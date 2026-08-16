@@ -19,10 +19,10 @@ CREATE TABLE empresa (
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL UNIQUE,
+	senha CHAR(64) NOT NULL,
+	fk_empresa INT NOT NULL,
 	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
