@@ -130,6 +130,66 @@
       setInterval(sumirMensagem, 5000);
     }
 
+    // Tamanho de nome inadequado
+    if (
+      nomeVar.length < 2 || nomeVar.length > 50
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para tamanho de nome inadequado)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Tamanho de senha inadequado
+    if (
+      senhaVar.length < 8 || senhaVar.length >= 64
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para tamanho de senha inadequado)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Confirmação de senha incorreta
+    if (
+      senhaVar != confirmacaoSenhaVar
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para confirmação de senha incorreta)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // E-mail inválido
+    if (
+      !emailVar.includes("@") ||
+      !emailVar.includes(".") ||
+      emailVar.lastIndexOf(".") < emailVar.lastIndexOf("@") ||
+      emailVar.length > 50 ||
+      emailVar.length < 5
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para e-mail inválido)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
