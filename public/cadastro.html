@@ -59,19 +59,19 @@
           </div>
           <div class="campo">
             <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
+            <input id="nome_input" type="text" placeholder="Nome Completo" />
           </div>
           <div class="campo">
             <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+            <input id="email_input" type="text" placeholder="ex: meuemail@provedor.com" />
           </div>
           <div class="campo">
             <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
+            <input id="senha_input" type="password" placeholder="ex: m1nha@S3nh434" />
           </div>
           <div class="campo">
             <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+            <input id="confirmacao_senha_input" type="password" placeholder="Corfirmar senha" />
           </div>
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
@@ -132,11 +132,11 @@
 
     // Tamanho de nome inadequado
     if (
-      nomeVar.length < 2 || nomeVar.length > 50
+      nomeVar.length < 2 || nomeVar.length > 30
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para tamanho de nome inadequado)";
+        "(Tamanho do nome inadequado)";
 
       finalizarAguardar();
       return false;
@@ -144,27 +144,68 @@
       setInterval(sumirMensagem, 5000);
     }
 
+
     // Tamanho de senha inadequado
     if (
-      senhaVar.length < 8 || senhaVar.length >= 64
+      senhaVar.length < 8 || senhaVar.length > 25
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para tamanho de senha inadequado)";
+        "(Tamanho de senha inadequado)";
 
       finalizarAguardar();
       return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+     // a senha deve conter 1 de cada variável
+
+    // expressões regulares
+    var letrasMaiusculas = /[A-Z]/;
+    var letrasMinusculas = /[a-z]/; 
+    var numeros = /[0-9]/;
+    var caracteresEspeciais = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+    // método test - confere se o senhaVar é compatível com o padrão
+
+    if(!letrasMaiusculas.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém letras maisculas)";
+       finalizarAguardar();
+      return false;
+
+    } else if (!letrasMinusculas.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém letras minusculas)";
+       finalizarAguardar();
+      return false;
+
+    } else if (!numeros.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém números)";
+      finalizarAguardar();
+      return false;
+
+    } else if (!caracteresEspeciais.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém caracteres especiais)";
+      finalizarAguardar();
+      return false;
+
     } else {
       setInterval(sumirMensagem, 5000);
     }
 
     // Confirmação de senha incorreta
-    if (
-      senhaVar != confirmacaoSenhaVar
-    ) {
+    if (senhaVar != confirmacaoSenhaVar) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para confirmação de senha incorreta)";
+      "(Confirmação de senha incorreta)";
 
       finalizarAguardar();
       return false;
@@ -172,18 +213,15 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    // E-mail inválido
-    if (
-      !emailVar.includes("@") ||
-      !emailVar.includes(".") ||
-      emailVar.lastIndexOf(".") < emailVar.lastIndexOf("@") ||
-      emailVar.length > 50 ||
-      emailVar.length < 5
-    ) {
+    // Validando a estrutura do email
+    // ^ inicio da string  ... + @ ... + . ...
+    var regex_formato_email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+    if(!regex_formato_email.test(emailVar) || emailVar.length > 50 || emailVar.length < 5) {
+
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para e-mail inválido)";
-
+      "(Formato de e-mail inválido)";
       finalizarAguardar();
       return false;
     } else {
