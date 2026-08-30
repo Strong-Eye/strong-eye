@@ -1,20 +1,12 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+-- DROP DATABASE IF EXISTS strong_eye; 
+CREATE DATABASE strong_eye;
 
-/*
-comandos para mysql server
-*/
-
-CREATE DATABASE aquatech;
-
-USE aquatech;
+USE strong_eye;
 
 CREATE TABLE empresa (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
+	razao_social VARCHAR(50) NOT NULL UNIQUE,
+	cnpj CHAR(14) NOT NULL UNIQUE
 );
 
 CREATE TABLE usuario (
@@ -22,37 +14,38 @@ CREATE TABLE usuario (
 	nome VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL UNIQUE,
 	senha CHAR(64) NOT NULL,
+    cargo VARCHAR(20) NOT NULL,
 	fk_empresa INT NOT NULL,
 	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
-CREATE TABLE aviso (
+create table endereco (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+    cep char(8) NOT NULL UNIQUE
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
+create table radar (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
+    mac CHAR(12) NOT NULL UNIQUE,
+    modelo VARCHAR(50) NOT NULL,
+    complemento_endereco VARCHAR(20) NOT NULL,
+    fk_endereco INT NOT NULL,
+	fk_empresa INT NOT NULL,
+	FOREIGN KEY (fk_endereco) REFERENCES endereco(id),
 	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
+create table componente (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	temperatura DECIMAL,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+	dado_capturado TEXT NOT NULL
 );
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+create table metrica (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    metrica INT NOT NULL,
+    fk_componente INT NOT NULL,
+    fk_radar INT NOT NULL,
+    FOREIGN KEY (fk_componente) REFERENCES componente(id),
+    FOREIGN KEY (fk_radar) REFERENCES radar(id)
+);
+
