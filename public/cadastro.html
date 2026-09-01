@@ -125,7 +125,103 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    // ----------------------------------------------------------- Precisa ver se o email
+    // Tamanho de nome inadequado
+    if (
+      nomeVar.length < 2 || nomeVar.length > 30
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Tamanho do nome inadequado)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+
+    // Tamanho de senha inadequado
+    if (
+      senhaVar.length < 8 || senhaVar.length > 25
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Tamanho de senha inadequado)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+     // a senha deve conter 1 de cada variável
+
+    // expressões regulares
+    var letrasMaiusculas = /[A-Z]/;
+    var letrasMinusculas = /[a-z]/; 
+    var numeros = /[0-9]/;
+    var caracteresEspeciais = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+    // método test - confere se o senhaVar é compatível com o padrão
+
+    if(!letrasMaiusculas.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém letras maisculas)";
+       finalizarAguardar();
+      return false;
+
+    } else if (!letrasMinusculas.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém letras minusculas)";
+       finalizarAguardar();
+      return false;
+
+    } else if (!numeros.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém números)";
+      finalizarAguardar();
+      return false;
+
+    } else if (!caracteresEspeciais.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Senha não contém caracteres especiais)";
+      finalizarAguardar();
+      return false;
+
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Confirmação de senha incorreta
+    if (senhaVar != confirmacaoSenhaVar) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Confirmação de senha incorreta)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Validando a estrutura do email
+    // ^ inicio da string  ... + @ ... + . ...
+    var regex_formato_email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+    if(!regex_formato_email.test(emailVar) || emailVar.length > 50 || emailVar.length < 5) {
+
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(Formato de e-mail inválido)";
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
