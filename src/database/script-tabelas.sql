@@ -19,12 +19,12 @@ CREATE TABLE usuario (
 	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
-create table endereco (
+CREATE TABLE endereco (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    cep char(8) NOT NULL UNIQUE
+    cep CHAR(8) NOT NULL UNIQUE
 );
 
-create table radar (
+CREATE TABLE radar (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     mac CHAR(12) NOT NULL UNIQUE,
     modelo VARCHAR(50) NOT NULL,
@@ -35,12 +35,12 @@ create table radar (
 	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
-create table componente (
+CREATE TABLE componente (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	dado_capturado VARCHAR(30) NOT NULL
 );
 
-create table metrica (
+CREATE TABLE metrica (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     metrica INT NOT NULL,
     fk_componente INT NOT NULL,
@@ -49,3 +49,4 @@ create table metrica (
     FOREIGN KEY (fk_radar) REFERENCES radar(id)
 );
 
+-- INSERT INTO empresa (razao_social, cnpj) VALUES ("Strong Eye", "01001001000101");
