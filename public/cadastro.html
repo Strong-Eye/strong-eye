@@ -56,7 +56,7 @@
                 <label for="floatingPassword">Nome</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email_input" placeholder="email@example.com" />
+                <input type="text" class="form-control" id="email_input" placeholder="email@example.com" />
                 <label for="floatingInput">Email empresarial</label>
               </div>
               <div class="form-floating mb-3">
@@ -67,7 +67,7 @@
                 <input type="password" class="form-control" id="confirmacao_senha_input"  placeholder="Password"/>
                 <label for="floatingPassword">Confirmar senha</label>
               </div>
-              <button onclick="cadastrar()" class="btn btn-info w-100 py-2" type="submit">
+              <button onclick="cadastrar()" class="btn btn-info w-100 py-2" type="button">
                 Cadastre-se
               </button>
               <div>
@@ -93,7 +93,7 @@
 <script>
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaEmpresasCadastradas = [];
+  // let listaEmpresasCadastradas = [];
 
   function cadastrar() {
     // aguardar();
@@ -105,7 +105,8 @@
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     // var codigoVar = codigo_input.value;
-    var idEmpresaVincular
+    var idEmpresaVincular = 1
+    console.log("nomeVar: " + nomeVar, "emailVar: " + emailVar, "senhaVar: " + senhaVar, "confirmacaoSenhaVar: " + confirmacaoSenhaVar, "idEmpresaVincular: " + idEmpresaVincular)
 
     // Verificando se há algum campo em branco
     if (
@@ -115,11 +116,12 @@
       confirmacaoSenhaVar == ""
       // codigoVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+      alert("Há campos não preenchidos")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Mensagem de erro para todos os campos em branco)";
 
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -129,11 +131,12 @@
     if (
       nomeVar.length < 2 || nomeVar.length > 30
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Tamanho do nome inadequado)";
+      alert("Tamanho de nome inválido")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Tamanho do nome inadequado)";
 
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -144,11 +147,12 @@
     if (
       senhaVar.length < 8 || senhaVar.length > 25
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Tamanho de senha inadequado)";
+      alert("Tamanho de senha inadequado")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Tamanho de senha inadequado)";
 
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -165,31 +169,35 @@
     // método test - confere se o senhaVar é compatível com o padrão
 
     if(!letrasMaiusculas.test(senhaVar)) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Senha não contém letras maisculas)";
-       finalizarAguardar();
+      alert("Senha não contém letras maiúsculas")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém letras maisculas)";
+      //  finalizarAguardar();
       return false;
 
     } else if (!letrasMinusculas.test(senhaVar)) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Senha não contém letras minusculas)";
-       finalizarAguardar();
+      alert("Senha não contém letras minúsculas")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém letras minusculas)";
+      //  finalizarAguardar();
       return false;
 
     } else if (!numeros.test(senhaVar)) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Senha não contém números)";
-      finalizarAguardar();
+      alert("Senha não contém números")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém números)";
+      // finalizarAguardar();
       return false;
 
     } else if (!caracteresEspeciais.test(senhaVar)) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Senha não contém caracteres especiais)";
-      finalizarAguardar();
+      alert("Senha não contém caracteres especiais")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém caracteres especiais)";
+      // finalizarAguardar();
       return false;
 
     } else {
@@ -198,11 +206,12 @@
 
     // Confirmação de senha incorreta
     if (senhaVar != confirmacaoSenhaVar) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Confirmação de senha incorreta)";
+      alert("Confirmação de senha incorreta")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Confirmação de senha incorreta)";
 
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -214,10 +223,11 @@
 
     if(!regex_formato_email.test(emailVar) || emailVar.length > 50 || emailVar.length < 5) {
 
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-      "(Formato de e-mail inválido)";
-      finalizarAguardar();
+      alert("Formato de e-mail inválido")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Formato de e-mail inválido)";
+      // finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -255,50 +265,50 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          // cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
+          // finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;
   }
 
   // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
 
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
 
   function sumirMensagem() {
-    cardErro.style.display = "none";
+    // cardErro.style.display = "none";
   }
 </script>
