@@ -35,12 +35,13 @@
       </div>
     </div>
   </header> -->
-  <main class="min-vh-100">
-    <div class="row align-items-stretch g-0 flex-grow-1">
-      <div class="col-12 col-md-6 g-0 d-flex flex-column position-relative min-vh-100">
+    <main class="vh-100 d-flex flex-column">
+    <div class="row align-items-stretch g-0 flex-grow-1 h-100">
+      <div class="col-12 col-md-6 g-0 d-flex flex-column position-relative h-100">
+
         <div class="position-absolute align-self-start mt-3 ms-3">
           <a href="./index.html">
-            <button class="btn btn-outline-light py-1 px-1 fs-6">Voltar</button>
+            <button class="btn btn-outline-light py-1 px-2 fs-6">&larr;</button>
           </a>
         </div>
         <div class="w-100 max-width-400 my-auto align-items-center d-flex flex-column" >
@@ -48,29 +49,32 @@
           <h1 class="ms-2 text-white mt-3 px-3 fs-2">Bem-Vindo de volta!</h1>
           <div class="container d-flex justify-content-center formulario">
             <form class="d-flex flex-column w-100 mx-2">
-              <!-- <div class="form-floating mb-3 mt-5">
-                <input type="text" class="form-control" id="nome_input"  placeholder="Password"/>
-                <label for="floatingPassword">Nome</label>
-              </div> -->
-              <div class="form-floating mb-3 mt-5">
-                <input type="email" class="form-control" id="email_input" placeholder="email@example.com" />
-                <label for="floatingInput">Email empresarial</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="senha_input"  placeholder="Min. 8 caracteres"/>
-                <label for="floatingPassword">Senha (min. 8 caracteres)</label>
-              </div>
-              <!-- <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="confirmacao_senha_input"  placeholder="Password"/>
-                <label for="floatingPassword">Confirmar senha</label>
-              </div> -->
-              <button onclick="entrar()" class="btn btn-info w-100 py-2" type="button">
-                Cadastre-se
-              </button>
-              <div>
-                <a class="mt-1 mb-3" href="./cadastro.html">Ainda não tem cadastro?</a>
-              </div>
-            </form>
+
+  <!-- Campo de Email -->
+  <div class="form-floating mb-1 mt-5"> 
+    <input type="email" class="form-control" id="email_input" placeholder="email@example.com" />
+    <label for="email_input">Email empresarial</label>
+  </div>
+  <!-- A div2 agora fica aqui fora, garantindo que apareça embaixo -->
+  <div id="div2" class="text-danger mb-3 ms-1" style="font-size: 0.875rem;"></div>
+
+  <!-- Campo de Senha -->
+  <div class="form-floating mb-1">
+    <input type="password" class="form-control" id="senha_input" placeholder="Min. 8 caracteres"/>
+    <label for="senha_input">Senha (min. 8 caracteres)</label>
+  </div>
+  <!-- A div1 também fica aqui fora -->
+  <div id="div1" class="text-danger mb-3 ms-1" style="font-size: 0.875rem;"></div>
+
+  <button onclick="entrar()" class="btn btn-info w-100 py-2" type="button">
+    ENTRAR
+  </button>
+  
+  <div>
+
+  </div>
+</form>
+
 
           </div>
         </div>
@@ -102,7 +106,8 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-          alert("Há campos não preenchidos.")  
+          div2.innerHTML = "Há campos não preenchidos." 
+          div1.innerHTML = "Há campos não preenchidos."  
           // cardErro.style.display = "block"
             // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             // finalizarAguardar();
