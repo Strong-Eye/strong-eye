@@ -159,7 +159,7 @@
     <div class="row g-2 ms-4 me-0">
           <div class="col-md">
               <div class="form-floating">
-              <input  type="text" class="form-control" id="email_input" placeholder="name@exemplo.com" >
+              <input  type="text" class="form-control" id="nome_input" placeholder="name@exemplo.com" >
               <label for="nome_input">Nome</label>
               </div>
           </div>
@@ -171,18 +171,25 @@
               </div>
           </div>
   
-              <div class="col-md">
+          <div class="col-md">
               <div class="form-floating">
-              <input type="email" class="form-control" id="senha_input" placeholder="name@exemplo.com" >
+              <input type="password" class="form-control" id="senha_input" placeholder="name@exemplo.com" >
               <label for="floatingInputGrid">Senha (min. 8 caracteres)</label>
+              </div>
+          </div>
+          
+          <div class="col-md">
+              <div class="form-floating">
+              <input type="password" class="form-control" id="confirmacao_senha_input" placeholder="name@exemplo.com" >
+              <label for="floatingInputGrid">Confirmar Senha</label>
               </div>
           </div>
   
           <div class="col-md pe-0">
               <div class="form-floating">
-              <select class="form-select" id="floatingSelectGrid">
-                  <option value="1">Gestor</option>
-                  <option value="2">Analista / Técnico</option>
+              <select class="form-select" id="cargo_input">
+                  <option value="Gestor">Gestor</option>
+                  <option value="Tecnico">Técnico</option>
               </select>
               <label for="floatingSelectGrid">Cargo</label>
               </div>
@@ -204,7 +211,7 @@
             </button>
           <!-- </div> -->
           <!-- <div class="mt-5 ms-5"> -->
-            <button class="btn btn-light fs-2 py-1" onclick="Excluir()">
+            <button class="btn btn-light fs-2 py-1" onclick="remover()">
                 Excluir
             </button>
           <!-- </div> -->
@@ -227,7 +234,8 @@
 <script>
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
-  // let listaEmpresasCadastradas = [];
+  let listaUsuariosCadastrados = [];
+  var idEmpresaVincular = 1;
 
   function cadastrar() {
     // aguardar();
@@ -238,9 +246,9 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    // var codigoVar = codigo_input.value;
-    var idEmpresaVincular = 1
-    console.log("nomeVar: " + nomeVar, "emailVar: " + emailVar, "senhaVar: " + senhaVar, "confirmacaoSenhaVar: " + confirmacaoSenhaVar, "idEmpresaVincular: " + idEmpresaVincular)
+    var cargoVar = cargo_input.value;
+    
+    console.log("nomeVar: " + nomeVar, "emailVar: " + emailVar, "senhaVar: " + senhaVar, "confirmacaoSenhaVar: " + confirmacaoSenhaVar, "cargoVar: " + cargoVar, "idEmpresaVincular: " + idEmpresaVincular)
 
     // Verificando se há algum campo em branco
     if (
@@ -392,6 +400,7 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
+        cargoServer: cargoVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
@@ -405,7 +414,7 @@
           //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";
+            // window.location = "login.html";
           }, "2000");
 
           limparFormulario();
@@ -445,4 +454,106 @@
   function sumirMensagem() {
     // cardErro.style.display = "none";
   }
+
+  function buscarUsuarios(fkEmpresa){
+        fetch("/usuarios/buscarUsuarios", {
+        method: "GET",
+        body: JSON.stringify({
+                fkEmpresa: idEmpresaVincular
+            })
+    })
+        .then(function (resposta) {
+        resposta.json().then((usuarios) => {
+        // usuarios.forEach((usuarios) => {
+            listaUsuariosCadastrados.push(usuarios);
+
+            console.log("listaUsuariosCadastrados")
+            console.log(listaUsuariosCadastrados)
+        ;
+        });
+    })
+        .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });    
+    }
+
+    function buscar(id, cargoNovo){
+        fetch("/usuarios/atualizar", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: id,
+                cargoUsuario: cargoVar
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                // window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar atualizar! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function atualizar(id, cargoNovo){
+        fetch("/usuarios/atualizar", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: id,
+                cargoUsuario: cargoVar
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                // window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar atualizar! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function remover(id){
+        // console.log("Criar função de apagar post escolhido - ID" + idAviso);
+        fetch("/usuarios/remover", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: id,
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                // window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar remover usuário! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    window.onload = function () {
+        // listar();
+        buscarUsuarios(idEmpresaVincular);
+    }
 </script>
