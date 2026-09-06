@@ -110,10 +110,11 @@ function atualizar(req, res) {
 function buscarUsuarios(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var fkEmpresa = req.params.fkEmpresa;
+    var idGestor = req.params.idGestor
     
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.buscarUsuarios(fkEmpresa).then(function (resultado) {
+        usuarioModel.buscarUsuarios(fkEmpresa, idGestor).then(function (resultado) {
             res.json(resultado);
         }).catch(function (erro) {
             console.log(erro);

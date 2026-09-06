@@ -32,10 +32,10 @@ function atualizar(id, cargoNovo) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUsuarios(fkEmpresa) {
+function buscarUsuarios(fkEmpresa, idGestor) {
     var instrucaoSql = `
         SELECT * FROM usuario
-        WHERE fk_empresa = ${fkEmpresa};
+        WHERE fk_empresa = ${fkEmpresa} AND id != ${idGestor};
     `;
     return database.executar(instrucaoSql);
 }
