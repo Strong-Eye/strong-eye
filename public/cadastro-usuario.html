@@ -234,7 +234,8 @@
 <script>
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaUsuariosCadastrados = [];
+  var listaUsuariosCadastrados = [];
+  var usuarioId = {};
   var idEmpresaVincular = 1;
 
   function cadastrar() {
@@ -422,6 +423,7 @@
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
+        buscarUsuarios(idEmpresaVincular);
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -456,28 +458,30 @@
   }
 
   function buscarUsuarios(fkEmpresa){
-        fetch("/usuarios/buscarUsuarios", {
-        method: "GET",
-        body: JSON.stringify({
-                fkEmpresa: idEmpresaVincular
-            })
+    let usuarios = [];
+        fetch(`/usuarios/buscarUsuarios/${fkEmpresa}`, {
+        method: "GET"
     })
-        .then(function (resposta) {
-        resposta.json().then((usuarios) => {
-        // usuarios.forEach((usuarios) => {
-            listaUsuariosCadastrados.push(usuarios);
-
-            console.log("listaUsuariosCadastrados")
-            console.log(listaUsuariosCadastrados)
-        ;
-        });
-    })
+        .then(resposta => resposta.json()) 
+        .then(json => {
+          usuarios = json;
+          for(let i=0; i<usuarios.length; i++){
+            listaUsuariosCadastrados.push(usuarios[i].nome);
+            document.getElementById("pessoa_input").innerHTML += `
+            <option>${usuarios[i].nome}</option>
+            `;
+            usuarioId[usuarios[i].nome] = usuarios[i].id;
+          }
+          console.log(usuarios);
+        })
         .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });    
     }
 
-    function buscar(id, cargoNovo){
+    function atualizar(){
+      let id = usuarioId[pessoa_input.value];
+      let cargo = cargo_input.value;
         fetch("/usuarios/atualizar", {
             method: "PUT",
             headers: {
@@ -485,7 +489,7 @@
             },
             body: JSON.stringify({
                 idUsuario: id,
-                cargoUsuario: cargoVar
+                cargoUsuario: cargo
             })
         }).then(function (resposta) {
 
@@ -502,33 +506,9 @@
         });
     }
 
-    function atualizar(id, cargoNovo){
-        fetch("/usuarios/atualizar", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                idUsuario: id,
-                cargoUsuario: cargoVar
-            })
-        }).then(function (resposta) {
-
-            if (resposta.ok) {
-                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                // window.location = "/dashboard/mural.html"
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar atualizar! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
-
-    function remover(id){
+    function remover(){
         // console.log("Criar função de apagar post escolhido - ID" + idAviso);
+        let id = usuarioId[pessoa_input.value];
         fetch("/usuarios/remover", {
             method: "DELETE",
             headers: {
@@ -547,6 +527,8 @@
             } else {
                 throw ("Houve um erro ao tentar remover usuário! Código da resposta: " + resposta.status);
             }
+        buscarUsuarios(idEmpresaVincular);
+
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
