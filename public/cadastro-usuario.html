@@ -429,6 +429,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
+          buscarUsuarios(idEmpresaVincular);
           // cardErro.style.display = "block";
 
           // mensagem_erro.innerHTML =
@@ -443,7 +444,6 @@
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
-        buscarUsuarios(idEmpresaVincular);
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -477,22 +477,27 @@
     // cardErro.style.display = "none";
   }
 
+  function exibirUsuariosCadastrados(usuarios){
+    document.getElementById("pessoa_input").innerHTML = `<option selected>Escolha um membro</option>`
+
+    usuarios.forEach(usuario => {
+    document.getElementById("pessoa_input").innerHTML += `
+      <option>${usuario.nome}</option>
+      `;
+    usuarioId[usuario.nome] = usuario.id;
+    });
+
+  }
+
   function buscarUsuarios(fkEmpresa){
-    let usuarios = [];
-        fetch(`/usuarios/buscarUsuarios/${fkEmpresa}`, {
+        fetch(`/usuarios/buscarUsuarios/${fkEmpresa}/${sessionStorage.ID_USUARIO}`, {
         method: "GET"
     })
         .then(resposta => resposta.json()) 
         .then(json => {
-          usuarios = json;
-          for(let i=0; i<usuarios.length; i++){
-            listaUsuariosCadastrados.push(usuarios[i].nome);
-            document.getElementById("pessoa_input").innerHTML += `
-            <option>${usuarios[i].nome}</option>
-            `;
-            usuarioId[usuarios[i].nome] = usuarios[i].id;
-          }
-          console.log(usuarios);
+
+          exibirUsuariosCadastrados(json);
+          console.log(json);
         })
         .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
