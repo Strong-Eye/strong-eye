@@ -109,25 +109,17 @@ function atualizar(req, res) {
 
 function buscarUsuarios(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var fkEmpresa = req.body.fkEmpresa;
+    var fkEmpresa = req.params.fkEmpresa;
     
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.buscarUsuarios(fkEmpresa)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao buscar usuario",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
+        usuarioModel.buscarUsuarios(fkEmpresa).then(function (resultado) {
+            res.json(resultado);
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao buscar usuario", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function remover(req, res) {
