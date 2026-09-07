@@ -126,6 +126,72 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
+main .container > div,
+.button-group {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 15px !important;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#abrir-popup1, 
+#abrir-popup2, 
+.btnx,
+.btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 48px !important;            
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  white-space: nowrap;                 
+}
+
+#abrir-popup1, 
+#abrir-popup2 {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 0 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+#abrir-popup1:hover, 
+#abrir-popup2:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+.btnx {
+  width: 100% !important;     
+  max-width: 280px;           
+  background-color: #123282;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 0 24px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btnx:hover {
+  background-color: #1a42a8;
+  color: white;
+  transform: translateY(-2px);
+}
+
+
+
 [data-bs-theme=dark] {
   color-scheme: dark;
   --bs-body-color: #dee2e6;
