@@ -218,8 +218,52 @@
   
       </div>
 
-  </div>
-  <div class="col-md pe-0">
+      <div>
+        <button id="abrir-popup2" onclick="popup2.showModal()">EXCLUIR</button>
+        <dialog id="popup2">
+          <form method="dialog">
+              <div class="col-md pe-0">
+                <div class="form-floating">
+                    <select class="form-select" id="pessoa2_input"> 
+                        <option selected>Escolha um membro</option> 
+                    </select> 
+                    <label for="pessoa2_input">Membro</label> 
+                </div>
+            </div> 
+            <button type="button" class="btn btn-light fs-2 py-1" onclick="remover()">Excluir</button> 
+            <button type="submit" id="fechar-popup2" onclick="popup2.close()">Fechar</button> 
+          </form>
+        </dialog>
+      </div>
+
+<div> 
+    <button id="abrir-popup1" onclick="popup1.showModal()">ATUALIZAR</button> 
+    <dialog id="popup1"> 
+        <form method="dialog"> 
+            <div class="col-md pe-0">
+                <div class="form-floating">
+                    <select class="form-select" id="pessoa3_input3"> 
+                        <option selected>Escolha um membro</option> 
+                    </select> 
+                    <label for="pessoa3_input">Membro</label> 
+                </div>
+            </div>
+            <div class="col-md pe-0"> 
+                <div class="form-floating"> 
+                    <select class="form-select" id="cargo2_input2"> 
+                        <option value="Gestor">Gestor</option> 
+                        <option value="Tecnico">Técnico</option> 
+                    </select> 
+                    <label for="cargo2_input">Cargo</label> 
+                </div> 
+            </div> 
+            <button type="button" class="btn btn-light fs-2 py-1" onclick="atualizar()">Atualizar</button> 
+            <button type="submit" id="fechar-popup1" onclick="popup1.close()">Fechar</button> 
+        </form> 
+    </dialog> 
+</div>
+
+  <!-- <div class="col-md pe-0">
     <div class="form-floating">
       <select class="form-select" id="pessoa_input">
         <option selected>Escolha um membro</option>
@@ -237,7 +281,7 @@
           Atualizar
         </button>
       </div>
-    </div>
+    </div> -->
 
 
   </div>
@@ -260,6 +304,7 @@
 
   function cadastrar() {
     // aguardar();
+    
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -429,6 +474,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
+          alert("Cadastro Realizado!")    
           buscarUsuarios(idEmpresaVincular);
           // cardErro.style.display = "block";
 
@@ -440,6 +486,7 @@
           }, "2000");
 
           limparFormulario();
+          
           // finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
@@ -478,15 +525,17 @@
   }
 
   function exibirUsuariosCadastrados(usuarios){
-    document.getElementById("pessoa_input").innerHTML = `<option selected>Escolha um membro</option>`
+   var selectExcluir = document.getElementById("pessoa2_input");
+    var selectAtualizar = document.getElementById("pessoa3_input3");
+
+    var opcoesHTML = `<option value="" selected disabled>Escolha um membro</option>`;
 
     usuarios.forEach(usuario => {
-    document.getElementById("pessoa_input").innerHTML += `
-      <option>${usuario.nome}</option>
-      `;
-    usuarioId[usuario.nome] = usuario.id;
+      opcoesHTML += `<option value="${usuario.id}">${usuario.nome}</option>`;
     });
 
+    if (selectExcluir) selectExcluir.innerHTML = opcoesHTML;
+    if (selectAtualizar) selectAtualizar.innerHTML = opcoesHTML;
   }
 
   function buscarUsuarios(fkEmpresa){
@@ -504,9 +553,28 @@
     });    
     }
 
+//       let modal = document.querySelector('#meu-popup1');
+//       let botaoAbrir = document.querySelector('#abrir-popup1');
+//       botaoAbrir.addEventListener('click', () => {
+//   modal.showModal();
+// });
+
     function atualizar(){
-      let id = usuarioId[pessoa_input.value];
-      let cargo = cargo_input.value;
+
+      // let botaoFechar = document.querySelector('#fechar-popup1');
+
+// Abrir o pop-up
+// botaoAbrir.addEventListener('click', () => {
+  // modal.showModal();
+// });
+
+// Fechar o pop-up pelo botão
+// botaoFechar.addEventListener('click', () => {
+  // modal.close();
+// });
+
+     let id = document.getElementById("pessoa3_input3").value;
+    let cargo = document.getElementById("cargo2_input2").value;
         fetch("/usuarios/atualizar", {
             method: "PUT",
             headers: {
@@ -531,9 +599,25 @@
         });
     }
 
+  //     let modal2 = document.querySelector('#meu-popup2');
+  //     let botaoAbrir2 = document.querySelector('#abrir-popup2');
+  //     botaoAbrir.addEventListener('click', () => {
+  // modal2.showModal();
+// });
+
     function remover(){
-        // console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        let id = usuarioId[pessoa_input.value];
+
+//             let botaoFechar2 = document.querySelector('#fechar-popup2');
+
+//             botaoAbrir2.addEventListener('click', () => {
+//             modal2.showModal();
+//           });
+
+// botaoFechar2.addEventListener('click', () => {
+//   modal2.close();
+// });
+
+        let id = document.getElementById("pessoa2_input").value;
         fetch("/usuarios/remover", {
             method: "DELETE",
             headers: {
