@@ -2,307 +2,650 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Dashboards</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/custom.css">
+  
+  <title>Strong Eye - Cadastro</title>
+  
+  <script src="./js/sessao.js"></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="icon" href="./assets/icon/logo.png" />
 
-    
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- scripts do Chart.js - 2022-1 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<!-- <body onload=" atualizarFeed()"> -->
+<body class="d-flex flex-row min-vh-100">
 
-<body>
+<!-- <div class="alert alert-info d-none d-lg-block">Resize your browser to show the responsive offcanvas toggle.</div> -->
 
-    <div class="janela">
-        <div class="header-left">
-            <h1>AquaTech</h1>
+<div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column " style="width: 290px;" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+  <div class="offcanvas-header bg-dark d-flex mb-0 pb-0">
+    
+      <img src="assets/img/LOGO.png" alt="" style="max-height: 100%;" class="h-auto mw-100" >
+    
+    <!-- <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Responsive offcanvas</h5> -->
+    <!-- <div class="d-md-none d-flex"> -->
+      <!-- <button type="button" class=" d-sm-none btn-close m-0" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button> -->
+    <!-- </div> -->
+  </div>
+  <div class="offcanvas-body p-3 d-flex flex-column justify-content-between flex-grow-1">
+    <!-- <p class="mb-0">This is content within an <code>.offcanvas-lg</code>.</p> -->
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
+        
+        <!-- <a
+            href="/"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+            <svg
+            class="bi pe-none me-2"
+            width="40"
+            height="32"
+            aria-hidden="true"
+            >
+            <use xlink:href="#bootstrap"></use>
+            </svg>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários e Terrários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+            <span class="fs-4">Sidebar</span>
+        </a> -->
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+            <a href="./cadastro-usuario.html" class="nav-link active" aria-current="page">
+                <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                >
+                <use xlink:href="#cadastro-membros"></use>
+                </svg>
+                Cadastro de membros
+            </a>
+            </li>
+            <li>
+            <a href="./dashboard/dashboard.html" class="nav-link text-white">
+                <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                >
+                <use xlink:href="#dash"></use>
+                </svg>
+                Dashboard
+            </a>
+            </li>
+            <!-- <li>
+            <a href="#" class="nav-link text-white">
+                <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                >
+                <use xlink:href="#table"></use>
+                </svg>
+                Orders
+            </a>
+            </li>
+            <li>
+            <a href="#" class="nav-link text-white">
+                <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                >
+                <use xlink:href="#grid"></use>
+                </svg>
+                Products
+            </a>
+            </li>
+            <li>
+            <a href="#" class="nav-link text-white">
+                <svg
+                class="bi pe-none me-2"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                >
+                <use xlink:href="#people-circle"></use>
+                </svg>
+                Customers
+            </a>
+            </li> -->
+        </ul>
+        <hr />
+        <div class="dropdown">
+            <a
+            href="#"
+            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >
+            <img
+                src="./assets/icon/usuario.png"
+                alt=""
+                width="32"
+                height="32"
+                class="rounded-circle me-2"
+            />
+            <!-- <strong>mdo</strong> -->
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider" /></li> -->
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
         </div>
+</div>
+</div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
-            <div id="graficos">
-            </div>
-        </div>
+<main class="flex-grow-1 w-100 d-flex flex-column">
+    <div>
+        <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+        Menu</button>
     </div>
 
+    <div class="mx-auto mt-5 pt-2 text-light">
+        <h1 class="">Cadastro de Funcionários</h1>
+    </div>
+<div class="container mt-5 mx-auto d-flex flex-column">
+  <div class="">
+    <div class="row g-2 ms-4 me-0">
+          <div class="col-md">
+              <div class="form-floating">
+              <input  type="text" class="form-control" id="nome_input" placeholder="name@exemplo.com" >
+              <label for="nome_input">Nome</label>
+              </div>
+          </div>
+  
+          <div class="col-md">
+              <div class="form-floating">
+              <input type="email" class="form-control" id="email_input" placeholder="name@exemplo.com" >
+              <label for="floatingInputGrid">Email Corporativo</label>
+              </div>
+          </div>
+  
+          <div class="col-md">
+              <div class="form-floating">
+              <input type="password" class="form-control" id="senha_input" placeholder="name@exemplo.com" >
+              <label for="floatingInputGrid">Senha (min. 8 caracteres)</label>
+              </div>
+          </div>
+          
+          <div class="col-md">
+              <div class="form-floating">
+              <input type="password" class="form-control" id="confirmacao_senha_input" placeholder="name@exemplo.com" >
+              <label for="floatingInputGrid">Confirmar Senha</label>
+              </div>
+          </div>
+  
+          <div class="col-md pe-0">
+              <div class="form-floating">
+              <select class="form-select" id="cargo_input">
+                  <option value="Gestor">Gestor</option>
+                  <option value="Tecnico">Técnico</option>
+              </select>
+              <label for="floatingSelectGrid">Cargo</label>
+              </div>
+  
+          </div>
+      </div>
 
+  </div>
+    <div class="d-flex align-self-center">
+      <div class="d-grid gap-1 mt-2 d-md-block">
+          <!-- <div class="mt-5"> -->
+            <button class=" btnx fs-3 py-3 " onclick="cadastrar()">
+                Cadastrar
+            </button>
+          <!-- </div> -->
+          <!-- <div class="mt-5 ms-5"> -->
+            <!-- <button class="btn btn-light fs-2 py-1 " onclick="atualizar()">
+                Atualizar
+            </button> -->
+          <!-- </div> -->
+          <!-- <div class="mt-5 ms-5"> -->
+            <!-- <button class="btn btn-light fs-2 py-1" onclick="remover()">
+                Excluir
+            </button> -->
+          <!-- </div> -->
+  
+      </div>
+
+      <div>
+        <button id="abrir-popup2" onclick="popup2.showModal()">EXCLUIR</button>
+        <dialog id="popup2">
+          <form method="dialog">
+              <div class="col-md pe-0">
+                <div class="form-floating">
+                    <select class="form-select" id="pessoa2_input"> 
+                        <option selected>Escolha um membro</option> 
+                    </select> 
+                    <label for="pessoa2_input">Membro</label> 
+                </div>
+            </div> 
+            <button type="button" class="modal-custom " onclick="remover()">Excluir</button> 
+            <button type="submit" id="fechar-popup2" onclick="popup2.close()">Fechar</button> 
+          </form>
+        </dialog>
+      </div>
+
+<div> 
+    <button id="abrir-popup1" onclick="popup1.showModal()">ATUALIZAR</button> 
+    <dialog id="popup1"> 
+        <form method="dialog"> 
+            <div class="col-md pe-0">
+                <div class="form-floating">
+                    <select class="form-select" id="pessoa3_input3"> 
+                        <option selected>Escolha um membro</option> 
+                    </select> 
+                    <label for="pessoa3_input">Membro</label> 
+                </div>
+            </div>
+            <div class="col-md pe-0"> 
+                <div class="form-floating"> 
+                    <select class="form-select" id="cargo2_input2"> 
+                        <option value="Gestor">Gestor</option> 
+                        <option value="Tecnico">Técnico</option> 
+                    </select> 
+                    <label for="cargo2_input">Cargo</label> 
+                </div> 
+            </div> 
+            <button type="button" class="modal-custom" onclick="atualizar()">Atualizar</button> 
+            <button type="submit" id="fechar-popup1" onclick="popup1.close()">Fechar</button> 
+        </form> 
+    </dialog> 
+</div>
+
+  <!-- <div class="col-md pe-0">
+    <div class="form-floating">
+      <select class="form-select" id="pessoa_input">
+        <option selected>Escolha um membro</option>
+      </select>
+      <label for="floatingSelectGrid">Membro</label>
+    </div>
+
+    <div class="d-flex align-self-center">
+
+      <div class="d-grid gap-2 mt-5 d-md-block"> 
+        <button class="btn btn-light fs-2 py-1" onclick="remover()">
+          Excluir
+        </button>
+        <button class="btn btn-light fs-2 py-1 " onclick="atualizar()">
+          Atualizar
+        </button>
+      </div>
+    </div> -->
+
+
+  </div>
+
+</main>
+
+<footer>
+
+</footer>
 </body>
 
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    let proximaAtualizacao;
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  var listaUsuariosCadastrados = [];
+  var usuarioId = {};
+  var idEmpresaVincular = 1;
 
-    window.onload = exibirAquariosDoUsuario();
+  function cadastrar() {
+    // aguardar();
+    
 
-    function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-        aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var cargoVar = cargo_input.value;
+    
+    console.log("nomeVar: " + nomeVar, "emailVar: " + emailVar, "senhaVar: " + senhaVar, "confirmacaoSenhaVar: " + confirmacaoSenhaVar, "cargoVar: " + cargoVar, "idEmpresaVincular: " + idEmpresaVincular)
 
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
-                    </div>
-                </div>
-            `
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+      // codigoVar == ""
+    ) {
+      alert("Há campos não preenchidos")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Mensagem de erro para todos os campos em branco)";
 
-            obterDadosGrafico(item.id)
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Tamanho de nome inadequado
+    if (
+      nomeVar.length < 2 || nomeVar.length > 30
+    ) {
+      alert("Tamanho de nome inválido")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Tamanho do nome inadequado)";
+
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+
+    // Tamanho de senha inadequado
+    if (
+      senhaVar.length < 8 || senhaVar.length > 25
+    ) {
+      alert("Tamanho de senha inadequado")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Tamanho de senha inadequado)";
+
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+     // a senha deve conter 1 de cada variável
+
+    // expressões regulares
+    var letrasMaiusculas = /[A-Z]/;
+    var letrasMinusculas = /[a-z]/; 
+    var numeros = /[0-9]/;
+    var caracteresEspeciais = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+    // método test - confere se o senhaVar é compatível com o padrão
+
+    if(!letrasMaiusculas.test(senhaVar)) {
+      alert("Senha não contém letras maiúsculas")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém letras maisculas)";
+      //  finalizarAguardar();
+      return false;
+
+    } else if (!letrasMinusculas.test(senhaVar)) {
+      alert("Senha não contém letras minúsculas")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém letras minusculas)";
+      //  finalizarAguardar();
+      return false;
+
+    } else if (!numeros.test(senhaVar)) {
+      alert("Senha não contém números")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém números)";
+      // finalizarAguardar();
+      return false;
+
+    } else if (!caracteresEspeciais.test(senhaVar)) {
+      alert("Senha não contém caracteres especiais")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Senha não contém caracteres especiais)";
+      // finalizarAguardar();
+      return false;
+
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Confirmação de senha incorreta
+    if (senhaVar != confirmacaoSenhaVar) {
+      alert("Confirmação de senha incorreta")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Confirmação de senha incorreta)";
+
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Validando a estrutura do email
+    // ^ inicio da string  ... + @ ... + . ...
+    var regex_formato_email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+    if(!regex_formato_email.test(emailVar) || emailVar.length > 50 || emailVar.length < 5) {
+
+      alert("Formato de e-mail inválido")
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      // "(Formato de e-mail inválido)";
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+    //     console.log("Código de ativação válido.");
+    //     break;
+    //   } else {
+    //     cardErro.style.display = "block";
+    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+    //     finalizarAguardar();
+    //   }
+    // }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        cargoServer: cargoVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert("Cadastro Realizado!")    
+          buscarUsuarios(idEmpresaVincular);
+          // cardErro.style.display = "block";
+
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            // window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          
+          // finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
+
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  function sumirMensagem() {
+    // cardErro.style.display = "none";
+  }
+
+  function exibirUsuariosCadastrados(usuarios){
+   var selectExcluir = document.getElementById("pessoa2_input");
+    var selectAtualizar = document.getElementById("pessoa3_input3");
+
+    var opcoesHTML = `<option value="" selected disabled>Escolha um membro</option>`;
+
+    usuarios.forEach(usuario => {
+      opcoesHTML += `<option value="${usuario.id}">${usuario.nome}</option>`;
+    });
+
+    if (selectExcluir) selectExcluir.innerHTML = opcoesHTML;
+    if (selectAtualizar) selectAtualizar.innerHTML = opcoesHTML;
+  }
+
+  function buscarUsuarios(fkEmpresa){
+        fetch(`/usuarios/buscarUsuarios/${fkEmpresa}/${sessionStorage.ID_USUARIO}`, {
+        method: "GET"
+    })
+        .then(resposta => resposta.json()) 
+        .then(json => {
+
+          exibirUsuariosCadastrados(json);
+          console.log(json);
+        })
+        .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });    
+    }
+
+//       let modal = document.querySelector('#meu-popup1');
+//       let botaoAbrir = document.querySelector('#abrir-popup1');
+//       botaoAbrir.addEventListener('click', () => {
+//   modal.showModal();
+// });
+
+    function atualizar(){
+
+      // let botaoFechar = document.querySelector('#fechar-popup1');
+
+// Abrir o pop-up
+// botaoAbrir.addEventListener('click', () => {
+  // modal.showModal();
+// });
+
+// Fechar o pop-up pelo botão
+// botaoFechar.addEventListener('click', () => {
+  // modal.close();
+// });
+
+     let id = document.getElementById("pessoa3_input3").value;
+    let cargo = document.getElementById("cargo2_input2").value;
+        fetch("/usuarios/atualizar", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: id,
+                cargoUsuario: cargo
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                // window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar atualizar! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
         });
-
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
-        }
     }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-        tituloAquario.innerHTML = "Últimas medidas do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+  //     let modal2 = document.querySelector('#meu-popup2');
+  //     let botaoAbrir2 = document.querySelector('#abrir-popup2');
+  //     botaoAbrir.addEventListener('click', () => {
+  // modal2.showModal();
+// });
 
-    function exibirAquario(idAquario) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+    function remover(){
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
+//             let botaoFechar2 = document.querySelector('#fechar-popup2');
 
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
+//             botaoAbrir2.addEventListener('click', () => {
+//             modal2.showModal();
+//           });
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
+// botaoFechar2.addEventListener('click', () => {
+//   modal2.close();
+// });
 
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
+        let id = document.getElementById("pessoa2_input").value;
+        fetch("/usuarios/remover", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: id,
+            })
+        }).then(function (resposta) {
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
-
-        alterarTitulo(idAquario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idAquario);
-
-                });
+            if (resposta.ok) {
+                // window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                // window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
             } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+                throw ("Houve um erro ao tentar remover usuário! Código da resposta: " + resposta.status);
             }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+        buscarUsuarios(idEmpresaVincular);
+
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
-
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
-            labels: labels,
-            datasets: [
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.temperatura);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    }
-
-
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados, myChart) {
-
-
-
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    obterdados(idAquario);
-                    // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-                    avisoCaptura.innerHTML = ""
-
-
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
-                    }
-
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
+    window.onload = function () {
+        // listar();
+        buscarUsuarios(idEmpresaVincular);
     }
 </script>
