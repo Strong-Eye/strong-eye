@@ -12,4 +12,16 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/buscarUsuarios/:fkEmpresa/:idGestor", function (req, res) {
+    usuarioController.buscarUsuarios(req, res);
+});
+
+router.put("/atualizar", function (req, res) {
+    usuarioController.atualizar(req, res);
+});
+
+router.delete("/remover", function (req, res) {
+    usuarioController.remover(req, res);
+});
+
 module.exports = router;

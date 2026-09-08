@@ -1,0 +1,171 @@
+    body {
+      background-color: #030d36;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .navbar {
+      background-color: #040d2f;
+      padding: 0.6rem 1rem;
+    }
+
+
+    .navbar2 img {
+      height: 40px;
+      width: auto;
+    }
+
+    /*Aumenta logo em telas maiores q 992px*/
+    @media (min-width: 992px) {
+      .navbar2 img {
+        height: 48px;
+      }
+    }
+
+    /*tira o risco em baixo na navbar*/
+    .profile-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-align: right;
+      transition: opacity 0.2s;
+    }
+
+    .profile-link2 {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      align-items: center;
+      transition: opacity 0.2s;
+      justify-content: center;
+    }
+
+    .profile-link:hover {
+      color: #192e7a;
+    }
+
+    .ajustarLogin {
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .mt-30 {
+      margin-top: 0 !important;
+    }
+
+.fundoSite {
+  padding-top: 110px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* trava a imagem no fundo */
+.fundoSite::before {
+  content: "";
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(3, 13, 54, 0.85) 0%, rgba(3, 13, 54, 0.5) 100%),
+              url('../assets/img/fundoSite.png') no-repeat center center / cover;
+}
+
+@media (min-width: 992px) {
+  .fundoSite::before {
+    background: linear-gradient(90deg, #030d36 45%, rgba(3, 13, 54, 0.3) 100%),
+                url('../assets/img/fundoSite.png') no-repeat center right / cover;
+  }
+}
+
+
+    .fundoTitulo {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .textoDestaque {
+      color: #587bf8;
+    }
+
+    .btn-custom {
+      background-color: #123282;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-custom:hover {
+      background-color: #1a42a8;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+
+    .margemSolucao {
+      margin-top: 10px;
+    }
+
+    .yyy {
+      color: #587bf8;
+    }
+
+    .card-funcionalidade {
+      width: 70%;
+      margin: 10px;
+      background: #080f3b;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      padding: 35px 30px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .card-funcionalidade:hover{
+      background-color: #1a42a8;
+      color: white;
+      transform: translateY(3px);
+      transform: scale(1.05);
+    }
+
+    .rrr {
+      margin-top: 30px;
+    }
+
+    .card:hover {
+      transform: translateY(3px);
+      transform: scale(1.05);
+    }
+
+    .fundoAzul{
+      background-color: #030d36;
+    }
+
+    .corDiv {
+      color: red;
+    }

@@ -2,104 +2,119 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/custom.css">
+  
+  <title>Strong Eye - Cadastro</title>
+  
+  <script src="./js/sessao.js"></script>
+  
+  <link rel="icon" href="./assets/icon/logo.png" />
 
-    <title>AquaTech | Login</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body class="d-flex flex-column">
+  <!-- <header class="p-3 fundoHeader ">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">
+              Login
+            </button>
+          </div>
+      </div>
+    </div>
+  </header> -->
+    <main class="vh-100 d-flex flex-column">
+    <div class="row align-items-stretch g-0 flex-grow-1 h-100">
+      <div class="col-12 col-md-6 g-0 d-flex flex-column position-relative h-100">
 
-    <!--Header-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
+        <div class="position-absolute align-self-start mt-3 ms-3">
+          <a href="./index.html">
+            <button class="btn btn-outline-light py-1 px-2 fs-6">&larr;</button>
+          </a>
         </div>
+        <div class="w-100 max-width-400 my-auto align-items-center d-flex flex-column" >
+          
+          <h1 class="ms-2 text-white mt-3 px-3 fs-2">Bem-Vindo de volta!</h1>
+          <div class="container d-flex justify-content-center formulario">
+            <form class="d-flex flex-column w-100 mx-2">
+
+  <!-- Campo de Email -->
+  <div class="form-floating mb-1 mt-5"> 
+    <input type="email" class="form-control" id="email_input" placeholder="email@example.com" />
+    <label for="email_input">Email empresarial</label>
+  </div>
+  <!-- A div2 agora fica aqui fora, garantindo que apareça embaixo -->
+  <div id="div2" class="text-danger mb-3 ms-1" style="font-size: 0.875rem;"></div>
+
+  <!-- Campo de Senha -->
+  <div class="form-floating mb-1">
+    <input type="password" class="form-control" id="senha_input" placeholder="Min. 8 caracteres"/>
+    <label for="senha_input">Senha (min. 8 caracteres)</label>
+  </div>
+  <!-- A div1 também fica aqui fora -->
+  <div id="div1" class="text-danger mb-3 ms-1" style="font-size: 0.875rem;"></div>
+
+  <button onclick="entrar()" class="btn btn-info w-100 py-2" type="button">
+    ENTRAR
+  </button>
+  
+  <div>
+
+  </div>
+</form>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="d-flex d-none d-md-flex col-12 col-md-6 g-0">
+        <img src="./assets/img/radar4.png" class="object-fit-cover w-100 h-100">
+      </div>
     </div>
 
 
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
+  </main>
 
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
+  <footer>
 
-                <div id="div_erros_login"></div>
-            </div>
-        </div>
-    </div>
-
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-        </div>
-    </div>
-    <!--footer fim-->
-
+  </footer>
 </body>
 
 </html>
 
 <script>
 
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
 
-    function entrar() {
-        aguardar();
+  function entrar() {
+        // aguardar();
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+          div2.innerHTML = "Há campos não preenchidos." 
+          div1.innerHTML = "Há campos não preenchidos."  
+          // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // finalizarAguardar();
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            // setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -126,10 +141,10 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./cadastro-usuario.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -137,10 +152,11 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+                alert("Credenciais inválidas.")
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    // finalizarAguardar(texto);
                 });
             }
 
@@ -149,10 +165,6 @@
         })
 
         return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
     }
 
 </script>
