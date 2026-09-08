@@ -1,0 +1,89 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won’t be available)
+$info: #86adf7;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/functions";
+// Then add additional custom code here
+.fundoHeader {
+    color: $white;
+    background-color: $dark-blue-600;
+}
+
+html{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    body{
+        background-color: $primary;
+        height: 100%;
+        main{
+            div{
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}
+.formulario{
+  container-type: inline-size;
+  max-width: 500px;
+  .form-control{
+    background-color: transparent;
+    color: $light;
+  }
+  a{
+    text-decoration: none;
+    color: $gray-500;
+      &:hover{
+      text-decoration: underline;
+      color: blue;
+    } 
+  }
+  label{
+    color: $gray-500;
+  }
+}
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.botao{
+  position: absolute;
+
+}
+.teste{
+  background-color: $white;
+  width: 500px;
+  height: 500px;
+
+}
+
+
+.form-control, .btn{
+  font-size: clamp(0.875rem, 4cqw, 1.25rem);
+  padding-top: 2cqw;
+  padding-bottom: 2cqw;
+}
+img{
+  filter: brightness(65%);
+}
