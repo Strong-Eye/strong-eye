@@ -37,7 +37,8 @@ CREATE TABLE radar (
 
 CREATE TABLE componente (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	dado_capturado VARCHAR(30) NOT NULL
+	dado_capturado VARCHAR(30) NOT NULL,
+	unidade_medida VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE metrica (
