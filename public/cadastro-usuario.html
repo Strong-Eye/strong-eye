@@ -53,79 +53,19 @@
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="./cadastro-usuario.html" class="nav-link active" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-              <use xlink:href="#cadastro-membros"></use>
-            </svg>
+          <a href="./cadastro-usuario.html" class="nav-link active p-3 text-center" aria-current="page">
             Cadastro de membros
           </a>
         </li>
-        <!-- <li>
-            <a href="./dash.html" class="nav-link text-white">
-                <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                >
-                <use xlink:href="#dash"></use>
-                </svg>
-                Dashboard
-            </a>
-            </li> -->
-        <!-- <li>
-            <a href="#" class="nav-link text-white">
-                <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                >
-                <use xlink:href="#table"></use>
-                </svg>
-                Orders
-            </a>
-            </li>
-            <li>
-            <a href="#" class="nav-link text-white">
-                <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                >
-                <use xlink:href="#grid"></use>
-                </svg>
-                Products
-            </a>
-            </li>
-            <li>
-            <a href="#" class="nav-link text-white">
-                <svg
-                class="bi pe-none me-2"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                >
-                <use xlink:href="#people-circle"></use>
-                </svg>
-                Customers
-            </a>
-            </li> -->
       </ul>
       <hr />
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown" aria-expanded="false">
           <img src="./assets/icon/usuario.png" alt="" width="32" height="32" class="rounded-circle me-2" />
-          <!-- <strong>mdo</strong> -->
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider" /></li> -->
-          <li><a class="dropdown-item" href="login.html">Sign out</a></li>
+          <li><a class="dropdown-item" href="login.html">Sair da conta</a></li>
         </ul>
       </div>
     </div>
@@ -187,14 +127,16 @@
 
       </div>
       <div class="d-flex align-self-center">
-        <div class="d-grid gap-1 mt-2 d-md-block">
-          <!-- <div class="mt-5"> -->
-          <button class=" btnx fs-3 py-3 " onclick="cadastrar()">
-            Cadastrar
-          </button>
-        </div>
-        <div>
-          <button id="abrir-popup2" onclick="popup2.showModal()">EXCLUIR</button>
+        <div class="d-flex flex-row gap-3">
+          <!-- Botão de cadastro -->
+
+          <button class="btn btn-primary" onclick="cadastrar()">Cadastrar</button>
+
+          <!-- Botão de exclusão -->
+
+          <button class="btn btn-danger " onclick="popup2.showModal()">Excluir</button>
+          <!-- PopUp Exclusão -->
+
           <dialog id="popup2">
             <form method="dialog">
               <div class="col-md pe-0">
@@ -205,14 +147,16 @@
                   <label for="pessoa2_input">Membro</label>
                 </div>
               </div>
-              <button type="button" class="modal-custom " onclick="remover()">Excluir</button>
+              <button type="button" class="modal-custom" onclick="remover()">Excluir</button>
               <button type="submit" id="fechar-popup2" onclick="popup2.close()">Fechar</button>
             </form>
           </dialog>
-        </div>
 
-        <div>
-          <button id="abrir-popup1" onclick="popup1.showModal()">ATUALIZAR</button>
+          <!-- Botão de Atualização -->
+
+          <button class="btn btn-warning" onclick="popup1.showModal()">Atualizar</button>
+          <!-- PopUp Atualização -->
+           
           <dialog id="popup1">
             <form method="dialog">
               <div class="col-md pe-0">
@@ -236,6 +180,7 @@
               <button type="submit" id="fechar-popup1" onclick="popup1.close()">Fechar</button>
             </form>
           </dialog>
+
         </div>
       </div>
       <div class="d-flex justify-content-center ">
