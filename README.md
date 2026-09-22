@@ -26,3 +26,12 @@ O **Strong Eye** é um sistema de monitoramento contínuo e em tempo real para h
 * Milena Amorim
 * Murilo Mendes
 * Rafaela Leite
+
+## 👥 Nova Equipe (Atual)
+
+* Guilherme Polizello
+* Jhenifer Tavares
+* Matheus Rosa
+* Matheus Gonçalves
+* Nicholas Visentini
+* Rafaela Fukuda
