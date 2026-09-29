@@ -67,6 +67,10 @@
                 <input type="password" class="form-control" id="confirmacao_senha_input"  placeholder="Password"/>
                 <label for="floatingPassword">Confirmar senha</label>
               </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="codigo_input"  placeholder="Código"/>
+                <label for="floatingPassword">Código</label>
+              </div>
               <button onclick="cadastrar()" class="btn btn-info w-100 py-2" type="button">
                 Cadastre-se
               </button>
@@ -104,17 +108,15 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    // var codigoVar = codigo_input.value;
-    var idEmpresaVincular = 1
-    console.log("nomeVar: " + nomeVar, "emailVar: " + emailVar, "senhaVar: " + senhaVar, "confirmacaoSenhaVar: " + confirmacaoSenhaVar, "idEmpresaVincular: " + idEmpresaVincular)
+    var codigoVar = codigo_input.value;
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == ""
-      // codigoVar == ""
+      confirmacaoSenhaVar == "" ||
+      codigoVar == ""
     ) {
       alert("Há campos não preenchidos")
       // cardErro.style.display = "block";
@@ -233,19 +235,6 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
-
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -258,7 +247,7 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
+        codigoServer: codigoVar
       }),
     })
       .then(function (resposta) {
