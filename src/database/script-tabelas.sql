@@ -47,7 +47,6 @@ CREATE TABLE radares (
   CHECK (status IN (0, 1))
 );
 
--- Sem a FK para usuarios (adicionada no final por causa do ciclo)
 CREATE TABLE codigo_ativacao (
   id INT NOT NULL AUTO_INCREMENT,
   codigo_ativacao CHAR(5),
@@ -137,3 +136,9 @@ CREATE TABLE endereco_radar (
   CONSTRAINT fk_endereco_radar_endereco
     FOREIGN KEY (fk_endereco) REFERENCES longradouros(cep)
 );
+
+INSERT INTO componentes (nome) VALUES
+  ("cpu"),
+  ("ram"),
+  ("disco"),
+  ("rede");
