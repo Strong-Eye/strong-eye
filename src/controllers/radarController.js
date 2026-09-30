@@ -61,7 +61,7 @@ function cadastrarRadar(req, res) {
             return inserirRadarEEndereco();
         }
     }).then((fk_radar) => {
-        res.status(200).json({ mensagem: "Radar cadastrado!", id: fk_radar });
+        res.status(200).json({ mensagem: "Radar cadastrado!", id: fk_radar, nome: modelo});
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao cadastrar o radar: ", erro.sqlMessage);
@@ -69,7 +69,44 @@ function cadastrarRadar(req, res) {
     });
 }
 
+function buscarParametros(req, res) {
+  var fk_radar = req.params.fk_radar;
+
+  if (!fk_radar) {
+    return res.status(400).send("fk_radar está undefined!");
+  }
+
+  radarModel.buscarParametros(fk_radar).then((resultado) => {
+    res.status(200).json(resultado);
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar o radar: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function cadastrarParametros(req, res) {
+    var fk_componente = req.body.fk_componenteServer;
+    var fk_radar = req.body.fk_radarServer;
+    var valor_maximo = req.body.valor_maximoServer;
+    var valor_minimo = req.body.valor_minimoServer;
+
+    if (!fk_componente || !fk_radar || !valor_maximo || !valor_minimo) {
+        return res.status(400).send("Dados obrigatórios estão undefined!");
+    }
+
+    radarModel.inserirParametros(fk_componente, fk_radar, valor_maximo, valor_minimo).then((resultado) => {
+        res.status(200).json({ mensagem: "Parâmetro cadastrado!"});
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao cadastrar o parâmetro: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
   buscarRadarPorUuid,
-  cadastrarRadar
+  cadastrarRadar,
+  buscarParametros,
+  cadastrarParametros
 }

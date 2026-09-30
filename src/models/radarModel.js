@@ -50,10 +50,31 @@ function inserirEnderecoRadar(fk_radar, fk_endereco, km, complemento) {
     return database.executar(instrucaoSql, [fk_radar, fk_endereco, km, complemento]);
 }
 
+function inserirParametros(fk_componente, fk_radar, valor_maximo, valor_minimo) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucaoSql = `
+        INSERT INTO parametros (fk_componente, fk_radar, valor_maximo, valor_minimo) VALUES 
+	        (?, ?, ?, ?);
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql, [fk_componente, fk_radar, valor_maximo, valor_minimo]);
+}
+
+function buscarParametros(fk_radar) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucaoSql = `
+        SELECT * FROM parametros p INNER JOIN componentes c ON p.fk_componente = c.id WHERE p.fk_radar = ?; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql, [fk_radar]);
+}
+
 module.exports = {
     buscarLongradouroPorCep,
     inserirLongradouro, 
     buscarRadarPorUuid, 
     inserirRadar,
-    inserirEnderecoRadar
+    inserirEnderecoRadar,
+    buscarParametros,
+    inserirParametros
 };
