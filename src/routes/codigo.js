@@ -8,4 +8,8 @@ router.post("/cadastrar", function (req, res) {
     codigoController.cadastrar(req, res);
 })
 
+router.post("/listar", function (req, res) {
+    codigoController.listar(req, res);
+})
+
 module.exports = router;

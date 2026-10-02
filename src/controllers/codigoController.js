@@ -1,6 +1,7 @@
 var codigoModel = require("../models/codigoModel");
 
 function cadastrar(req, res) {
+    var id_usuario = req.body.idUsuarioServer;
     var codigo = req.body.codigoServer;
     var id_empresa = req.body.idEmpresaServer;
     var cargo = req.body.cargoServer;
@@ -8,7 +9,32 @@ function cadastrar(req, res) {
     if (codigo == undefined) {
         res.status(400).send("Seu codigo está undefined!");
     } else {
-        codigoModel.cadastrar(codigo, id_empresa, cargo)
+        codigoModel.cadastrar(id_usuario, codigo, id_empresa, cargo)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function listar(req, res) {
+    var id_usuario = req.body.idUsuarioServer;
+    var id_empresa = req.body.idEmpresaServer;
+
+    if (id_empresa == undefined) {
+        res.status(400).send("Seu id_empresa está undefined!");
+    } else {
+        codigoModel.listar(id_usuario, id_empresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -28,4 +54,5 @@ function cadastrar(req, res) {
 
 module.exports = {
     cadastrar,
+    listar
 }
