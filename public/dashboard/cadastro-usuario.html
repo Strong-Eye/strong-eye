@@ -28,7 +28,7 @@
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a href="../cadastro-usuario.html" class="nav-link active p-3 text-center" aria-current="page">
-            Cadastro de membros
+            Cadastro de código
           </a>
         </li>
       </ul>
@@ -46,7 +46,7 @@
   </div>
 
 
-  <main class="flex-grow-1 w-100 d-flex flex-column">
+  <main class="flex-grow-1 w-100 h-100 d-flex flex-column">
     <div>
       <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
@@ -54,20 +54,15 @@
     </div>
 
     <div class="mx-auto mt-5 pt-2 text-light">
-      <h1 class="">Cadastro de Funcionários</h1>
+      <h1 class="">Cadastro de Códigos de Acesso</h1>
     </div>
-    <div class="container mt-5 mx-auto d-flex flex-column">
-      <div class="">
-        <div class="flex-row gap-2 ms-4 me-0 w-75">
-
-        </div>
-      </div>
+    <div class="container mx-auto d-flex flex-column">
       <div class="d-flex align-self-center">
         <div class="d-flex flex-row gap-3">
           <!-- Botão de cadastro -->
           
           <div class="">
-            <button class="btn btn-success h-100 rounded-0 rounded-start" onclick="cadastrarCodigo()">Gerar código</button>
+            <button class="btn btn-success h-100 rounded-0 rounded-start" onclick="cadastrarCodigo(), listarCodigos()">Gerar código</button>
             <div class="col-md pe-0 h-100">
               <div class="form-floating">
                 <select class="form-select rounded-0 rounded-end" id="cargo_input">
@@ -80,7 +75,7 @@
           </div>
           <!-- Botão de exclusão -->
 
-          <button class="btn btn-danger " onclick="popup2.showModal()">Excluir</button>
+          <button class="btn btn-danger" onclick="popup2.showModal()">Excluir</button>
           <!-- PopUp Exclusão -->
 
           <dialog id="popup2">
@@ -148,8 +143,8 @@
       </div>
 
       <div class="d-flex justify-content-center">
-        <div class="border rounded-3 overflow-hidden w-75">
-          <table class="table table-striped mb-0">
+        <div class="border rounded-3 w-75 h-100 overflow-scroll" style="max-height: 400px;">
+          <table id="tabela_codigos" class="table table-bordered table-striped mb-0">
             <thead>
               <tr>
                 <th scope="col">Nome</th>
@@ -157,23 +152,10 @@
                 <th scope="col">Email Corporativo</th>
                 <th scope="col">Data de Cadastro</th>
                 <th scope="col">Código de ativação</th>
+                <th scope="col">Ativo</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Ana</td>
-                <td>Gestor</td>
-                <td>ana@gmail.com</td>
-                <td>24/05/2023</td>
-                <td>JFUA23C</td>
-              </tr>
-              <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>JPKN23P</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -190,3 +172,4 @@
 <script src="./js/cadastro-usuario.js"></script>
 <script>
 </script>
+<!-- TODO: terminar crud (read: atualizar tabela, update: mudar status codigo, delete: deletar codigo/usuario) -->
