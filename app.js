@@ -15,6 +15,10 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
+app.listen(PORTA_APP, '0.0.0.0', () => {
+  console.log(`Servidor escutando na porta ${PORTA_APP}`);
+});
+
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
