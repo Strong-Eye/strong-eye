@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/custom.css">
+
+  <title>Strong Eye - Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="icon" href="../assets/icon/logo.png" />
+</head>
+
+<body class="d-flex flex-row min-vh-100" onload="listar()">
+  <div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column " style="width: 290px;" tabindex="-1"
+    id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+    <div class="offcanvas-header bg-dark d-flex mb-0 pb-0">
+
+      <img src="../assets/img/LOGO.png" alt="" style="max-height: 100%;" class="h-auto mw-100">
+
+    </div>
+    <div class="offcanvas-body p-3 d-flex flex-column justify-content-between flex-grow-1">
+         <hr />
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="./cadastro-usuario.html" class="nav-link active p-3 text-center" aria-current="page">
+            Cadastro de membros
+          </a>
+        </li>
+        <br><br>
+         <li class="nav-item">
+          <a href="./cadastro-radar.html" class="nav-link active p-3 text-center" aria-current="page">
+            Cadastro de radar
+          </a>
+        </li>
+      </ul>
+     
+      <hr />
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="../assets/icon/usuario.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="login.html">Sair da conta</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="flex-grow-1 w-100 d-flex flex-column">
+    <div>
+      <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+        Menu</button>
+    </div>
+
+    <div class="mx-auto mt-5 pt-2 text-light">
+      <h1 class="">Cadastro de Funcionários</h1>
+    </div>
+    <div class="container mt-5 mx-auto d-flex flex-column">
+      <div class="">
+        <div class="flex-row gap-2 ms-4 me-0 w-75">
+
+        </div>
+      </div>
+      <div class="d-flex align-self-center">
+        <div class="d-flex flex-row gap-3">
+          <!-- Botão de cadastro -->
+          
+         
+          <!-- Botão de exclusão -->
+
+          <button class="btn btn-danger " onclick="popup2.showModal()">Excluir</button>
+          <!-- PopUp Exclusão -->
+
+          <dialog id="popup2">
+            <form method="dialog">
+              <div class="col-md pe-0">
+                <div class="form-floating">
+                  <select onclick="listarSelectRemo()" class="form-select" id="selectRe">
+                    <option selected>Escolha um Radar</option>
+                    <div id="oprm"></div>
+                  </select>
+                  <label for="pessoa2_input">Radar</label>
+                </div>
+              </div>
+              <button type="button" class="modal-custom" onclick="removerUm()">Excluir</button>
+              <button type="button" class="modal-custom" onclick="removerAll()">Excluir Todos</button>
+              <button type="submit" id="fechar-popup2" onclick="popup2.close()">Fechar</button>
+            </form>
+          </dialog>
+
+          <!-- Botão de Atualização -->
+          
+          <button class="btn btn-warning" onclick="popup1.showModal()">Atualizar</button>
+          <!-- PopUp Atualização -->
+
+          <dialog id="popup1">
+            <form method="dialog">
+              
+                
+              <label for="pessoa3_input">Radar</label>
+                  <select onclick="listarSelect()" class="form-select" id="selectRad">
+                    <option on selected>Escolha um radar</option>
+                    <div id="op"></div>
+                  </select>
+                
+                            
+              
+                  <label for="cargo2_input">Componente</label>
+                  <select class="form-select" id="selectCom">
+                    <option value=""></option>
+                    <option value="1">CPU</option>
+                    <option value="2">RAM</option>
+                    <option value="3">DISCO</option>
+                    <option value="4">NET</option>
+                  </select>
+              
+              
+              
+              
+                  <label for="pessoa4_input">Valor</label>
+                  <select class="form-select" id="selectValor">
+                    <option></option>
+                    <option value="valor_maximo">Valor Maxímo</option>
+                    <option value="valor_maximo">Valor Mínimo</option>
+                  </select>
+              
+              
+              
+                <div class="d-flex flex-column">
+                  <label for="pessoa5_input">Valor novo</label>
+                  <input type="number" id="valor_ipt">
+                </div>
+                
+              
+                <div class="d-flex flex-column">
+                  <div">Status</label>
+                  <select class="form-select" id="selectStatus">
+                    <option value=""></option>
+                    <option value="1">Funcionando</option>
+                    <option value="0">Parado</option>    
+                  </select>
+                </div>
+
+                  <div>
+                    <button type="button" class="modal-custom" onclick="alterarValor()">Atualizar</button>
+                    <button type="submit" id="fechar-popup1" onclick="popup1.close()">Fechar</button>
+                  </div>  
+            </form>
+          </dialog>
+
+<!-- ================================================================================== -->
+
+          <button class="btn btn-primary " onclick="popup3.showModal()">Paramêtros</button>
+          <!-- PopUp Exclusão -->
+
+          <dialog id="popup3">
+            <form method="dialog">
+              <div>
+                <span>Escolha radar:</span>
+                <select onclick="listarRadarParms()" id="rd">
+                  <option value=""></option>
+                  <div id="rdParams"></div>
+                </select>
+              </div>
+              <table id="table_params">
+                <thead>
+                  <tr>
+                <th scope="col">Componente</th>
+                <th scope="col">Valor maximo</th>
+                <th scope="col">Valor minimo</th>
+          
+                  </tr>
+                </thead>
+                <tbody id="tbParams">
+
+                </tbody>
+              </table>
+              <button type="button" class="modal-custom" onclick="listarParametro()">Buscar</button>
+              <button type="submit" id="fechar-popup2" onclick="popup2.close()">Fechar</button>
+            </form>
+          </dialog>
+        </div>
+      </div>
+<!-- ===============================================================================-->
+     
+
+      <div class="d-flex justify-content-center">
+        <div class="border rounded-3 overflow-hidden w-75">
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">uuid</th>
+                <th scope="col">modelo</th>
+                <th scope="col">Ativo</th>
+                <th scope="col">Data de Cadastro</th>
+              </tr>
+            </thead>
+           <tbody id="tb">
+              
+           </tbody>
+          </table>
+        </div>
+      </div>
+  </main>
+
+  <footer>
+
+  </footer>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  var listaUsuariosCadastrados = [];
+  var usuarioId = {};
+  var idEmpresaVincular = 1;
+  let j = 0;
+  let k = 0;
+  let l = 0;
+
+  function listarRadarParms(){
+
+    let empresaVar = sessionStorage.ID_EMPRESA;
+
+      fetch("/radar/listar", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                empresaServer: empresaVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+          console.log(respostafinal); 
+           for(let i = 0; i < respostafinal.length; i++){
+            if(l >= respostafinal.length){
+              break
+            }
+            rdParams.innerHTML+=`<option value="${respostafinal[i].id}">${respostafinal[i].uuid}</option>`
+            l++;
+            console.log(respostafinal.length)
+            console.log(j)
+            }
+         
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+  }
+  
+  function listarParametro(){
+    let radarVar = rd.value;
+
+    fetch("/radar/listarParams", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                radarServer: radarVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+          console.log(respostafinal); 
+          let comp; 
+          for(let i = 0; i < respostafinal.length; i++){
+              if(respostafinal[i].fk_componente == 1){
+                comp = "CPU";
+              }else if(respostafinal[i].fk_componente == 2){
+                comp = "RAM";
+              }else if(respostafinal[i].fk_componente == 3){
+                comp = "DISCO";
+              }else if(respostafinal[i].fk_componente == 4){
+                comp = "NET";
+              }
+
+            tbParams.innerHTML  +=`<tr>
+            <td>${comp}</td>
+            <td>${respostafinal[i].valor_maximo}</td>
+            <td>${respostafinal[i].valor_minimo}</td>  
+            </tr>  
+            `; 
+            console.log(respostafinal)
+          }
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+  }
+
+  function listar() {
+
+    var empresaVar = sessionStorage.ID_EMPRESA;
+
+    fetch("/radar/listar", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                empresaServer: empresaVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+      
+          console.log(respostafinal); 
+           for(let i = 0; i < respostafinal.length; i++){
+            console.log(respostafinal)
+           let ativo = false;
+            if(respostafinal[i].status == 1){
+            ativo = true;
+          }
+
+          
+          let menssagem = `
+          <tr>
+            <td>${respostafinal[i].uuid}</td>
+            <td>${respostafinal[i].modelo}</td>
+            <td>${ativo}</td>  
+            <td>${respostafinal[i].data_cadastro}</td>
+            </tr>  
+            `;
+            
+            tb.innerHTML += menssagem;
+            
+            
+            console.log(menssagem)
+            }
+         
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+      
+    }
+
+    function altererarStatus(uuid,status){
+      let uuidVar = uuid;
+      let statusVar = status;
+
+      fetch("/radar/alterarStatus", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              
+                uuidServer: uuidVar,
+                statusServer: statusVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+      window.location.href = "./cadastro-radar.html"
+    }
+      
+    
+    function listarSelectRemo(){
+      
+      let empresaVar = sessionStorage.ID_EMPRESA;
+
+      fetch("/radar/listar", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                empresaServer: empresaVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+          console.log(respostafinal); 
+           for(let i = 0; i < respostafinal.length; i++){
+            if(k >= respostafinal.length){
+              break
+            }
+            oprm.innerHTML+=`<option value="${respostafinal[i].id}">${respostafinal[i].uuid}</option>`
+            k++;
+            console.log(respostafinal.length)
+            console.log(j)
+            }
+         
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
+
+
+
+    function listarSelect(){
+      
+      let empresaVar = sessionStorage.ID_EMPRESA;
+
+      fetch("/radar/listar", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                empresaServer: empresaVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+          console.log(respostafinal); 
+           for(let i = 0; i < respostafinal.length; i++){
+            if(j >= respostafinal.length){
+              break
+            }
+            op.innerHTML+=`<option value="${respostafinal[i].id}">${respostafinal[i].uuid}</option>`
+            j++;
+            console.log(respostafinal.length)
+            console.log(j)
+            }
+         
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
+
+
+
+      function alterarValor(){
+      let valorCom = selectCom.value
+      let valor= selectValor.value;
+      let valorValor= valor_ipt.value;
+      let valorRad = selectRad.value;
+      let statusVar = selectStatus.value;
+
+      // let valorCom = com;
+      // let valor= valorD;
+      // let valorValor= valorN;
+      // let valorRad = radar_id;
+      
+    
+      
+      fetch("/radar/alterar", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              
+                componenteServer: valorCom,
+                valorServer: valor,
+                valorValorServer: valorValor,
+                radarServer: valorRad
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+          if(!statusVar == ""){
+            altererarStatus(valorRad,statusVar)
+            
+          }
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+        window.location.href = "./cadastro-radar.html"
+    }
+
+    function removerUm(){
+      // let uuidVar = SelectRad.value
+      
+      let uuidVar = selectRe.value;
+      
+      
+      
+      fetch("/radar/remover", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              
+                uuidServer: uuidVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+      window.location.href = "./cadastro-radar.html"
+
+    }
+
+    function removerAll(){
+      let empresaVar = sessionStorage.ID_EMPRESA;
+
+      fetch("/radar/removerAll", {
+       method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              
+                empresaServer: empresaVar
+            })
+    })
+      .then(function (resposta) {
+       if(resposta.ok)
+        resposta.json().then(function (respostafinal){
+
+       })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+      window.location.href = "./cadastro-radar.html"
+
+
+    }
+    
+  //   function atualizar(){
+  //     var empresaVar = sessionStorage.ID_EMPRESA;
+      
+  //     fetch("/radar/listar", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //           },
+  //           body: JSON.stringify({
+  //               empresaServer: empresaVar
+  //           })
+  //   })
+  //     .then(function (resposta) {
+  //      if(resposta.ok)
+  //       resposta.json().then(function (respostafinal){
+      
+  //     console.log(respostafinal); 
+  //     com.innerHTML= `
+  //     <select id="selectCom">
+  //       <option value=""></option>
+  //       <option value="1">CPU</option>
+  //       <option value="2">RAM</option>
+  //       <option value="3">DISCO</option>
+  //       <option value="4">NET</option>
+  //       </select>
+  //       `;
+  //       let componente = selectCom.value;
+  //     oq.innerHTML= `
+  //     <select id="selectOq">
+  //       <option value=""></option>
+  //       <option value="valor_maximo">Valor maximo</option>
+  //       <option value="valor_minimo">Valor minimo</option>
+  //       </select>
+  //       `;
+
+  //       let oque = selectOq.value;
+        
+  //     edt.innerHTML= `
+  //     <select id="select">
+  //       <option value=""></option>
+  //       <div id="opt"></div>
+  //       </select>
+  //       <button onclick="teste(oque,radar,componente,empresaVar)">sla</button>
+  //       `;
+  //     for(let i = 0; i < respostafinal.length; i++){
+  //       console.log(respostafinal)
+        
+  //         opt.innerHTML += `<option value="${respostafinal[i].uuid}">${respostafinal[i].uuid}</option>`
+          
+  //           }
+
+  //           let radar = select.value;
+         
+
+  //      })
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  //   edt.innerHTML = `
+                      
+  //   `
+  //   console.log("oi")
+
+  // }
+
+  // function teste(oque,radar,empresa,comp){
+  //   alert(oque,radar,empresa,comp)
+  // }
+
+
+</script>
+<script src="../js/radar.js"></script>
