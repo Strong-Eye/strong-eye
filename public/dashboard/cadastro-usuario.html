@@ -56,6 +56,9 @@
     <div class="mx-auto mt-5 pt-2 text-light">
       <h1 class="">Cadastro de Códigos de Acesso</h1>
     </div>
+    <div class="mx-auto pt-2 text-light">
+      <h2 id="exibicao_codigo"></h2>
+    </div>
     <div class="container mx-auto d-flex flex-column">
       <div class="d-flex align-self-center">
         <div class="d-flex flex-row gap-3">
@@ -129,13 +132,13 @@
         <div class="gap-3 w-75">
           <div class="input-group gap-0 w-75">
             <span class="input-group-text">@</span>
-            <input type="text" class="form-control" placeholder="Email Corporativo">
+            <input id="ipt_pesquisa" type="text" class="form-control" onblur="listarCodigos()" placeholder="Email Corporativo">
           </div>
           <div class="form-floating w-25">
-            <select id="select_filtro" class="form-select text-center">
-              <option>Cargo</option>
-              <option>Nome (A-Z)</option>
-              <option>Nome (Z-A)</option>
+            <select id="select_filtro" class="form-select text-center" onchange="listarCodigos()">
+              <option value="1">Cargo</option>
+              <option value="2">Nome (A-Z)</option>
+              <option value="3">Nome (Z-A)</option>
             </select>
             <label for="select_filtro">Filtrar por</label>
           </div>
@@ -172,4 +175,3 @@
 <script src="./js/cadastro-usuario.js"></script>
 <script>
 </script>
-<!-- TODO: terminar crud (read: atualizar tabela, update: mudar status codigo, delete: deletar codigo/usuario) -->
