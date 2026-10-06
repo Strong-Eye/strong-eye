@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS strong_eye;
-
 USE strong_eye;
 
 CREATE TABLE empresas (
@@ -18,20 +17,6 @@ CREATE TABLE cargos (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE codigo_ativacao (
-  id INT NOT NULL AUTO_INCREMENT,
-  codigo_ativacao CHAR(5) NOT NULL,
-  fk_empresa INT NOT NULL,
-  fk_cargo INT NOT NULL,
-  ativo TINYINT NOT NULL DEFAULT 1,
-  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_codigo_ativacao_empresa
-    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
-  CONSTRAINT fk_codigo_ativacao_cargo
-    FOREIGN KEY (fk_cargo) REFERENCES cargos(id)
-);
-
 CREATE TABLE longradouros (
   cep INT NOT NULL,
   longradouro VARCHAR(45) NOT NULL,
@@ -42,18 +27,10 @@ CREATE TABLE longradouros (
   PRIMARY KEY (cep)
 );
 
-CREATE TABLE usuarios (
+CREATE TABLE componentes (
   id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(50) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  senha VARCHAR(255) NOT NULL,
-  cargo VARCHAR(20) NOT NULL,
-  fk_codigo_ativacao INT NOT NULL,
-  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  UNIQUE (email),
-  CONSTRAINT fk_usuarios_codigo_ativacao
-    FOREIGN KEY (fk_codigo_ativacao) REFERENCES codigo_ativacao(id)
+  nome VARCHAR(30) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE radares (
@@ -66,13 +43,58 @@ CREATE TABLE radares (
   PRIMARY KEY (id),
   UNIQUE (uuid),
   CONSTRAINT fk_radares_empresa
-    FOREIGN KEY (fk_empresa) REFERENCES empresas(id)
+    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
+  CHECK (status IN (0, 1))
 );
 
-CREATE TABLE componentes (
+CREATE TABLE codigo_ativacao (
   id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(30) NOT NULL,
-  PRIMARY KEY (id)
+  codigo_ativacao CHAR(5),
+  fk_empresa INT NOT NULL,
+  fk_cargo INT NOT NULL,
+  ativo TINYINT NOT NULL DEFAULT 1,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fk_criado_por_usuario INT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_codigo_ativacao_empresa
+    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
+  CONSTRAINT fk_codigo_ativacao_cargo
+    FOREIGN KEY (fk_cargo) REFERENCES cargos(id),
+  CHECK (ativo IN (0, 1))
+);
+
+CREATE TABLE usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  fk_codigo_ativacao INT NOT NULL,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE (email),
+  CONSTRAINT fk_usuarios_codigo_ativacao
+    FOREIGN KEY (fk_codigo_ativacao) REFERENCES codigo_ativacao(id)
+);
+
+ALTER TABLE codigo_ativacao
+  ADD CONSTRAINT fk_codigo_ativacao_usuario
+    FOREIGN KEY (fk_criado_por_usuario) REFERENCES usuarios(id);
+
+CREATE TABLE tarefas (
+  id INT NOT NULL AUTO_INCREMENT,
+  fk_usuario_solicitante INT NOT NULL,
+  fk_usuario_designado INT NOT NULL,
+  fk_radar INT NOT NULL,
+  data DATETIME,
+  status VARCHAR(20) NOT NULL DEFAULT 'pendente',
+  PRIMARY KEY (id),
+  CONSTRAINT fk_tarefas_solicitante
+    FOREIGN KEY (fk_usuario_solicitante) REFERENCES usuarios(id),
+  CONSTRAINT fk_tarefas_designado
+    FOREIGN KEY (fk_usuario_designado) REFERENCES usuarios(id),
+  CONSTRAINT fk_tarefas_radar
+    FOREIGN KEY (fk_radar) REFERENCES radares(id),
+  CHECK (status IN ('pendente', 'em_andamento', 'concluida', 'cancelada'))
 );
 
 CREATE TABLE parametros (
@@ -115,20 +137,8 @@ CREATE TABLE endereco_radar (
     FOREIGN KEY (fk_endereco) REFERENCES longradouros(cep)
 );
 
-INSERT INTO empresas (razao_social, nome_fantasia, cnpj) 
-VALUES ('Strong Eye Soluções em Tecnologia LTDA', 'Strong Eye Tech', '12345678000199');
-
-INSERT INTO cargos (nome) 
-VALUES ('Administrador do Sistema');
-
-INSERT INTO codigo_ativacao (codigo_ativacao, fk_empresa, fk_cargo, ativo) 
-VALUES ('A1B2C', 1, 1, 1);
-
-INSERT INTO usuarios (nome, email, senha, cargo, fk_codigo_ativacao) 
-VALUES (
-    'João da Silva', 
-    'joao.silva@strongeye.com', 
-    'Senha12345', -- Em um cenário real, utilize hashes seguros como bcrypt ou argon2
-    'Administrador', 
-    1
-);
+INSERT INTO componentes (nome) VALUES
+  ("cpu"),
+  ("ram"),
+  ("disco"),
+  ("rede");
