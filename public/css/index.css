@@ -169,3 +169,66 @@
     .corDiv {
       color: red;
     }
+
+    
+    #logo svg {
+    width: 150px;
+    height: 50px;
+    }
+
+    #cpu svg {
+      margin-left: 35px;
+    width: 690px !important;
+    height: 550px !important;
+    }
+    #rede svg {
+      margin-left: 35px;
+    width: 690px !important;
+    height: 550px !important;
+    }
+    #ram svg {
+      margin-left: 35px;
+    width: 690px !important;
+    height: 550px !important;
+    }
+    #disco svg {
+      margin-left: 35px;
+    width: 690px !important;
+    height: 550px !important;
+    }
+
+
+    #valores svg {
+    width: 50px !important;
+    height: 50px !important;
+    }
+    #missao svg {
+    width: 50px !important;
+    height: 50px !important;
+    }
+    #visao svg {
+    width: 50px !important;
+    height: 50px !important;
+    }
+
+    #github svg {
+    width: 50px !important;
+    height: 50px !important;
+    }#email svg {
+    width: 50px !important;
+    height: 50px !important;
+    }#linkedin svg {
+    width: 50px !important;
+    height: 50px !important;
+    }
+
+    #time1 svg {
+    margin-left: 35px;
+    width: 690px !important;
+    height: 600px !important;
+    }
+    #time2 svg {
+    margin-left: 35px;
+    width: 690px !important;
+    height: 600px !important;
+    }
