@@ -16,7 +16,7 @@ function cadastrar(nome, email, senha, codigo) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO usuarios (nome, email, senha, cargo, fk_codigo_ativacao) VALUES ('${nome}', '${email}', SHA2('${senha}', 256), (SELECT nome FROM cargos WHERE id = (SELECT fk_cargo FROM codigo_ativacao WHERE codigo_ativacao = '${codigo}')), (SELECT id FROM codigo_ativacao WHERE codigo_ativacao = '${codigo}')
+        INSERT INTO usuarios (nome, email, senha, fk_codigo_ativacao) VALUES ('${nome}', '${email}', SHA2('${senha}', 256), (SELECT id FROM codigo_ativacao WHERE codigo_ativacao = '${codigo}')
         );
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -26,7 +26,7 @@ function cadastrar(nome, email, senha, codigo) {
 function atualizar(id, cargoNovo) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizar():", id);
     var instrucaoSql = `
-        UPDATE usuarios SET cargo = '${cargoNovo}'
+        UPDATE usuarios SET fk_cargo = '${cargoNovo}'
         WHERE id = '${id}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
