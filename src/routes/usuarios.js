@@ -20,8 +20,10 @@ router.put("/atualizar", function (req, res) {
     usuarioController.atualizar(req, res);
 });
 
-router.delete("/remover", function (req, res) {
-    usuarioController.remover(req, res);
+router.delete("/remover/:id", function (req, res) {
+    let id = req.params.id;
+    
+    usuarioController.remover(req, res, id);
 });
 
 module.exports = router;
