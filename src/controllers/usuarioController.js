@@ -81,12 +81,12 @@ function cadastrar(req, res) {
 
 function atualizar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-        var id = req.body.idUsuario;
-        var cargoNovo = req.body.cargoUsuario;
+        var codigo = req.body.codigoServer;
+        var cargoNovo = req.body.cargoServer;
         
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.atualizar(id, cargoNovo)
+        usuarioModel.atualizar(codigo, cargoNovo)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -119,27 +119,22 @@ function buscarUsuarios(req, res) {
         });
 }
 
-function remover(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var id = req.body.idUsuario;
-    
-
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.remover(id)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao remover usuario",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
+function remover(req, res, id) {
+    usuarioModel.remover(id)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao remover usuario",
+                erro.sqlMessage
             );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
 }
 
 module.exports = {

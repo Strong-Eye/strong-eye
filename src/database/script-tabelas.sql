@@ -47,6 +47,45 @@ CREATE TABLE radares (
   CHECK (status IN (0, 1))
 );
 
+-- Sem a FK para usuarios (adicionada no final por causa do ciclo)
+CREATE TABLE codigo_ativacao (
+  id INT NOT NULL AUTO_INCREMENT,
+  codigo_ativacao CHAR(5),
+  fk_empresa INT NOT NULL,
+  fk_cargo INT NOT NULL,
+  ativo TINYINT NOT NULL DEFAULT 1,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fk_criado_por_usuario INT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_codigo_ativacao_empresa
+    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
+  CONSTRAINT fk_codigo_ativacao_cargo
+    FOREIGN KEY (fk_cargo) REFERENCES cargos(id),
+  CHECK (ativo IN (0, 1))
+);
+
+CREATE TABLE usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  fk_codigo_ativacao INT NOT NULL,
+  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE (email),
+  CONSTRAINT fk_usuarios_codigo_ativacao
+    FOREIGN KEY (fk_codigo_ativacao) REFERENCES codigo_ativacao(id)
+);
+
+ALTER TABLE codigo_ativacao
+  ADD CONSTRAINT fk_codigo_ativacao_usuario
+    FOREIGN KEY (fk_criado_por_usuario) REFERENCES usuarios(id);
+
+CREATE TABLE tarefas (
+    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
+  CHECK (status IN (0, 1))
+);
+
 CREATE TABLE codigo_ativacao (
   id INT NOT NULL AUTO_INCREMENT,
   codigo_ativacao CHAR(5),
@@ -137,6 +176,17 @@ CREATE TABLE endereco_radar (
     FOREIGN KEY (fk_endereco) REFERENCES longradouros(cep)
 );
 
+INSERT INTO empresas (razao_social, nome_fantasia, cnpj) 
+VALUES ('Strong Eye', 'Strong Eye Tech', '12345678000199');
+
+INSERT INTO cargos (nome) 
+VALUES ('Gerente');
+
+INSERT INTO cargos (nome) 
+VALUES ('Técnico');
+
+INSERT INTO codigo_ativacao (codigo_ativacao, fk_empresa, fk_cargo, ativo) 
+VALUES ('A1B2C', 1, 1, 1);
 INSERT INTO componentes (nome) VALUES
   ("cpu"),
   ("ram"),
