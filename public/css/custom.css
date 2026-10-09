@@ -126,7 +126,7 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
-main .container > div:not(.input-group),
+main .container > div,
 .button-group {
   display: flex !important;
   flex-direction: row !important;
