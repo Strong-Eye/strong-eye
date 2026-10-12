@@ -126,6 +126,10 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
+* {
+    font-family: "TT Supermolot Neue", sans-serif !important;
+}
+
 main .container > div:not(.input-group),
 .button-group {
   display: flex !important;
