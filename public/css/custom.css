@@ -130,6 +130,42 @@
     font-family: "TT Supermolot Neue", sans-serif !important;
 }
 
+.card-pardal {
+    background-color: #101a33;
+    border: 1px solid #080f20;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.card-pardal:hover {
+    background-color: #1c2e52;
+    border-color: #080f20;
+}
+
+.card-pardal.selecionado {
+    background-color: #263f70;
+    border: 2px solid #080f20;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-pardal.selecionado:hover {
+    background-color: #263f70;
+}
+
+/* Hover: muda a cor do texto */
+.mainDash .card-pardal:hover .card-header h5,
+.mainDash .card-pardal:hover .card-body p,
+.mainDash .card-pardal:hover .card-body b {
+    color: #ffffff !important;
+}
+
+/* Card selecionado: mantém o texto branco */
+.mainDash .card-pardal.selecionado .card-header h5,
+.mainDash .card-pardal.selecionado .card-body p,
+.mainDash .card-pardal.selecionado .card-body b {
+    color: #ffffff !important;
+}
+
 main .container > div:not(.input-group),
 .button-group {
   display: flex !important;
@@ -275,6 +311,38 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Impede os cards de crescerem sem limite */
+.medidor-card {
+    width: 100%;
+    max-width: 280px;
+    height: 210px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Define um tamanho fixo para os medidores */
+.medidor-container {
+    position: relative;
+    width: 220px;
+    max-width: 100%;
+    height: 110px;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+/* Impede que o canvas ultrapasse o contêiner */
+.medidor-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Gráfico de pacotes */
+.pacotes-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
 }
 
 hr {
@@ -2332,7 +2400,7 @@ textarea.form-control-lg {
 .form-select {
   --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   display: block;
-  width: 100%;
+  width: 500px;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -2342,7 +2410,7 @@ textarea.form-control-lg {
   background-color: var(--bs-body-bg);
   background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
   background-repeat: no-repeat;
-  background-position: right 0.75rem center;
+  background-position: right 0.85rem center;
   background-size: 16px 12px;
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
@@ -8059,6 +8127,11 @@ textarea.form-control-lg {
   margin-left: 3rem !important;
 }
 
+
+.ms-6 {
+  margin-left: 17rem !important;
+}
+
 .ms-auto {
   margin-left: auto !important;
 }
@@ -10620,7 +10693,6 @@ textarea.form-control-lg {
   .px-lg-5 {
     padding-right: 3rem !important;
     padding-left: 3rem !important;
-    
   }
   .py-lg-0 {
     padding-top: 0 !important;
