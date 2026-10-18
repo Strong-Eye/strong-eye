@@ -15,10 +15,9 @@
   <link rel="icon" href="../assets/icon/logo.png" />
 </head>
 
+<body class="d-flex flex-row min-vh-100">
 
-<body class="d-flex flex-col md:flex-row h-screen overflow-hidden">
-
-  <div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column position-fixed" style="width: 244px;" tabindex="-1"
+  <div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column " style="width: 290px;" tabindex="-1"
     id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
 
     <div class="offcanvas-header bg-dark d-flex mb-0 pb-0">
@@ -29,7 +28,7 @@
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="./cadastro-usuario.html" class="nav-link p-3  text-center" aria-current="page">
+          <a href="./cadastro-usuario.html" class="nav-link p-3 active text-center" aria-current="page">
             <b>Cadastro de membros</b>
           </a>
         </li>
@@ -40,7 +39,7 @@
           </a>
         </li>
          <li class="nav-item">
-          <a href="./dashboard-tecnico.html" class="nav-link active p-4 text-center" aria-current="page">
+          <a href="./dashboard-tecnico.html" class="nav-link p-4 text-center" aria-current="page">
             <b>Dashboard técnico</b>
           </a>
         </li>
@@ -59,7 +58,7 @@
   </div>
 
 
-  <main class="mainDash flex-grow-1 w-100 h-100 d-flex flex-column overflow-scroll ms-6">
+  <main class="flex-grow-1 w-100 h-100 d-flex flex-column ms-3 me-3 overflow-auto">
     <div>
       <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
@@ -83,7 +82,7 @@
         </div>
       </div>
     </div>
- <div class="container">
+ <div class="container justify-content-center">
   <div id="carrosselDeCards" class="carousel slide" data-bs-ride="carousel">
     
     <div class="carousel-inner">
