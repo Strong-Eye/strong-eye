@@ -5576,6 +5576,12 @@ dialog .form-select {
     border: 1px solid #526DFF;
 }
 
+dialog .select{
+    background-color: #101b49;
+    color: white;
+    border: 1px solid #526DFF;
+}
+
 dialog .form-select:focus {
     border-color: #526DFF;
     box-shadow: 0 0 8px rgba(82, 109, 255, 0.5);
@@ -5598,7 +5604,53 @@ dialog button[type="submit"] {
     color: white;
 }
 
+#popup3 span {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
 
+#popup3 select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #101b49;
+    color: white;
+    border: 1px solid #526DFF;
+    border-radius: 6px;
+}
+
+#table_params {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    color: white;
+}
+
+#table_params th {
+    background-color: #17275c;
+    color: white;
+    padding: 12px;
+    border: 1px solid #526DFF;
+}
+
+#table_params td {
+    background-color: #101b49;
+    color: white;
+    padding: 10px;
+    border: 1px solid #526DFF;
+    text-align: center;
+}
+
+#popup3 .modal-custom {
+    background-color: #526DFF;
+    color: white;
+}
+
+#popup3 button[type="submit"] {
+    background-color: #343a40;
+    color: white;
+}
 
 .modal-dialog {
   position: relative;
