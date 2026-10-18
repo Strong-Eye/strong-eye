@@ -86,7 +86,7 @@ function selecionarCard(card) {
 
                 <div class="col-12 col-lg-6">
                     <div class="mt-5 ms-5 mb-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Tráfego de Rede</h4>
+                        <h4 class="text-light">Velocidade de Rede</h4>
                         <div style="height: 250px; width: 100%;">
                             <canvas id="graficoRede"></canvas>
                         </div>
@@ -106,16 +106,16 @@ function selecionarCard(card) {
         `;
 
         // colocando os valores para a criação funcionar
-        criarLinha('graficoCPU', [0, 12, 38, 30, 65, 48, 40, 65, 90, 100]);
+        criarLinha('graficoCPU', [0, 12, 38, 30, 65, 48, 40, 65, 90, 90]);
         criarMedidor('medidorCPU', 90, '#B80000');
 
-        criarLinha('graficoRAM', [10, 25, 18, 75, 50, 38, 90, 90, 85, 100]);
+        criarLinha('graficoRAM', [10, 25, 18, 75, 50, 38, 90, 90, 85, 80]);
         criarMedidor('medidorRAM', 80, '#B80000');
 
         criarLinha('graficoDisco', [0, 15, 40, 32, 70, 50, 42, 85, 60, 100]);
         criarMedidor('medidorDisco', 60, '#52DCE5');
 
-        criarLinha('graficoRede', [0, 20, 65, 50, 125, 85, 70, 140, 100, 110]);
+        criarLinhaRede('graficoRede', [0, 20, 65, 50, 125, 85, 70, 140, 100, 110]);
         criarGraficoPacotes();
 
 
@@ -183,7 +183,7 @@ function selecionarCard(card) {
 
                 <div class="col-12 col-lg-6">
                     <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Tráfego de Rede</h4>
+                        <h4 class="text-light">Velocidade de Rede</h4>
                         <div style="height: 250px; width: 100%;">
                             <canvas id="graficoRede"></canvas>
                         </div>
@@ -211,7 +211,7 @@ function selecionarCard(card) {
         criarLinha('graficoRAM', [10, 25, 18, 35, 50, 38, 60, 65, 60, 65]);
         criarMedidor('medidorRAM', 65, '#52DCE5');
 
-        criarLinha('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 95, 100]);
+        criarLinhaRede('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 95, 100]);
         criarGraficoPacotes();
 
 
@@ -222,7 +222,7 @@ function selecionarCard(card) {
 
                 <div class="col-12 col-lg-6">
                     <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Tráfego de Rede</h4>
+                        <h4 class="text-light">Velocidade de Rede</h4>
                         <div style="height: 250px; width: 100%;">
                             <canvas id="graficoRede"></canvas>
                         </div>
@@ -298,7 +298,7 @@ function selecionarCard(card) {
             </div>
         `;
 
-        criarLinha('graficoRede', [189, 180, 170, 160, 125, 100, 94, 90, 84, 70]);
+        criarLinhaRede('graficoRede', [189, 180, 170, 160, 125, 100, 94, 90, 84, 70]);
         criarGraficoPacotes();
 
         criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 50, 50, 50]);
@@ -375,7 +375,7 @@ function selecionarCard(card) {
 
                 <div class="col-12 col-lg-6">
                     <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Tráfego de Rede</h4>
+                        <h4 class="text-light">Velocidade de Rede</h4>
                         <div style="height: 250px; width: 100%;">
                             <canvas id="graficoRede"></canvas>
                         </div>
@@ -403,7 +403,7 @@ function selecionarCard(card) {
         criarLinha('graficoDisco', [0, 15, 40, 32, 45, 50, 42, 55, 55, 55]);
         criarMedidor('medidorDisco', 55, '#52DCE5');
 
-        criarLinha('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 100, 100]);
+        criarLinhaRede('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 100, 100]);
         criarGraficoPacotes();
     }
 }
@@ -460,6 +460,75 @@ function criarLinha(id, valores) {
 
                 y: {
                     beginAtZero: true,
+                    min: 0,
+                    max: 100,
+                    grid: {
+                        color: '#333333'
+                    },
+                    ticks: {
+                        color: '#AAAAAA'
+                    }
+                }
+            }
+        }
+    });
+
+    graficosAtuais.push(grafico);
+}
+
+function criarLinhaRede(id, valores) {
+
+    var canvas = document.getElementById(id);
+
+    if (!canvas) {
+        return;
+    }
+
+    var grafico = new Chart(canvas, {
+        type: 'line',
+
+        data: {
+            labels: [
+                '21:00', '21:30', '21:50', '22:15', '22:20',
+                '22:55', '23:10', '23:35', '23:40', '00:45'
+            ],
+
+            datasets: [{
+                label: 'Uso (%)',
+                data: valores,
+                borderColor: '#526DFF',
+                backgroundColor: 'rgba(82, 109, 255, 0.15)',
+                borderWidth: 3,
+                pointRadius: 3,
+                tension: 0,
+                fill: true
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#AAAAAA'
+                    },
+                    grid: {
+                        color: '#333333'
+                    }
+                },
+
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 200,
                     grid: {
                         color: '#333333'
                     },
