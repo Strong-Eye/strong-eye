@@ -298,7 +298,7 @@ function selecionarCard(card) {
             </div>
         `;
 
-        criarLinha('graficoRede', [0, 40, 65, 80, 125, 100, 140, 160, 180, 200]);
+        criarLinha('graficoRede', [189, 180, 170, 160, 125, 100, 94, 90, 84, 70]);
         criarGraficoPacotes();
 
         criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 50, 50, 50]);
