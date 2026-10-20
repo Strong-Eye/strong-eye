@@ -18,31 +18,37 @@
 <body class="d-flex flex-row min-vh-100">
   <div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column " style="width: 290px;" tabindex="-1"
     id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+
     <div class="offcanvas-header bg-dark d-flex mb-0 pb-0">
-
       <img src="../assets/img/LOGO.png" alt="" style="max-height: 100%;" class="h-auto mw-100">
-
     </div>
+    
     <div class="offcanvas-body p-3 d-flex flex-column justify-content-between flex-grow-1">
       <hr />
-      <ul class="nav nav-pills flex-column mb-auto gap-3">
+      <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="../cadastro-usuario.html" class="nav-link active p-3 text-center" aria-current="page">
-            Cadastro de código
+          <a href="./cadastro-usuario.html" class="nav-link p-3 text-center" aria-current="page">
+            <b>Cadastro de membros</b>
+          </a>
+        </li>
+        <br><br>
+         <li class="nav-item">
+          <a href="./cadastro-radar.html" class="nav-link p-4 text-center" aria-current="page">
+            <b>Cadastro de radar</b>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboard-gerente.html" class="nav-link p-4 active text-center" aria-current="true">
+            <b>Dashboard gerente</b>
           </a>
         </li>
          <li class="nav-item">
-          <a href="./cadastro-radar.html" class="nav-link active p-3 text-center" aria-current="page">
-            Cadastro de radar
+          <a href="./dashboard-tecnico.html" class="nav-link p-4 text-center" aria-current="page">
+            <b>Dashboard técnico</b>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link active p-3 text-center" aria-current="page">
-            Dashboard
-          </a>
-        </li>
+
       </ul>
-     
       <hr />
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
@@ -57,12 +63,13 @@
   </div>
 
 
-  <main class="flex-grow-1 w-100 vh-100 d-flex flex-column p-4 overflow-hidden">
+  <main class="flex-grow-1 w-100 h-100 d-flex flex-column ms-3 me-3 overflow-auto">
     <div>
       <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
         Menu</button>
     </div>
+
     <div class="w-100 flex-grow-1 overflow-hidden d-flex flex-row gap-4 justify-content-center align-items-center rounded-3">
         <div class="w-75 h-100 bg-dark p-3 d-flex flex-column gap-3 rounded-3">
             <div class="w-100 h-25 bg-dark border border-white rounded-3 d-flex flex-column">
