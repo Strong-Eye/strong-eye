@@ -1,4 +1,3 @@
-=======
 var radarModel = require("../models/radarModel");
 const { json } = require("express");
 
