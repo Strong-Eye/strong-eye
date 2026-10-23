@@ -82,44 +82,6 @@ ALTER TABLE codigo_ativacao
     FOREIGN KEY (fk_criado_por_usuario) REFERENCES usuarios(id);
 
 CREATE TABLE tarefas (
-    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
-  CHECK (status IN (0, 1))
-);
-
-CREATE TABLE codigo_ativacao (
-  id INT NOT NULL AUTO_INCREMENT,
-  codigo_ativacao CHAR(5),
-  fk_empresa INT NOT NULL,
-  fk_cargo INT NOT NULL,
-  ativo TINYINT NOT NULL DEFAULT 1,
-  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fk_criado_por_usuario INT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_codigo_ativacao_empresa
-    FOREIGN KEY (fk_empresa) REFERENCES empresas(id),
-  CONSTRAINT fk_codigo_ativacao_cargo
-    FOREIGN KEY (fk_cargo) REFERENCES cargos(id),
-  CHECK (ativo IN (0, 1))
-);
-
-CREATE TABLE usuarios (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(50) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  senha VARCHAR(255) NOT NULL,
-  fk_codigo_ativacao INT NOT NULL,
-  data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  UNIQUE (email),
-  CONSTRAINT fk_usuarios_codigo_ativacao
-    FOREIGN KEY (fk_codigo_ativacao) REFERENCES codigo_ativacao(id)
-);
-
-ALTER TABLE codigo_ativacao
-  ADD CONSTRAINT fk_codigo_ativacao_usuario
-    FOREIGN KEY (fk_criado_por_usuario) REFERENCES usuarios(id);
-
-CREATE TABLE tarefas (
   id INT NOT NULL AUTO_INCREMENT,
   fk_usuario_solicitante INT NOT NULL,
   fk_usuario_designado INT NOT NULL,
@@ -187,8 +149,32 @@ VALUES ('Técnico');
 
 INSERT INTO codigo_ativacao (codigo_ativacao, fk_empresa, fk_cargo, ativo) 
 VALUES ('A1B2C', 1, 1, 1);
-INSERT INTO componentes (nome) VALUES
-  ("cpu"),
-  ("ram"),
-  ("disco"),
-  ("rede");
+
+use strong_eye;
+
+SELECT 
+    IFNULL(u.nome, '-') AS nome,
+    ca.nome AS cargo,
+    IFNULL(u.email, '-') AS email,
+    IFNULL(u.data_criacao, '-') AS data_criacao,
+    c.codigo_ativacao AS codigo_ativacao,
+    CASE
+        WHEN ativo = 1 THEN 'Código ativado'
+        ELSE 'Código Inativo'
+    END AS status
+FROM
+    codigo_ativacao c
+        LEFT JOIN
+    usuarios u ON c.id = u.fk_codigo_ativacao
+        JOIN
+    cargos ca ON ca.id = c.fk_cargo
+ORDER BY u.nome ASC;
+
+DROP TRIGGER update_codigo;
+
+SELECT * FROM cargos;
+
+use strong_eye;
+
+select * from usuarios;
+select * from codigo_ativacao;
