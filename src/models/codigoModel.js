@@ -53,7 +53,7 @@ function listar(id_usuario, id_empresa, filtro, pesquisa) {
 
 function atualizar(codigo) {
     var instrucaoSql = `
-        UPDATE codigo_ativacao SET ativo = NOT ativo WHERE codigo = '${codigo}';
+        UPDATE codigo_ativacao SET ativo = NOT ativo WHERE codigo_ativacao = '${codigo}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

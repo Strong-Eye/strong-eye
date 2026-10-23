@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+var codigoModel = require("../models/codigoModel");
 // var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
@@ -76,6 +77,7 @@ function cadastrar(req, res) {
                     res.status(500).json(erro.sqlMessage);
                 }
             );
+        codigoModel.atualizar(codigo);
     }
 }
 
