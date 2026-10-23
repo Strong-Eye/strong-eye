@@ -119,9 +119,6 @@ function listarCodigos() {
                     ${json[i].codigo_ativacao}
                     <button class="btn btn-danger" onclick="deletarCodigo(${i}), listarCodigos()">
                       <img src="../../assets/icon/delete.png" style='filter: brightness(0) invert(1);'>
-                    </button> 
-                    <button class="btn btn-warning" onclick=popup${i}>
-                      <img src="../../assets/icon/update.png" style='filter: brightness(0) invert(1);'>
                     </button>
                   </div>
                 </td>
