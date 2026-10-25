@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/custom.css">
 
-  <title>Strong Eye - Cadastro</title>
+  <title>Strong Eye - Dashboard</title>
 
   <script src="./js/sessao.js"></script>
 
@@ -76,7 +76,7 @@
           <div class="input-group gap-5 w-75">
             <input id="ipt_pesquisa" type="text" class="form-control ms-3 me-3" onblur="listarCodigos()" placeholder="Pesquisar">
           </div>
-          <div class="form-floating w-25">
+          <div class="form-floating w-50">
             <select id="select_filtro" class="form-select text-center" onchange="listarCodigos()">
               <option value="1" disabled selected>Status</option>
               <option value="2">Critico</option>
@@ -92,7 +92,7 @@
     
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <div class="row justify-content-center g-4">
+        <div class="row justify-content-center g-4 mt-4">
           <div class="col-md-3">
             <div class="card h-100 shadow-sm card-pardal" id="card1"
             onclick="selecionarCard(this)">
@@ -149,7 +149,7 @@
       </div>
 
       <div class="carousel-item">
-        <div class="row justify-content-center g-3">
+        <div class="row justify-content-center g-3 mt-4">
           <div class="col-md-3">
             <div class="card h-100 shadow-sm card-pardal" id="card4"
             onclick="selecionarCard(this)">
