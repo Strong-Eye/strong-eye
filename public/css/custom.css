@@ -126,6 +126,8 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
+
+
 * {
     font-family: "TT Supermolot Neue", sans-serif !important;
 }
@@ -180,16 +182,10 @@ p {
   background-color: var(--bg-card);
   color: var(--branco-titulo);
 }
-
-/* Cards dos radares */
 .card-pardal {
   background-color: var(--bg-card);
   color: var(--branco-titulo);
   border: 1px solid var(--borda);
-  overflow: hidden;
-  transition: transform 0.2s, border-color 0.2s,
-              box-shadow 0.2s;
-  cursor: pointer;
 }
 
 .card-pardal:hover {
@@ -258,6 +254,8 @@ p {
   border-radius: 0 !important;
 }
 
+
+
 main .container > div:not(.input-group),
 .button-group {
   display: flex !important;
@@ -321,8 +319,6 @@ main .container > div:not(.input-group),
   color: white;
   transform: translateY(-2px);
 }
-
-
 
 [data-bs-theme=dark] {
   color-scheme: dark;
