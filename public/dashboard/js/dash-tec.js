@@ -139,7 +139,7 @@ function selecionarCard(card) {
                         <div style="height: 180px; width: 100%; max-width: 300px;">
                             <canvas id="medidorDisco"></canvas>
                         </div>
-                        <p>90%</p>
+                        <p>77%</p>
                     </div>
                 </div>
 
@@ -202,8 +202,8 @@ function selecionarCard(card) {
             </div>
         `;
 
-        criarLinha('graficoDisco', [0, 15, 40, 32, 70, 50, 42, 85, 90, 95]);
-        criarMedidor('medidorDisco', 90, '#B80000');
+        criarLinha('graficoDisco', [0, 15, 40, 32, 70, 50, 57, 66, 70, 77]);
+        criarMedidor('medidorDisco', 77, '#d19900');
 
         criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 50, 45, 45]);
         criarMedidor('medidorCPU', 45, '#52DCE5');
@@ -331,7 +331,7 @@ function selecionarCard(card) {
                         <div style="height: 180px; width: 100%; max-width: 300px;">
                             <canvas id="medidorRAM"></canvas>
                         </div>
-                        <p>95%</p>
+                        <p>78%</p>
                     </div>
                 </div>
 
@@ -394,8 +394,8 @@ function selecionarCard(card) {
             </div>
         `;
 
-        criarLinha('graficoRAM', [10, 25, 48, 75, 80, 88, 90, 93, 95, 95]);
-        criarMedidor('medidorRAM', 95, '#B80000');
+        criarLinha('graficoRAM', [10, 25, 48, 47, 55, 59, 60, 67, 70, 78]);
+        criarMedidor('medidorRAM', 78, '#d19900');
 
         criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 45, 45, 45]);
         criarMedidor('medidorCPU', 45, '#52DCE5');
