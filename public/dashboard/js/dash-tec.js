@@ -113,290 +113,94 @@ function selecionarCard(card) {
 
     } else if (card.id == 'card2') {
 
+
         conteudo_dashs.innerHTML = `
-            <div class="row g-3">
+            <div class="d-flex flex-column bg-dark p-3 rounded mt-4 w-75">
+                <h2 class="text-light">Relatório Individual - Radar 1</h2>
+                <p class="text-light mb-4"><b>Modelo:</b> Doppler H37 | <b>Status:</b> Crítico | <b>Em alerta:</b> RAM, Rede e Buffer</p>
 
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso do Disco</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoDisco"></canvas>
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <div class="p-3 rounded d-flex flex-column" style="background-color: var(--bg-principal)">
+                            <h4 class="text-light mb-3">Uso da RAM</h4>
+                                <div class="row g-3 align-items-center">
+                                <div class="col-12 col-lg-8">
+                                    <div style="height: 250px; width: 100%;"><canvas id="graficoRAM"></canvas></div>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
+                                    <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorRAM"></canvas></div>
+                                    <h3 class="mt-2 mb-0">78%</h3>
+                                    <p class="mb-0">Última leitura</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="p-3 rounded d-flex flex-column" style="background-color: var(--bg-principal)">
+                            <h4 class="text-light mb-3">Uso da CPU</h4>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-12 col-lg-8">
+                                    <div style="height: 250px; width: 100%;"><canvas id="graficoCPU"></canvas></div>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
+                                    <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorCPU"></canvas></div>
+                                    <h3 class="mt-2 mb-0">45%</h3>
+                                    <p class="mb-0">Última leitura</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="p-3 rounded d-flex flex-column" style="background-color: var(--bg-principal)">
+                            <h4 class="text-light mb-3">Utilização do Buffer de disco</h4>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-12 col-lg-8">
+                                    <div style="height: 250px; width: 100%;"><canvas id="graficoDisco"></canvas></div>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
+                                    <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorDisco"></canvas></div>
+                                    <h3 class="mt-2 mb-0">55%</h3>
+                                    <p class="mb-0">Última leitura</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 rounded d-flex flex-column" style="background-color: var(--bg-principal)">
+                            <h4 class="text-light mb-3">Rede</h4>
+                            <div class="row g-3 align-items-center">
+
+                                <div class="col-12 col-lg-8">
+                                    <div style="height: 250px; width: 100%;"><canvas id="graficoRede"></canvas></div>
+                                </div>
+
+                                <div class="col-12 col-lg-4">
+                                    <div style="height: 250px; width: 100%;"><canvas id="graficoPacotes"></canvas></div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso Disco</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorDisco"></canvas>
-                        </div>
-                        <p>77%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da CPU</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoCPU"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso CPU</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorCPU"></canvas>
-                        </div>
-                        <p>45%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da RAM</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRAM"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso RAM</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorRAM"></canvas>
-                        </div>
-                        <p>65%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Velocidade de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRede"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h4 class="mt-3">Pacotes de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoPacotes"></canvas>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         `;
 
-        criarLinha('graficoDisco', [0, 15, 40, 32, 70, 50, 57, 66, 70, 77]);
-        criarMedidor('medidorDisco', 77, '#d19900');
-
-        criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 50, 45, 45]);
-        criarMedidor('medidorCPU', 45, '#52DCE5');
-
-        criarLinha('graficoRAM', [10, 25, 18, 35, 50, 38, 60, 65, 60, 65]);
-        criarMedidor('medidorRAM', 65, '#52DCE5');
-
-        criarLinhaRede('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 95, 100]);
-        criarGraficoPacotes();
-
-
-    } else if (card.id == 'card3') {
-
-        conteudo_dashs.innerHTML = `
-            <div class="row g-3">
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Velocidade de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRede"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h4 class="mt-3">Pacotes de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoPacotes"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da CPU</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoCPU"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso CPU</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorCPU"></canvas>
-                        </div>
-                        <p>50%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da RAM</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRAM"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso RAM</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorRAM"></canvas>
-                        </div>
-                        <p>60%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso do Disco</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoDisco"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso Disco</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorDisco"></canvas>
-                        </div>
-                        <p>60%</p>
-                    </div>
-                </div>
-
-            </div>
-        `;
-
-        criarLinhaRede('graficoRede', [189, 180, 170, 160, 125, 100, 94, 90, 84, 70]);
-        criarGraficoPacotes();
-
-        criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 50, 50, 50]);
-        criarMedidor('medidorCPU', 50, '#52DCE5');
-
-        criarLinha('graficoRAM', [10, 25, 18, 35, 50, 38, 60, 55, 60, 60]);
-        criarMedidor('medidorRAM', 60, '#52DCE5');
-
-        criarLinha('graficoDisco', [0, 15, 40, 32, 45, 50, 42, 55, 60, 60]);
-        criarMedidor('medidorDisco', 60, '#52DCE5');
-
-
-    } else if (card.id == 'card4') {
-
-        conteudo_dashs.innerHTML = `
-            <div class="row g-3">
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da RAM</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRAM"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso RAM</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorRAM"></canvas>
-                        </div>
-                        <p>78%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso da CPU</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoCPU"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso CPU</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorCPU"></canvas>
-                        </div>
-                        <p>45%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Uso do Disco</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoDisco"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h3 class="mt-3">Uso Disco</h3>
-                        <div style="height: 180px; width: 100%; max-width: 300px;">
-                            <canvas id="medidorDisco"></canvas>
-                        </div>
-                        <p>55%</p>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="mt-5 ms-5 bg-dark p-3 rounded">
-                        <h4 class="text-light">Velocidade de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoRede"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card medidor-card bg-dark text-light mb-4 mt-5 ms-6 align-items-center">
-                        <h4 class="mt-3">Pacotes de Rede</h4>
-                        <div style="height: 250px; width: 100%;">
-                            <canvas id="graficoPacotes"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        `;
-
-        criarLinha('graficoRAM', [10, 25, 48, 47, 55, 59, 60, 67, 70, 78]);
+        criarLinha('graficoRAM', [10, 25, 48, 47, 55, 59, 60, 67, 70, 95.5]);
         criarMedidor('medidorRAM', 78, '#d19900');
 
-        criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 45, 45, 45]);
+        criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 45, 45, 100]);
         criarMedidor('medidorCPU', 45, '#52DCE5');
 
-        criarLinha('graficoDisco', [0, 15, 40, 32, 45, 50, 42, 55, 55, 55]);
-        criarMedidor('medidorDisco', 55, '#52DCE5');
+        criarLinha('graficoDisco', [0, 0, 0, 0, 0, 0, 0, 0, 0, 7]);
+        criarMedidor('medidorDisco', 49, '#d19900');
 
-        criarLinhaRede('graficoRede', [0, 20, 65, 50, 90, 85, 70, 100, 100, 100]);
-        criarGraficoPacotes();
+        criarLinhaRede('graficoRede', [10, 12, 8, 9, 7, 5, 3, 3, 1, 0]);
+        criarGraficoPacotes()
+
+
     }
 }
 
