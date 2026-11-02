@@ -6,7 +6,7 @@ new Chart(document.getElementById('graficoAlertas'), {
     labels: ['Semana -3', 'Semana -2', 'Semana passada', 'Semana atual'],
     datasets: [{
       label: 'Alertas',
-      data: [1, 2, 4, 3], // troque pelos dados reais
+      data: [1, 2, 4, 2],
       backgroundColor: '#0d6efd'
     }]
   },
