@@ -99,24 +99,22 @@ function selecionarCard(card) {
         `;
 
         criarLinha('graficoRAM', [10, 25, 48, 47, 55, 59, 60, 67, 70, 78]);
-        criarMedidor('medidorRAM', 78, '#d19900');
+        criarMedidor('medidorRAM', 78, '#dd3315');
 
         criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 45, 45, 45]);
-        criarMedidor('medidorCPU', 45, '#52DCE5');
+        criarMedidor('medidorCPU', 45, '#dfe211');
 
         criarLinha('graficoDisco', [0, 0, 0, 0, 1, 9, 15, 23, 35, 49]);
-        criarMedidor('medidorDisco', 49, '#d19900');
+        criarMedidor('medidorDisco', 49, '#dfe211');
 
         criarLinhaRede('graficoRede', [10, 12, 8, 5, 1, 0, 0, 0, 0, 0]);
         criarGraficoPacotes()
 
 
     } else if (card.id == 'card2') {
-
-
         conteudo_dashs.innerHTML = `
             <div class="d-flex flex-column bg-dark p-3 rounded mt-4 w-75">
-                <h2 class="text-light">Relatório Individual - Radar 1</h2>
+                <h2 class="text-light">Relatório Individual - Radar 3</h2>
                 <p class="text-light mb-4"><b>Modelo:</b> Doppler H37 | <b>Status:</b> Crítico | <b>Em alerta:</b> RAM, Rede e Buffer</p>
 
                 <div class="row g-3">
@@ -130,7 +128,7 @@ function selecionarCard(card) {
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
                                     <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorRAM"></canvas></div>
-                                    <h3 class="mt-2 mb-0">78%</h3>
+                                    <h3 class="mt-2 mb-0">95.5%</h3>
                                     <p class="mb-0">Última leitura</p>
                                 </div>
                             </div>
@@ -146,7 +144,7 @@ function selecionarCard(card) {
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
                                     <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorCPU"></canvas></div>
-                                    <h3 class="mt-2 mb-0">45%</h3>
+                                    <h3 class="mt-2 mb-0">100%</h3>
                                     <p class="mb-0">Última leitura</p>
                                 </div>
                             </div>
@@ -162,7 +160,7 @@ function selecionarCard(card) {
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex flex-column align-items-center justify-content-center text-light">
                                     <div style="height: 180px; width: 100%; max-width: 300px;"><canvas id="medidorDisco"></canvas></div>
-                                    <h3 class="mt-2 mb-0">55%</h3>
+                                    <h3 class="mt-2 mb-0">7%</h3>
                                     <p class="mb-0">Última leitura</p>
                                 </div>
                             </div>
@@ -188,14 +186,14 @@ function selecionarCard(card) {
             </div>
         `;
 
-        criarLinha('graficoRAM', [10, 25, 48, 47, 55, 59, 60, 67, 70, 95.5]);
-        criarMedidor('medidorRAM', 78, '#d19900');
+        criarLinha('graficoRAM', [13, 21, 38, 49, 54, 51, 63, 67, 78, 95.5]);
+        criarMedidor('medidorRAM', 95.5, '#dd3315');
 
-        criarLinha('graficoCPU', [0, 12, 38, 30, 45, 48, 40, 45, 45, 100]);
-        criarMedidor('medidorCPU', 45, '#52DCE5');
+        criarLinha('graficoCPU', [0, 14, 42, 32, 38, 51, 43, 61, 75, 100]);
+        criarMedidor('medidorCPU', 100, '#dd3315');
 
         criarLinha('graficoDisco', [0, 0, 0, 0, 0, 0, 0, 0, 0, 7]);
-        criarMedidor('medidorDisco', 49, '#d19900');
+        criarMedidor('medidorDisco', 7, '#dfe211');
 
         criarLinhaRede('graficoRede', [10, 12, 8, 9, 7, 5, 3, 3, 1, 0]);
         criarGraficoPacotes()
