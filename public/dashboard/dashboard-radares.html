@@ -169,124 +169,17 @@
             gap: 15px;
             padding: 24px;
         }
-
-        .sidebar {
-            width: 260px;
-            flex-shrink: 0;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 20px 16px;
-            background-color: #13161C;
-        }
-
-        .menu-sidebar {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .card {
-                flex: 0 0 calc((100% - 24px) / 2);
-            }
-
-            .menu-sidebar {
-                display: block;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .radar-card-subtitulo {
-                font-size: 12px;
-            }
-        }
-
-        .sidebar img {
-            width: 100%;
-        }
-
-        .sidebar-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #8a97ad;
-            font-size: 15px;
-            text-decoration: none;
-        }
-
-        .sidebar-label-activate {
-            color: #ffffff;
-            font-weight: 400;
-        }
-
-        .wrapper-top,
-        .wrapper-bottom {
-            display: flex;
-            flex-direction: column;
-            gap: 13px;
-        }
-
-        .wrapper {
-            flex: 0;
-        }
-
-        .sidebar-user-row {
-            background-color: #4e545e17;
-            color: #8a97ad;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            height: 40px;
-            container-type: size;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .sidebar-user-icon {
-            font-size: 70cqh;
-        }
     </style>
 </head>
 
-<body style="display: flex; flex-direction: row;">
-    <div class="sidebar">
-        <div class="wrapper-top">
-            <img src="../assets/icon/LOGO.png">
-            <div class="divider"></div>
-            <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
-            <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
-            <a class="sidebar-label sidebar-label-activate" href=""><i class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
-            <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
-        </div>
-
-        <div class="wrapper-bottom">
-            <div class="sidebar-user-row" style="align-items: center;">
-                <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
-                <div class="wrapper">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">Bruna Leal</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-light">bruna.leal@strongeye.com</span>
-                </div>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </div>
-        </div>
-    </div>
-
+<body>
     <div class="main">
         <div class="row row-space-beteween">
             <span class="radar-card-titulo">Gerenciamento de Radares</span>
 
-            <div class="row">
-                <div class="radares-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar...">
-                </div>
-                <button class="menu-sidebar radares-button" onclick="sidebar.style.display = 'block'">Menu</button>
+            <div class="radares-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar...">
             </div>
         </div>
 
