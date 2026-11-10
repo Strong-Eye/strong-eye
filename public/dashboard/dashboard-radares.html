@@ -5,178 +5,384 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" href="../assets/icon/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+
+    <style>
+        @font-face {
+            font-family: 'Manrope';
+            src: url('../assets/font/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
+            font-weight: 200 800;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Manrope", Arial, Helvetica, sans-serif;
+            background-color: #0C0E11;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .card {
+            display: flex;
+            flex: 0 0 calc((100% - 24px) / 3);
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+            box-sizing: border-box;
+            background-color: #13161C;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+
+        .row-space-beteween {
+            justify-content: space-between;
+        }
+
+        .radar-box-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radar-chart {
+            position: relative;
+            height: 6px;
+            width: 100%;
+            background: #4a5568;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .radar-chart canvas {
+            display: block;
+        }
+
+        .radar-card-subtitulo {
+            color: #8a97ad;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .radar-card-subtitulo-bold {
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .radar-card-subtitulo-light {
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .radar-card-titulo {
+            color: #1578FA;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .radar-status-online {
+            color: #40C84F;
+            background-color: #2F503131;
+            font-size: 12px;
+            align-self: center;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .radar-status-offline {
+            color: #C84042;
+            background-color: #502F2F31;
+            font-size: 12px;
+            align-self: center;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .radares-button {
+            background-color: #13161C;
+            color: #8a97ad;
+            ;
+            font-size: 15px;
+            padding: 8px 14px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .radares-search {
+            background-color: #13161C;
+            color: #8a97ad;
+            ;
+            font-size: 15px;
+            padding: 8px 14px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .radares-search input {
+            background: transparent;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            caret-color: #ffffff;
+        }
+
+        .radares-search input::placeholder {
+            color: #8a97ad;
+            ;
+            font-size: 15px;
+        }
+
+        .radares-button-activate {
+            background-color: #1578fa1a;
+            color: #1578FA;
+            ;
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background-color: #8a97ad;
+            ;
+            margin: 12px 0;
+        }
+
+        .main {
+            display: flex;
+            flex: 1;
+            min-width: 0;
+            flex-direction: column;
+            gap: 15px;
+            padding: 24px;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 20px 16px;
+            background-color: #13161C;
+        }
+
+        .menu-sidebar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 0 0 calc((100% - 24px) / 2);
+            }
+
+            .menu-sidebar {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .radar-card-subtitulo {
+                font-size: 12px;
+            }
+        }
+
+        .sidebar img {
+            width: 100%;
+        }
+
+        .sidebar-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #8a97ad;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .sidebar-label-activate {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .wrapper-top,
+        .wrapper-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .wrapper {
+            flex: 0;
+        }
+
+        .sidebar-user-row {
+            background-color: #4e545e17;
+            color: #8a97ad;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 40px;
+            container-type: size;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .sidebar-user-icon {
+            font-size: 70cqh;
+        }
+    </style>
 </head>
 
-<style>
-    @font-face {
-        font-family: 'Manrope';
-        src: url('../assets/font/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    body {
-        font-family: "Manrope", Arial, Helvetica, sans-serif;
-    }
-    
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-    }   
-
-    .card {
-        display: flex;
-        flex: 0 0 calc((100% - 32px) / 3);
-        gap: 10px;
-        min-width: 0; 
-        box-sizing: border-box;
-        flex-direction: column;
-        background-color: #13161C;
-        padding: 15px 15px 15px 15px;
-    }
-
-    .row {
-        display: flex;
-        flex-direction: row;
-        gap: 16px; 
-    }
-
-    .row-space-beteween {
-        justify-content: space-between;
-    }
-
-    .radar-box-info {
-        flex: 1;     
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .radar-chart {
-        position: relative;
-        height: 12px;
-        width: 100%;
-        background: #4a5568;
-        border-radius: 999px;
-        overflow: hidden;
-    }
-    .radar-chart canvas { display: block; }
-    .radar-card-subtitulo { 
-        color: #8a97ad; 
-        font-size: 24px;
-        font-weight: 400;
-    }
-
-    .radar-card-subtitulo-bold { 
-        color: #ffffff;
-        font-weight: 800;
-    }
-
-    .radar-card-subtitulo-light { 
-        font-size: 20px;
-        font-weight: 200;
-    }
-
-    .radar-card-titulo {
-        color: #1578FA;
-        font-size: 32px;
-        font-weight: 800;
-    }
-
-    .radar-status-online {
-        color: #40C84F;
-        background-color: #2F5031;
-        align-self: center;
-        padding: 5px;
-        border-radius: 5px;
-    }
-</style>
-
-<body style="background-color: blue;">
-    <div class="container">
-        <div class="card">
-            <div class="row row-space-beteween">
-                <span class="radar-card-titulo">RAD-001</span>
-                <div class="radar-status-online" id="radar-status">Online</div>
-            </div>
-
-            <span class="radar-card-subtitulo">Av. dos Bandeirantes, km 3</span>
-
-            <div class="row">
-                <div class="radar-box-info" id="cpu">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">10%</span>
-                    <div class="radar-chart"><canvas id="radar-chart-cpu"></canvas></div>
-                </div>
-
-                <div class="radar-box-info" id="ram">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">20%</span>
-                    <div class="radar-chart"><canvas id="radar-chart-ram"></canvas></div>
-                </div>
-
-                <div class="radar-box-info" id="disco">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">30%</span>
-                    <div class="radar-chart"><canvas id="radar-chart-disco"></canvas></div>
-                </div>
-
-                <div class="radar-box-info" id="rede">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">40%</span>
-                    <div class="radar-chart"><canvas id="radar-chart-rede"></canvas></div>
-                </div>
-            </div>
-
-            <span class="radar-card-subtitulo radar-card-subtitulo-light    ">Ultima leitura: 10.09.2026</span>
+<body style="display: flex; flex-direction: row;">
+    <div class="sidebar">
+        <div class="wrapper-top">
+            <img src="../assets/icon/LOGO.png">
+            <div class="divider"></div>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+            <a class="sidebar-label sidebar-label-activate" href=""><i class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
         </div>
-        
 
-            
+        <div class="wrapper-bottom">
+            <div class="sidebar-user-row" style="align-items: center;">
+                <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                <div class="wrapper">
+                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">Bruna Leal</span>
+                    <span class="radar-card-subtitulo radar-card-subtitulo-light">bruna.leal@strongeye.com</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
     </div>
 
-    
+    <div class="main">
+        <div class="row row-space-beteween">
+            <span class="radar-card-titulo">Gerenciamento de Radares</span>
+
+            <div class="row">
+                <div class="radares-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar...">
+                </div>
+                <button class="menu-sidebar radares-button" onclick="sidebar.style.display = 'block'">Menu</button>
+            </div>
+        </div>
+
+        <span class="radar-card-subtitulo" style="color: #ffffff;">
+            <span id="radares-total">10</span> cadastrados ·
+            <span id="radares-online">9</span> online ·
+            <span id="radares-alerta">5</span> alerta ·
+            <span id="radares-offline">5</span> offline
+        </span>
+
+        <div class="divider"></div>
+
+        <div class="row" style="gap: 15px;">
+            <button class="radares-button radares-button-activate">Todos</button>
+            <button class="radares-button">Online</button>
+            <button class="radares-button">Atenção</button>
+            <button class="radares-button">Offline</button>
+        </div>
+
+        <div class="container" id="container-cards">
+            <div class="card">
+                <div class="row row-space-beteween">
+                    <span class="radar-card-titulo">RAD-001</span>
+                    <div class="radar-status-online" id="radar-status">Online</div>
+                </div>
+
+                <span class="radar-card-subtitulo">Av. dos Bandeirantes, km 3</span>
+
+                <div class="row" id="row-radar-componentes">
+                    <div class="radar-box-info" id="cpu">
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">10%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-cpu"></canvas></div>
+                    </div>
+
+                    <div class="radar-box-info" id="ram">
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">20%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-ram"></canvas></div>
+                    </div>
+
+                    <div class="radar-box-info" id="disco">
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">30%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-disco"></canvas></div>
+                    </div>
+
+                    <div class="radar-box-info" id="rede">
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
+                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">40%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-rede"></canvas></div>
+                    </div>
+                </div>
+                <span class="radar-card-subtitulo radar-card-subtitulo-light">Ultima leitura: 10.09.2026</span>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <script>
+        function criarBarra(canvasID, valor, max = 100) {
+            return new Chart(document.getElementById(canvasID), {
+                type: "bar",
+                data: {
+                    labels: [''],
+                    datasets: [{
+                        data: [valor],
+                        backgroundColor: "#ffffff",
+                        borderRadius: 999,
+                        borderSkipped: false,
+                        barPercentage: 1,
+                        categoryPercentage: 1
+                    }]
+                },
+                options: {
+                    indexAxis: "y",
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 400 },
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                    layout: { padding: 0 },
+                    scales: {
+                        x: { display: false, min: 0, max: max },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+
+        criarBarra("radar-chart-cpu", 10);
+        criarBarra("radar-chart-ram", 20);
+        criarBarra("radar-chart-disco", 30);
+        criarBarra("radar-chart-rede", 40);
+    </script>
 </body>
 
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-<script>
-function criarBarra(canvasID, valor, max = 100) {
-    return new Chart(document.getElementById(canvasID), {
-        type: "bar",
-        data: {
-            labels: [''],
-            datasets: [{
-                data: [valor],
-                backgroundColor: "#ffffff",
-                borderRadius: 999,
-                borderSkipped: false,
-                barPercentage: 1,
-                categoryPercentage: 1
-            }]
-        },
-        options: {
-            indexAxis: "y",
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {duration: 400},
-            plugins: {legend: {display: false}, tooltip: {enabled: false}},
-            layout: {padding: 0},
-            scales: {
-                x: {display: false, min: 0, max: max},
-                y: {display: false}
-            }
-        }
-    });
-}
-
-criarBarra("radar-chart-cpu", 10);
-criarBarra("radar-chart-ram", 20);
-criarBarra("radar-chart-disco", 30);
-criarBarra("radar-chart-rede", 40);
-
-</script>
