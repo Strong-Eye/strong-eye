@@ -252,7 +252,7 @@
             font-size: 70cqh;
         }
 
-        .menu-overlay {
+        .overlay {
             position: fixed;
             inset: 0;
             background-color: #13161cb0;
@@ -261,13 +261,13 @@
             padding: 25px;
         }
 
-        .menu-overlay.aberto {
+        .overlay.aberto {
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .menu-overlay-fechar {
+        .overlay-fechar {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -277,7 +277,7 @@
         }
         
         .container-menu {
-            flex: 1;                    /* ocupa todo o espaço do overlay (menos o padding) */
+            flex: 1;
             max-width: 65vw;
             min-height: 100%;
             box-sizing: border-box;
@@ -288,14 +288,15 @@
             background-color: #13161C;
             padding: 16px;
             border-radius: 10px;
-            overflow-y: auto;           /* rola se o conteúdo for maior que a tela */
+            overflow-y: auto;
         }
     </style>
 </head>
 
 <body style="display: flex; flex-direction: row;" onload="renderizarRadares(dados_radares);">
-    <div class="menu-overlay" id="modal-radar">
-        <span class="menu-overlay-fechar" onclick="fecharMenu()"><i class="fa-solid fa-x"></i></span>
+    <!-- menu para mobile -->
+    <div class="overlay" id="modal-radar">
+        <span class="overlay-fechar" onclick="fecharMenu()"><i class="fa-solid fa-x"></i></span>
 
         <div class="container-menu">
             <div class="wrapper-top">
@@ -320,6 +321,7 @@
         </div>
     </div>
 
+    <!-- sidebar para desktop -->
     <div class="sidebar">
         <div class="wrapper-top">
             <img src="../assets/icon/LOGO.png">
@@ -349,7 +351,7 @@
             <div class="row">
                 <div class="radares-search">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar...">
+                    <input type="text" placeholder="Buscar..." id="input-buscar-radar">
                 </div>
                 <button class="menu-sidebar radares-button" onclick="abrirMenu()">Menu</button>
             </div>
@@ -365,10 +367,10 @@
         <div class="divider"></div>
 
         <div class="row" style="gap: 15px;">
-            <button class="radares-button radares-button-activate">Todos</button>
-            <button class="radares-button">Online</button>
-            <button class="radares-button">Atenção</button>
-            <button class="radares-button">Offline</button>
+            <button id="button-radares-total" class="radares-button radares-button-activate">Todos</button>
+            <button id="button-radares-online" class="radares-button">Online</button>
+            <button id="button-radares-alerta" class="radares-button">Atenção</button>
+            <button id="button-radares-offline" class="radares-button">Offline</button>
         </div>
 
         <div class="container" id="container-cards">
@@ -410,7 +412,6 @@
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="dados.js"></script>
 
@@ -445,8 +446,10 @@
         }
 
         function renderizarRadares(dados) {
+            let container = document.getElementById("container-cards");
+            container.replaceChildren(); 
             for (let i = 0; i < dados.length; i ++) {
-                document.getElementById("container-cards").insertAdjacentHTML("beforeend", `
+                container.insertAdjacentHTML("beforeend", `
                     <div class="card" onclick="abrirModalRadar(${dados[i]['id']})">
                         <div class="row row-space-beteween">
                             <span class="radar-card-titulo" id="radar-nome">${dados[i]['nome']}</span>
@@ -490,6 +493,49 @@
                 criarBarra(`radar-chart-rede-${dados[i]['id']}`, dados[i]['rede']);
             }
         }
+
+        function buscarRadar(termo, tipoBusca, dados) {
+            let encontrados = [];
+            for (let i = 0; i < dados.length; i++) {
+                if (dados[i][tipoBusca].toLowerCase().includes(termo.toLowerCase())) {
+                    encontrados.push(dados[i])
+                }
+            }
+            return renderizarRadares(encontrados);
+        }
+
+        let timer;
+        document.querySelector('#input-buscar-radar').oninput = (e) => {
+            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
+            e.target.classList.add('radares-button-activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar(e.target.value, "nome", dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-total').onclick = (e) => {
+            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
+            e.target.classList.add('radares-button-activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                renderizarRadares(dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-online').onclick = (e) => {
+            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
+            e.target.classList.add('radares-button-activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar('online', 'status', dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-offline').onclick = (e) => {
+            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
+            e.target.classList.add('radares-button-activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar('offline', 'status', dados_radares)
+            }, 50);
+        };
 
         function abrirModalRadar(id) {
             alert(`Você está acessando o radar: ${id}`)
