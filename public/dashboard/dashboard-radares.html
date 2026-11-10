@@ -449,6 +449,46 @@
             let container = document.getElementById("container-cards");
             container.replaceChildren(); 
             for (let i = 0; i < dados.length; i ++) {
+                let cpuBoxInfo = "";
+                if (dados[i]['cpu'] !== undefined && dados[i]['cpu'] !== null) {
+                    cpuBoxInfo = `
+                        <div class="radar-box-info" id="cpu">
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">${dados[i]['cpu']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-cpu-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let ramBoxInfo = "";
+                if (dados[i]['ram'] !== undefined && dados[i]['ram'] !== null) {
+                    ramBoxInfo = `
+                        <div class="radar-box-info" id="ram">
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">${dados[i]['ram']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-ram-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let discoBoxInfo = "";
+                if (dados[i]['disco'] !== undefined && dados[i]['disco'] !== null) {
+                    discoBoxInfo = `
+                        <div class="radar-box-info" id="disco">
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">${dados[i]['disco']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-disco-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let redeBoxInfo = "";
+                if (dados[i]['rede'] !== undefined && dados[i]['rede'] !== null) {
+                    redeBoxInfo = `
+                        <div class="radar-box-info" id="rede">
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
+                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">${dados[i]['rede']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-rede-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
                 container.insertAdjacentHTML("beforeend", `
                     <div class="card" onclick="abrirModalRadar(${dados[i]['id']})">
                         <div class="row row-space-beteween">
@@ -459,38 +499,30 @@
                         <span class="radar-card-subtitulo" id="radar-endereco">${dados[i]['endereco']}</span>
                     
                         <div class="row" id="row-radar-componentes">
-                            <div class="radar-box-info" id="cpu">
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">${dados[i]['cpu']}%</span>
-                                <div class="radar-chart"><canvas id="radar-chart-cpu-${dados[i]['id']}"></canvas></div>
-                            </div>
-                        
-                            <div class="radar-box-info" id="ram">
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">${dados[i]['ram']}%</span>
-                                <div class="radar-chart"><canvas id="radar-chart-ram-${dados[i]['id']}"></canvas></div>
-                            </div>
-                        
-                            <div class="radar-box-info" id="disco">
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">${dados[i]['disco']}%</span>
-                                <div class="radar-chart"><canvas id="radar-chart-disco-${dados[i]['id']}"></canvas></div>
-                            </div>
-                        
-                            <div class="radar-box-info" id="rede">
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
-                                <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">${dados[i]['rede']}%</span>
-                                <div class="radar-chart"><canvas id="radar-chart-rede-${dados[i]['id']}"></canvas></div>
-                            </div>
+                            ${cpuBoxInfo}
+                            ${ramBoxInfo}
+                            ${discoBoxInfo}
+                            ${redeBoxInfo}
                         </div>
                         <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura">Ultima leitura: ${dados[i]['ultima_leitura']}</span>
                     </div>
                 `);
 
-                criarBarra(`radar-chart-cpu-${dados[i]['id']}`, dados[i]['cpu']);
-                criarBarra(`radar-chart-ram-${dados[i]['id']}`, dados[i]['ram']);
-                criarBarra(`radar-chart-disco-${dados[i]['id']}`, dados[i]['disco']);
-                criarBarra(`radar-chart-rede-${dados[i]['id']}`, dados[i]['rede']);
+                if (dados[i]['cpu'] !== undefined && dados[i]['cpu'] !== null) {
+                    criarBarra(`radar-chart-cpu-${dados[i]['id']}`, dados[i]['cpu']);
+                }
+
+                if (dados[i]['ram'] !== undefined && dados[i]['ram'] !== null) {
+                    criarBarra(`radar-chart-ram-${dados[i]['id']}`, dados[i]['ram']);
+                }
+
+                if (dados[i]['disco'] !== undefined && dados[i]['disco'] !== null) {
+                    criarBarra(`radar-chart-disco-${dados[i]['id']}`, dados[i]['disco']);
+                }
+
+                if (dados[i]['rede'] !== undefined && dados[i]['rede'] !== null) {
+                    criarBarra(`radar-chart-rede-${dados[i]['id']}`, dados[i]['rede']);
+                }
             }
         }
 
