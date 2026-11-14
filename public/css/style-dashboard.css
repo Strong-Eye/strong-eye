@@ -260,3 +260,163 @@ body {
     background-color: var(--color-text-muted);
     margin: var(--spacing-md) 0;
 }
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 16px;
+    background-color: var(--color-surface);
+}
+
+.menu-sidebar {
+    display: none;
+}
+
+.sidebar img {
+    width: 100%;
+}
+
+.sidebar-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.sidebar-label-activate {
+    color: var(--color-text);
+}
+
+.sidebar-user-row {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 40px;
+    container-type: size;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.sidebar-user-icon {
+    font-size: 70cqh;
+}
+
+.logo {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-overlay);
+    display: none;
+    z-index: 1000;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.modal-overlay.aberto {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay-fechar {
+    flex-shrink: 0;
+    width: auto;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+#modal-radar {
+    left: 260px;
+}
+
+.modal-main {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 24px;
+    border-radius: 10px;
+    background-color: var(--color-surface);
+    overflow-y: auto;
+}
+
+.modal-main--escuro {
+    background-color: var(--color-bg);
+}
+
+.modal-main .container-chart {
+    min-height: 200px;
+
+}
+
+.modal-main .container--preencher {
+    flex: 1 0 auto;
+    min-height: 320px;
+}
+
+@media (max-width: 1070px) {
+    .main {
+        overflow-y: auto;
+    }
+
+    .container {
+        --colunas: 2;
+    }
+
+    .container--1col {
+        --colunas: 1;
+    }
+
+    .container--4col {
+        --colunas: 2;
+    }
+
+    .container--preencher {
+        flex: none;
+    }
+
+    .card--grande {
+        flex: 1;
+    }
+
+    .menu-sidebar {
+        display: block;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .text {
+        font-size: 12px;
+    }
+
+    #modal-radar {
+        left: 0;
+    }
+
+    .container-chart {
+        flex: none;
+        height: 240px;
+    }
+}
