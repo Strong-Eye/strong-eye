@@ -89,3 +89,82 @@ body {
     min-height: 0;
     align-content: stretch;
 }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: var(--color-surface);
+    flex: 0 0 var(--coluna);
+}
+
+.card--grande {
+    flex: 1;
+}
+
+
+.card--escuro {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+}
+
+.card--clicavel {
+    cursor: pointer;
+}
+
+.lista-rolagem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-height: 90px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.lista-rolagem__cabecalho {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-surface);
+}
+
+.container-chart {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+.container-chart canvas {
+    position: absolute;
+    inset: 0;
+}
+
+.title {
+    color: var(--color-primary);
+    font-size: var(--font-title);
+    font-weight: 800;
+}
+
+.text {
+    color: var(--color-text-muted);
+    font-size: var(--font-text);
+    font-weight: 400;
+}
+
+.text--bold {
+    color: var(--color-text);
+    font-weight: 800;
+}
+
+.text--light {
+    font-size: var(--font-light);
+    font-weight: 300;
+}
+
+.text--smallest {
+    font-size: calc(var(--font-light) / 2);
+}
