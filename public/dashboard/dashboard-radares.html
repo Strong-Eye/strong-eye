@@ -7,61 +7,9 @@
     <title>Document</title>
     <link rel="icon" href="../assets/icon/logo.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style-dashboard.css">
 
     <style>
-        @font-face {
-            font-family: 'Manrope';
-            src: url('../assets/font/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
-            font-weight: 200 800;
-            font-style: normal;
-        }
-
-        :root {
-            color-scheme: dark;
-        }
-
-        body {
-            font-family: "Manrope", Arial, Helvetica, sans-serif;
-            background-color: #0C0E11;
-            margin: 0;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .card {
-            display: flex;
-            flex: 0 0 calc((100% - 24px) / 3);
-            flex-direction: column;
-            gap: 8px;
-            min-width: 0;
-            box-sizing: border-box;
-            background-color: #13161C;
-            padding: 16px;
-            border-radius: 10px;
-        }
-
-        .row {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-        }
-
-        .row-space-beteween {
-            justify-content: space-between;
-        }
-
-        .radar-box-info {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
         .radar-chart {
             position: relative;
             height: 6px;
@@ -69,6 +17,10 @@
             background: #4a5568;
             border-radius: 999px;
             overflow: hidden;
+        }
+
+        .radar-chart canvas {
+            display: block;
         }
 
         .radar-chart-rosca {
@@ -91,21 +43,6 @@
             font-size: 22px;
             font-weight: 800;
             line-height: 1;
-        }
-
-        .radar-chart-linha {
-            position: relative;
-            width: 100%;
-            height: 240px;
-        }
-
-        .radar-chart-linha canvas {
-            display: block;
-        }
-
-
-        .radar-chart canvas {
-            display: block;
         }
 
         .radar-legenda {
@@ -139,28 +76,6 @@
             text-decoration: line-through;
         }
 
-        .radar-card-subtitulo {
-            color: #8a97ad;
-            font-size: 15px;
-            font-weight: 400;
-        }
-
-        .radar-card-subtitulo-bold {
-            color: #ffffff;
-            font-weight: 800;
-        }
-
-        .radar-card-subtitulo-light {
-            font-size: 13px;
-            font-weight: 300;
-        }
-
-        .radar-card-titulo {
-            color: #1578FA;
-            font-size: 20px;
-            font-weight: 800;
-        }
-
         .radar-status-online {
             color: #40C84F;
             background-color: #2F503131;
@@ -178,273 +93,33 @@
             padding: 3px 8px;
             border-radius: 5px;
         }
-
-        .radares-button {
-            background-color: #13161C;
-            color: #8a97ad;
-            font-size: 15px;
-            padding: 8px 14px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .radares-search {
-            background-color: #13161C;
-            color: #8a97ad;
-            font-size: 15px;
-            padding: 8px 14px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .radares-search input {
-            background: transparent;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            caret-color: #ffffff;
-        }
-
-        .radares-search input::placeholder {
-            color: #8a97ad;
-            font-size: 15px;
-        }
-
-        .radares-button-activate {
-            background-color: #1578fa1a;
-            color: #1578FA;
-        }
-
-        .divider {
-            border: none;
-            height: 1px;
-            background-color: #8a97ad;
-            margin: 12px 0;
-        }
-
-        .main {
-            display: flex;
-            flex: 1;
-            min-width: 0;
-            flex-direction: column;
-            gap: 15px;
-            padding: 24px;
-        }
-
-        .sidebar {
-            width: 260px;
-            flex-shrink: 0;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 20px 16px;
-            background-color: #13161C;
-        }
-
-        .menu-sidebar {
-            display: none;
-        }
-
-        .sidebar img {
-            width: 100%;
-        }
-
-        .sidebar-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #8a97ad;
-            font-size: 15px;
-            text-decoration: none;
-        }
-
-        .sidebar-label-activate {
-            color: #ffffff;
-            font-weight: 400;
-        }
-
-        .wrapper-top,
-        .wrapper-bottom {
-            display: flex;
-            flex-direction: column;
-            gap: 13px;
-        }
-
-        .wrapper {
-            flex: 0;
-        }
-
-        .sidebar-user-row {
-            background-color: #4e545e17;
-            color: #8a97ad;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            height: 40px;
-            container-type: size;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .sidebar-user-icon {
-            font-size: 70cqh;
-        }
-
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background-color: #0c0e11a2;
-            display: none;
-            z-index: 1000;
-            padding: 50px;
-            box-sizing: border-box;
-        }
-
-        #modal-radar {
-            left: 260px;
-        }
-
-        .overlay.aberto {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container-modal-radar,
-        .container-modal-menu {
-            flex: 1;
-            min-height: 0;
-            min-width: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 24px;
-            border-radius: 10px;
-            overflow-y: auto;
-        }
-
-        .container-modal-radar {
-            background-color: #13161C;
-        }
-
-        .container-modal-menu {
-            background-color: #13161C;
-            justify-content: space-between;
-        }
-
-        .container-modal-radar>*,
-        .container-modal-menu>* {
-            flex-shrink: 0;
-        }
-
-        .card-infos {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-            min-width: 0;
-            box-sizing: border-box;
-            background-color: #0C0E11;
-            padding: 16px;
-            border-radius: 10px;
-        }
-
-        .card-modal-radar {
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            gap: 8px;
-            min-width: 0;
-            box-sizing: border-box;
-            background-color: #0C0E11;
-            padding: 16px;
-            border-radius: 10px;
-        }
-
-        .card-modal-chart {
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            gap: 8px;
-            min-width: 0;
-            box-sizing: border-box;
-            background-color: #0C0E11;
-            padding: 16px;
-            border-radius: 10px;
-        }
-
-        /* Com gap de 12px e 4 cards em cima, cada card tem (100% - 36px) / 4 = 25% - 9px.
-           Grande = 3 cards + 2 gaps = 75% - 3px. Pequeno = 1 card = 25% - 9px. */
-        .card-modal-chart-grande {
-            flex: 0 0 calc(75% - 3px);
-        }
-
-        .card-modal-chart-pequeno {
-            flex: 0 0 calc(25% - 9px);
-        }
-
-        @media (max-width: 1070px) {
-            .card {
-                flex: 0 0 calc((100% - 12px) / 2);
-            }
-
-            .menu-sidebar {
-                display: block;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .radar-card-subtitulo {
-                font-size: 12px;
-            }
-
-            #modal-radar {
-                left: 0;
-            }
-
-            .card-modal-radar {
-                flex: 0 0 calc((100% - 12px) / 2);
-            }
-
-            .card-modal-chart-grande,
-            .card-modal-chart-pequeno {
-                flex: 0 0 100%;
-            }
-        }
     </style>
 </head>
 
 <body style="display: flex; flex-direction: row;" onload="renderizarRadares(dados_radares);">
     <!-- menu para mobile -->
-    <div class="overlay" id="modal-menu">
-        <span class="overlay-fechar" onclick="fecharModalMenu()"><i class="fa-solid fa-x"></i></span>
-
-        <div class="container-modal-menu">
+    <div class="modal-overlay" id="modal-menu">
+        <div class="modal-main">
             <div class="wrapper-top">
-                <img src="../assets/icon/LOGO.png">
+                <div class="row row-space-beteween">
+                    <img class="logo" src="../assets/icon/LOGO.png" alt="">
+                    <span class="modal-overlay-fechar" onclick="toggleModal('modal-menu')"><i
+                            class="fa-solid fa-x"></i></span>
+                </div>
                 <div class="divider"></div>
                 <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
                 <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
-                <a class="sidebar-label sidebar-label-activate" href=""><i class="fa-solid fa-layer-group"></i>
-                    Gerenciamento de Radares</a>
+                <a class="sidebar-label sidebar-label-activate" href=""><i
+                        class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
                 <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
             </div>
 
             <div class="wrapper-bottom">
-                <div class="sidebar-user-row" style="align-items: center;">
+                <div class="sidebar-user-row">
                     <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
                     <div class="wrapper">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">Bruna Leal</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light">bruna.leal@strongeye.com</span>
+                        <span class="text text--bold">Bruna Leal</span>
+                        <span class="text text--light">bruna.leal@strongeye.com</span>
                     </div>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
@@ -459,17 +134,17 @@
             <div class="divider"></div>
             <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
             <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
-            <a class="sidebar-label sidebar-label-activate" href=""><i class="fa-solid fa-layer-group"></i>
+            <a class="sidebar-label sidebar-label--activate" href=""><i class="fa-solid fa-layer-group"></i>
                 Gerenciamento de Radares</a>
             <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
         </div>
 
         <div class="wrapper-bottom">
-            <div class="sidebar-user-row" style="align-items: center;">
+            <div class="sidebar-user-row">
                 <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
                 <div class="wrapper">
-                    <span class="radar-card-subtitulo radar-card-subtitulo-bold">Bruna Leal</span>
-                    <span class="radar-card-subtitulo radar-card-subtitulo-light">bruna.leal@strongeye.com</span>
+                    <span class="text text--bold">Bruna Leal</span>
+                    <span class="text text--light text--smallest">bruna.leal@strongeye.com</span>
                 </div>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
@@ -477,45 +152,45 @@
     </div>
 
     <!-- modal informações de cada radar de forma única -->
-    <div class="overlay" id="modal-radar">
-        <div class="container-modal-radar">
+    <div class="modal-overlay" id="modal-radar">
+        <div class="modal-main">
             <div class="row row-space-beteween">
-            <span class="radar-card-titulo" id="modal-radar-nome">RAD-025 <span class="radar-card-subtitulo" id="radar-endereco">BE43BB34-2DC7-A2A8-214E-706979AD14D2</span></span>
+            <span class="title" id="modal-radar-nome">RAD-025 <span class="text" id="radar-endereco">BE43BB34-2DC7-A2A8-214E-706979AD14D2</span></span>
                 
-                <span class="overlay-fechar" onclick="fecharModalRadar()"><i class="fa-solid fa-x"></i></span>
+                <span class="modal-overlay-fechar" onclick="fecharModalRadar()"><i class="fa-solid fa-x"></i></span>
             </div>
 
-            <div class="card-infos">
+            <div class="card card--escuro">
                 <div class="row">
-                    <div class="radar-box-info" id="ram">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">Modelo:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">Doppler</span>
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Modelo:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Doppler</span>
                     </div>
 
-                    <div class="radar-box-info" id="ram">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">Endereço:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">Rodovia
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Endereço:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Rodovia
                             Castello Branco, km 18</span>
                     </div>
 
-                    <div class="radar-box-info" id="ram">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">Tempo ativo:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">41 d 06
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Tempo ativo:</span>
+                        <span class="text text--bold" id="radar-valor-ram">41 d 06
                             h</span>
                     </div>
 
-                    <div class="radar-box-info" id="ram">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">Última leitura:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">Há 10s</span>
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Última leitura:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Há 10s</span>
                     </div>
                 </div>
             </div>
 
             <!-- card de componentes -->
-            <div class="container" id="asd">
-                <div class="card-modal-radar">
+            <div class="container container--4col" id="asd">
+                <div class="card card--escuro">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-1">CPU:</span>
+                        <span class="title" id="radar-nome-1">CPU:</span>
                         <div class="radar-status-online" id="radar-status-1">Online</div>
                     </div>
 
@@ -525,16 +200,16 @@
                     </div>
 
                     <div class="row row-space-beteween">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura-3">Média:
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
                             10%</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light"
+                        <span class="text text--light"
                             id="radar-ultima-leitura-3">Mediana: 10%</span>
                     </div>
                 </div>
 
-                <div class="card-modal-radar">
+                <div class="card card--escuro">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-2">RAM:</span>
+                        <span class="title" id="radar-nome-2">RAM:</span>
                         <div class="radar-status-online" id="radar-status-2">Online</div>
                     </div>
 
@@ -544,16 +219,16 @@
                     </div>
 
                     <div class="row row-space-beteween">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura-3">Média:
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
                             10%</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light"
+                        <span class="text text--light"
                             id="radar-ultima-leitura-3">Mediana: 10%</span>
                     </div>
                 </div>
 
-                <div class="card-modal-radar">
+                <div class="card card--escuro">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-2">Disco:</span>
+                        <span class="title" id="radar-nome-2">Disco:</span>
                         <div class="radar-status-online" id="radar-status-2">Online</div>
                     </div>
 
@@ -563,16 +238,16 @@
                     </div>
 
                     <div class="row row-space-beteween">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura-3">Média:
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
                             10%</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light"
+                        <span class="text text--light"
                             id="radar-ultima-leitura-3">Mediana: 10%</span>
                     </div>
                 </div>
 
-                <div class="card-modal-radar">
+                <div class="card card--escuro">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-3">Rede:</span>
+                        <span class="title" id="radar-nome-3">Rede:</span>
                         <div class="radar-status-online" id="radar-status-3">Online</div>
                     </div>
 
@@ -582,43 +257,43 @@
                     </div>
 
                     <div class="row row-space-beteween">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura-3">Média:
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
                             10%</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light"
+                        <span class="text text--light"
                             id="radar-ultima-leitura-3">Mediana: 10%</span>
                     </div>
                 </div>
             </div>
 
-            <div class="container" id="asd">
-                <div class="card-modal-chart card-modal-chart-grande">
+            <div class="container container--4col container--preencher" id="asd">
+                <div class="card card--escuro card--grande">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-1">Leituras (%):</span>
+                        <span class="title" id="radar-nome-1">Leituras (%):</span>
                         <div class="radar-legenda" id="radar-leituras-legend"></div>
                     </div>
 
                     <!-- gráfico de linha -->
-                    <div class="radar-chart-linha"><canvas id="leituras-chart-linha"></canvas></div>
+                    <div class="container-chart"><canvas id="leituras-chart-linha"></canvas></div>
                 </div>
 
-                <div class="card-modal-chart card-modal-chart-pequeno">
+                <div class="card card--escuro">
                     <div class="row row-space-beteween">
-                        <span class="radar-card-titulo" id="radar-nome-2">RAM:</span>
+                        <span class="title" id="radar-nome-2">RAM:</span>
                         <div class="radar-status-online" id="radar-status-2">Online</div>
                     </div>
 
                     <div class="row" id="radar-componentes-2">
-                        <div class="radar-box-info" id="radar-ram-2">
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">Ultima leitura:</span>
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold"
+                        <div class="wrapper" id="radar-ram-2">
+                            <span class="text text--bold">Ultima leitura:</span>
+                            <span class="text text--bold"
                                 id="radar-valor-ram-2">20%</span>
                         </div>
                     </div>
 
                     <div class="row row-space-beteween">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura-3">Média:
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
                             10%</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light"
+                        <span class="text text--light"
                             id="radar-ultima-leitura-3">Mediana: 10%</span>
                     </div>
                 </div>
@@ -626,20 +301,20 @@
         </div>
     </div>
 
-    <div class="main">
+    <div class="modal-main modal-main--escuro">
         <div class="row row-space-beteween">
-            <span class="radar-card-titulo">Gerenciamento de Radares</span>
+            <span class="title">Gerenciamento de Radares</span>
 
             <div class="row">
-                <div class="radares-search">
+                <div class="wrapper-input">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Buscar..." id="input-buscar-radar">
                 </div>
-                <button class="menu-sidebar radares-button" onclick="abrirModalMenu()">Menu</button>
+                <button class="menu-sidebar button" onclick="abrirModalMenu()">Menu</button>
             </div>
         </div>
 
-        <span class="radar-card-subtitulo" style="color: #ffffff;">
+        <span class="text" style="color: #ffffff;">
             <span id="radares-total">10</span> cadastrados ·
             <span id="radares-online">9</span> online ·
             <span id="radares-alerta">5</span> alerta ·
@@ -649,47 +324,47 @@
         <div class="divider"></div>
 
         <div class="row" style="gap: 15px;">
-            <button id="button-radares-total" class="radares-button radares-button-activate">Todos</button>
-            <button id="button-radares-online" class="radares-button">Online</button>
-            <button id="button-radares-alerta" class="radares-button">Atenção</button>
-            <button id="button-radares-offline" class="radares-button">Offline</button>
+            <button id="button-radares-total" class="button button--activate">Todos</button>
+            <button id="button-radares-online" class="button">Online</button>
+            <button id="button-radares-alerta" class="button">Atenção</button>
+            <button id="button-radares-offline" class="button">Offline</button>
         </div>
 
         <div class="container" id="container-cards">
             <!-- <div class="card">
                 <div class="row row-space-beteween">
-                    <span class="radar-card-titulo" id="radar-nome">RAD-001</span>
+                    <span class="title" id="radar-nome">RAD-001</span>
                     <div class="radar-status-online" id="radar-status">Online</div>
                 </div>
 
-                <span class="radar-card-subtitulo" id="radar-endereco">Av. dos Bandeirantes, km 3</span>
+                <span class="text" id="radar-endereco">Av. dos Bandeirantes, km 3</span>
 
                 <div class="row" id="row-radar-componentes">
-                    <div class="radar-box-info" id="cpu">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">10%</span>
+                    <div class="wrapper" id="cpu">
+                        <span class="text text--bold">CPU:</span>
+                        <span class="text text--bold" id="radar-valor-cpu">10%</span>
                         <div class="radar-chart"><canvas id="radar-chart-cpu"></canvas></div>
                     </div>
 
-                    <div class="radar-box-info" id="ram">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">20%</span>
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">RAM:</span>
+                        <span class="text text--bold" id="radar-valor-ram">20%</span>
                         <div class="radar-chart"><canvas id="radar-chart-ram"></canvas></div>
                     </div>
 
-                    <div class="radar-box-info" id="disco">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">30%</span>
+                    <div class="wrapper" id="disco">
+                        <span class="text text--bold">DISCO:</span>
+                        <span class="text text--bold" id="radar-valor-disco">30%</span>
                         <div class="radar-chart"><canvas id="radar-chart-disco"></canvas></div>
                     </div>
 
-                    <div class="radar-box-info" id="rede">
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">40%</span>
+                    <div class="wrapper" id="rede">
+                        <span class="text text--bold">REDE:</span>
+                        <span class="text text--bold" id="radar-valor-rede">40%</span>
                         <div class="radar-chart"><canvas id="radar-chart-rede"></canvas></div>
                     </div>
                 </div>
-                <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura">Ultima leitura: 10.09.2026</span>
+                <span class="text text--light" id="radar-ultima-leitura">Ultima leitura: 10.09.2026</span>
             </div> -->
         </div>
     </div>
@@ -862,9 +537,9 @@
                 let cpuBoxInfo = "";
                 if (dados[i]['cpu'] !== undefined && dados[i]['cpu'] !== null) {
                     cpuBoxInfo = `
-                        <div class="radar-box-info" id="cpu">
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">CPU:</span>
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-cpu">${dados[i]['cpu']}%</span>
+                        <div class="wrapper" id="cpu">
+                            <span class="text text--bold">CPU:</span>
+                            <span class="text text--bold" id="radar-valor-cpu">${dados[i]['cpu']}%</span>
                             <div class="radar-chart"><canvas id="radar-chart-cpu-${dados[i]['id']}"></canvas></div>
                         </div>`
                 }
@@ -872,9 +547,9 @@
                 let ramBoxInfo = "";
                 if (dados[i]['ram'] !== undefined && dados[i]['ram'] !== null) {
                     ramBoxInfo = `
-                        <div class="radar-box-info" id="ram">
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">RAM:</span>
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-ram">${dados[i]['ram']}%</span>
+                        <div class="wrapper" id="ram">
+                            <span class="text text--bold">RAM:</span>
+                            <span class="text text--bold" id="radar-valor-ram">${dados[i]['ram']}%</span>
                             <div class="radar-chart"><canvas id="radar-chart-ram-${dados[i]['id']}"></canvas></div>
                         </div>`
                 }
@@ -882,9 +557,9 @@
                 let discoBoxInfo = "";
                 if (dados[i]['disco'] !== undefined && dados[i]['disco'] !== null) {
                     discoBoxInfo = `
-                        <div class="radar-box-info" id="disco">
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">DISCO:</span>
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-disco">${dados[i]['disco']}%</span>
+                        <div class="wrapper" id="disco">
+                            <span class="text text--bold">DISCO:</span>
+                            <span class="text text--bold" id="radar-valor-disco">${dados[i]['disco']}%</span>
                             <div class="radar-chart"><canvas id="radar-chart-disco-${dados[i]['id']}"></canvas></div>
                         </div>`
                 }
@@ -892,9 +567,9 @@
                 let redeBoxInfo = "";
                 if (dados[i]['rede'] !== undefined && dados[i]['rede'] !== null) {
                     redeBoxInfo = `
-                        <div class="radar-box-info" id="rede">
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold">REDE:</span>
-                            <span class="radar-card-subtitulo radar-card-subtitulo-bold" id="radar-valor-rede">${dados[i]['rede']}%</span>
+                        <div class="wrapper" id="rede">
+                            <span class="text text--bold">REDE:</span>
+                            <span class="text text--bold" id="radar-valor-rede">${dados[i]['rede']}%</span>
                             <div class="radar-chart"><canvas id="radar-chart-rede-${dados[i]['id']}"></canvas></div>
                         </div>`
                 }
@@ -902,11 +577,11 @@
                 container.insertAdjacentHTML("beforeend", `
                     <div class="card" onclick="abrirModalRadar(${dados[i]['id']})">
                         <div class="row row-space-beteween">
-                            <span class="radar-card-titulo" id="radar-nome">${dados[i]['nome']}</span>
+                            <span class="title" id="radar-nome">${dados[i]['nome']}</span>
                                 <div class="radar-status-${dados[i]['status'].toLowerCase()}" id="radar-status">${dados[i]['status']}</div>
                         </div>
                     
-                        <span class="radar-card-subtitulo" id="radar-endereco">${dados[i]['endereco']}</span>
+                        <span class="text" id="radar-endereco">${dados[i]['endereco']}</span>
                     
                         <div class="row" id="row-radar-componentes">
                             ${cpuBoxInfo}
@@ -914,7 +589,7 @@
                             ${discoBoxInfo}
                             ${redeBoxInfo}
                         </div>
-                        <span class="radar-card-subtitulo radar-card-subtitulo-light" id="radar-ultima-leitura">Ultima leitura: ${dados[i]['ultima_leitura']}</span>
+                        <span class="text text--light" id="radar-ultima-leitura">Ultima leitura: ${dados[i]['ultima_leitura']}</span>
                     </div>
                 `);
 
@@ -948,32 +623,32 @@
 
         let timer;
         document.querySelector('#input-buscar-radar').oninput = (e) => {
-            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
-            e.target.classList.add('radares-button-activate');
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
             timer = clearTimeout(timer) || setTimeout(() => {
                 buscarRadar(e.target.value, "nome", dados_radares)
             }, 50);
         };
 
         document.querySelector('#button-radares-total').onclick = (e) => {
-            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
-            e.target.classList.add('radares-button-activate');
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
             timer = clearTimeout(timer) || setTimeout(() => {
                 renderizarRadares(dados_radares)
             }, 50);
         };
 
         document.querySelector('#button-radares-online').onclick = (e) => {
-            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
-            e.target.classList.add('radares-button-activate');
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
             timer = clearTimeout(timer) || setTimeout(() => {
                 buscarRadar('online', 'status', dados_radares)
             }, 50);
         };
 
         document.querySelector('#button-radares-offline').onclick = (e) => {
-            document.querySelector('.radares-button-activate')?.classList.remove('radares-button-activate');
-            e.target.classList.add('radares-button-activate');
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
             timer = clearTimeout(timer) || setTimeout(() => {
                 buscarRadar('offline', 'status', dados_radares)
             }, 50);

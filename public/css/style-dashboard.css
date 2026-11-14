@@ -166,7 +166,7 @@ body {
 }
 
 .text--smallest {
-    font-size: calc(var(--font-light) / 2);
+    font-size: calc(var(--font-light) * 0.75);
 }
 
 .button {
@@ -257,6 +257,7 @@ body {
 .divider {
     border: none;
     height: 1px;
+    flex-shrink: 0;
     background-color: var(--color-text-muted);
     margin: var(--spacing-md) 0;
 }
@@ -293,8 +294,9 @@ body {
     text-decoration: none;
 }
 
-.sidebar-label-activate {
+.sidebar-label--activate {
     color: var(--color-text);
+    font-weight: 600;
 }
 
 .sidebar-user-row {
