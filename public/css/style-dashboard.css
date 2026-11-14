@@ -168,3 +168,95 @@ body {
 .text--smallest {
     font-size: calc(var(--font-light) / 2);
 }
+
+.button {
+    --btn-bg: var(--color-surface);
+    --btn-fg: var(--color-text-muted);
+
+    --btn-bg-hover: var(--color-primary-bg);
+    --btn-fg-hover: var(--color-primary);
+
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: var(--spacing-sm) 14px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: normal;
+    transition: background-color .2s, color .2s, border-color .2s,
+        box-shadow .2s, transform .2s;
+}
+
+.button:active:not(:disabled) {
+    transform: scale(.96);
+}
+
+.button--danger {
+    --btn-bg: var(--color-danger-bg);
+    --btn-fg: var(--color-danger);
+    --btn-bg-hover: var(--color-danger);
+    --btn-fg-hover: var(--color-bg);
+}
+
+.button--confirm {
+    --btn-bg: var(--color-success-bg);
+    --btn-fg: var(--color-success);
+    --btn-bg-hover: var(--color-success);
+    --btn-fg-hover: var(--color-bg);
+}
+
+.button--activate {
+    --btn-bg: var(--color-primary-bg);
+    --btn-fg: var(--color-primary);
+    --btn-bg-hover: var(--color-primary);
+    --btn-fg-hover: var(--color-bg);
+}
+
+.button--contorno {
+    --btn-bg: transparent;
+    --btn-fg: var(--color-text-muted);
+    --btn-bg-hover: var(--color-text-muted);
+    --btn-fg-hover: var(--color-surface);
+    border-color: var(--btn-fg);
+}
+
+.button:hover {
+    background-color: var(--btn-bg-hover);
+    color: var(--btn-fg-hover);
+}
+
+.hv-elevar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px var(--color-bg);
+}
+
+.wrapper-input {
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 15px;
+    padding: var(--spacing-sm) 14px;
+    border-radius: var(--radius-sm);
+}
+
+.wrapper-input input {
+    background: transparent;
+    color: var(--color-text);
+    border: none;
+    outline: none;
+    caret-color: var(--color-text);
+}
+
+.wrapper-input input::placeholder {
+    color: var(--color-text-muted);
+    font-size: 15px;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: var(--color-text-muted);
+    margin: var(--spacing-md) 0;
+}
