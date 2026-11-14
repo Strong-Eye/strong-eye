@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Exemplo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- menu para mobile !NÃO ALTERAR! -->
+    <div class="modal-overlay" id="modal-menu">
+        <div class="modal-main">
+            <div class="wrapper-top">
+                <div class="row row-space-beteween">
+                    <img class="logo" src="../assets/icon/LOGO.png" alt="">
+                    <span class="modal-overlay-fechar" onclick="toggleModal('modal-menu')"><i
+                            class="fa-solid fa-x"></i></span>
+                </div>
+                <div class="divider"></div>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+                <a class="sidebar-label sidebar-label-activate" href=""><i
+                        class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+            </div>
+
+            <div class="wrapper-bottom">
+                <div class="sidebar-user-row">
+                    <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                    <div class="wrapper">
+                        <span class="text text--bold">Bruna Leal</span>
+                        <span class="text text--light">bruna.leal@strongeye.com</span>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sidebar para desktop !NÃO ALTERAR! -->
+    <div class="sidebar">
+        <div class="wrapper-top">
+            <img src="../assets/icon/LOGO.png">
+            <div class="divider"></div>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+            <a class="sidebar-label sidebar-label--activate" href=""><i class="fa-solid fa-layer-group"></i>
+                Gerenciamento de Radares</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+        </div>
+
+        <div class="wrapper-bottom">
+            <div class="sidebar-user-row">
+                <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                <div class="wrapper">
+                    <span class="text text--bold">Bruna Leal</span>
+                    <span class="text text--light text--smallest">bruna.leal@strongeye.com</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- estrutura para modais, você deve passar a função de toggleModal com o id do overlay no botão ou lugar que você quer que abra -->
+    <div class="modal-overlay" id="modal-personalizado">
+        <div class="modal-main">
+            <!-- aqui funciona igual a main de baixo, pode montar da forma que quiser -->
+        </div>
+    </div>
+
+    <!-- conteúdo principal (tudo estático) -->
+    <!-- <div class="modal-main modal-main--escuro">  -->
+    <!-- ^^^ versão para ter barra de rolagem na dash! só descomentar a linha de cima e comentar a linha de baixo, cuidado que adicionar itens demais sem barra de rolagem quebra tudo^^^ -->
+    <div class="main">
+        <div class="row row-space-beteween">
+            <span class="title">Titulo da dashboard</span>
+
+            <div class="row">
+                <!-- elementos de input e select personalizado, deve estar exatamente dessa forma para ficar conforme esperado -->
+                <div class="wrapper-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar..." id="input-buscar-radar">
+                </div>
+
+                <div class="wrapper-input">
+                    <select>
+                        <option>Escolha uma opção...</option>
+                        <option>Opção 01</option>
+                        <option>Opção 02</option>
+                    </select>
+                    <i class="fa-solid fa-angle-down"></i>
+                </div>
+
+                <button class="button button--confirm hv-inverter"><i class="fa-solid fa-check"></i> Confirmar</button>
+                <button class="button button--danger hv-inverter"><i class="fa-solid fa-x"></i> Cancelar</button>
+                <button class="button button--contorno hv-elevar hv-inverter">Contorno</button>
+                <button class="button hv-inverter">Opção 1</button>
+                <button class="button button--activate hv-elevar">Opção 1</button>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="container container--4col">
+            <div class="card">
+                <span class="title">Exemplo de linha com 4 KPIS</span>
+                <span class="text">class="container container--4col"</span>
+                <span class="text text--bold">1</span>
+            </div>
+
+            <div class="card">
+                <span class="title">Exemplo de linha com 4 KPIS</span>
+                <span class="text">class="container container--4col"</span>
+                <span class="text text--bold">1</span>
+            </div>
+
+            <div class="card">
+                <span class="title">Exemplo de linha com 4 KPIS</span>
+                <span class="text">class="container container--4col"</span>
+                <span class="text text--bold">1</span>
+            </div>
+
+            <div class="card">
+                <span class="title">Exemplo de linha com 4 KPIS</span>
+                <span class="text">class="container container--4col"</span>
+                <span class="text text--bold">1</span>
+            </div>
+        </div>
+
+        <div class="container container--1col">
+            <div class="card">
+                <span class="title">container container--1col + lista</span>
+
+                <!-- pra montar essa lista de forma dinâmica basta você montar um desses row com base nas informações em js e adicionar ao #lista -->
+                <div class="lista-rolagem" id="lista">
+                    <div class="row lista-rolagem__cabecalho">
+                        <div class="wrapper">
+                            <span class="text">#</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text">Letra</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text">Identificador</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="wrapper">
+                            <span class="text text--bold">1</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">A</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">Aa</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="wrapper">
+                            <span class="text text--bold">2</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">B</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">Bb</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="wrapper">
+                            <span class="text text--bold">3</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">C</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">Cc</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="wrapper">
+                            <span class="text text--bold">4</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">D</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">Dd</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="wrapper">
+                            <span class="text text--bold">5</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">E</span>
+                        </div>
+
+                        <div class="wrapper">
+                            <span class="text text--bold">Ee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container container--4col container--preencher">
+            <div class="card card--grande">
+                <span class="title">Grafico principal</span>
+                <span class="text text--light">class="card card--grande"</span>
+                <div class="container-chart"><canvas id="leituras-chart-linha"></canvas></div>
+
+            </div>
+
+            <div class="card">
+                <span class="title">Grafico secundário</span>
+                <span class="text text--light"><- Submisso ao card--grande</span>
+                        <div class="container-chart"><canvas id="causas-chart-rosca"></canvas></div>
+            </div>
+        </div>
+
+        <div class="container container--3col">
+            <div class="card">
+                <span class="title">Aa</span>
+                <span class="text text--bold">1 Indicador</span>
+            </div>
+
+            <div class="card">
+                <span class="title">Bb</span>
+                <span class="text text--bold">2 Indicador</span>
+            </div>
+
+            <div class="card">
+                <span class="title">Cc</span>
+                <span class="text text--bold">3 Indicador</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // função de alterar o modal com base no id, caso você crie um novo basta passar o id de seu overlay
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle("aberto");
+        }
+
+        function criarLinhasMultiplas(canvasID, legendaID, labels, series) {
+            const chart = new Chart(document.getElementById(canvasID), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: series.map((s) => ({
+                        label: s.nome,
+                        data: s.valores,
+                        borderColor: s.cor,
+                        backgroundColor: s.cor,
+                        borderWidth: 2,
+                        tension: 0.35,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#8a97ad' }, grid: { display: false } },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: { color: '#8a97ad', callback: (v) => v + '%' },
+                            grid: { color: '#2a2f3a' }
+                        }
+                    }
+                }
+            });
+
+            return chart;
+        }
+
+        criarLinhasMultiplas(
+            "leituras-chart-linha",
+            "radar-leituras-legend",
+            ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
+            [
+                { nome: 'CPU', valores: [10, 25, 18, 40, 35, 30], cor: '#1578FA' },
+                { nome: 'RAM', valores: [60, 62, 65, 64, 70, 68], cor: '#40C84F' },
+                { nome: 'Disco', valores: [30, 30, 31, 31, 32, 32], cor: '#F5A524' },
+                { nome: 'Rede', valores: [5, 40, 15, 60, 20, 35], cor: '#C84042' }
+            ]
+        );
+
+        function criarRosca(canvasID, labels, valores, cores) {
+            return new Chart(document.getElementById(canvasID), {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: valores,
+                        backgroundColor: cores,
+                        borderColor: '#13161C',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '65%',
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        criarRosca(
+            "causas-chart-rosca",
+            ['CPU', 'RAM', 'Disco', 'Rede'],
+            [30, 25, 20, 15],
+            ['#1578FA', '#40C84F', '#F5A524', '#C84042']
+        );
+    </script>
+</body>
+
+</html>
