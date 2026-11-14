@@ -241,12 +241,23 @@ body {
     border-radius: var(--radius-sm);
 }
 
-.wrapper-input input {
+.wrapper-input input,
+.wrapper-input select {
     background: transparent;
     color: var(--color-text);
     border: none;
     outline: none;
     caret-color: var(--color-text);
+    font-family: inherit;
+    font-size: 15px;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.wrapper-input select option {
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    border: none;
 }
 
 .wrapper-input input::placeholder {
