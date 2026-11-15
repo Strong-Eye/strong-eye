@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Localização e previsões</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style-dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -220,11 +221,11 @@
             </div>
         </div> -->
 
-        <div class="container container--4col container--preencher">
+        <div class="container container--1col container--preencher">
             <div class="card card--grande">
-                <span class="title">Grafico principal</span>
-                <span class="text text--light">class="card card--grande"</span>
-                <div class="container-chart"><canvas id="leituras-chart-linha"></canvas></div>
+                <span class="title">Mapa</span>
+                <!-- <span class="text text--light">class="card card--grande"</span> -->
+                <div id="mapa"></div>
 
             </div>
 
@@ -238,117 +239,214 @@
         <div class="container container--3col">
             <div class="card">
                 <span class="title">Horário do alerta</span>
-                <span class="text text--bold">20:10</span>
+                <span class="text text--bold" id="horarioAlerta"></span>
             </div>
 
             <div class="card">
                 <span class="title">Previsão de chegada</span>
-                <span class="text text--bold">20Min</span>
+                <span class="text text--bold" id="previsaoChegada"></span>
             </div>
 
             <div class="card">
                 <span class="title">Distância KM</span>
-                <span class="text text--bold">7KM</span>
+                <span class="text text--bold" id="distanciaKm"></span>
             </div>
             <div class="card">
-                <span class="title">Fluxo de arro</span>
-                <span class="text text--bold">Médio</span>
+                <span class="title">Fluxo de carro</span>
+                <span class="text text--bold" id="fluxoCarro"></span>
             </div>
 
             <div class="card">
-                <span class="title">Tempo médio de manuntenção</span>
-                <span class="text text--bold">1hr 30min</span>
+                <span class="title">Tempo médio de manutenção</span>
+                <span class="text text--bold" id="tempoManutencao"></span>
             </div>
 
             <div class="card">
                 <span class="title">Componentes em alerta</span>
-                <span class="text text--bold">CPU | RAM</span>
+                <span class="text text--bold" id="componentesAlerta"></span>
             </div>
         </div>
     </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
 
-    <script>
-        // função de alterar o modal com base no id, caso você crie um novo basta passar o id de seu overlay
-        function toggleModal(id) {
-            document.getElementById(id).classList.toggle("aberto");
+
+// Localização do técnico
+let tecnico = {
+    latitude: -23.5505,
+    longitude: -46.6333
+};
+
+// Dados mocados dos radares
+let radares = [
+    {
+        endereco: "Radar Avenida Paulista",
+        latitude: -23.5632,
+        longitude: -46.6544,
+        critico: true,
+        horarioAlerta: "08:15",
+        fluxo: "Intenso",
+        tempoManutencao: "45 minutos",
+        previsaoChegada: "1hr 20min",
+        componentesAlerta: ["CPU", "RAM"]
+    },
+    {
+        endereco: "Radar Marginal Tietê",
+        latitude: -23.5165,
+        longitude: -46.6250,
+        critico: false,
+        horarioAlerta: "07:40",
+        fluxo: "Moderado",
+        tempoManutencao: "30 minutos",
+        previsaoChegada: "2hr",
+        componentesAlerta: ["RAM"]
+    },
+    {
+        endereco: "Radar Avenida Rebouças",
+        latitude: -23.5580,
+        longitude: -46.6710,
+        critico: true,
+        horarioAlerta: "09:05",
+        fluxo: "Livre",
+        tempoManutencao: "60 minutos",
+        previsaoChegada: "1hr 15min",
+        componentesAlerta: ["CPU", "RAM", "DISCO"]
+    }
+];
+
+// Inicialização do mapa
+let mapa = L.map("mapa").setView(
+    [tecnico.latitude, tecnico.longitude],
+    13
+);
+
+// Camada do OpenStreetMap 
+L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+).addTo(mapa);
+
+
+// Marcador do técnico em azul
+L.circleMarker(
+    [tecnico.latitude, tecnico.longitude],
+    {
+        radius: 10,
+        color: "#1d4ed8",
+        fillColor: "#2563eb",
+        fillOpacity: 1,
+        weight: 3
+    }
+)
+.addTo(mapa)
+.bindPopup("Localização do técnico");
+
+
+// Criar marcadores dos radares
+radares.forEach(radar => {
+
+    let cor = radar.critico ? "#dc2626" : "#eab308";
+
+    let marcador = L.circleMarker(
+        [radar.latitude, radar.longitude],
+        {
+            radius: 9,
+            color: cor,
+            fillColor: cor,
+            fillOpacity: 1,
+            weight: 2
         }
+    ).addTo(mapa);
 
-        function criarLinhasMultiplas(canvasID, legendaID, labels, series) {
-            const chart = new Chart(document.getElementById(canvasID), {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: series.map((s) => ({
-                        label: s.nome,
-                        data: s.valores,
-                        borderColor: s.cor,
-                        backgroundColor: s.cor,
-                        borderWidth: 2,
-                        tension: 0.35,
-                        pointRadius: 0,
-                        pointHoverRadius: 4
-                    }))
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#8a97ad' }, grid: { display: false } },
-                        y: {
-                            min: 0,
-                            max: 100,
-                            ticks: { color: '#8a97ad', callback: (v) => v + '%' },
-                            grid: { color: '#2a2f3a' }
-                        }
+    marcador.bindPopup(radar.endereco);
+
+    marcador.on("click", () => {
+        selecionarRadar(radar);
+    });
+});
+
+
+    // Selecionar radar e preencher os cards
+    function selecionarRadar(radar) {
+
+        // Coordenadas do técnico
+        let pontoTecnico = L.latLng(
+            tecnico.latitude,
+            tecnico.longitude
+        );
+
+        // Coordenadas do radar selecionado
+        let pontoRadar = L.latLng(
+            radar.latitude,
+            radar.longitude
+        );
+
+        // Leaflet calcula a distância em metros
+        let distanciaMetros = pontoTecnico.distanceTo(pontoRadar);
+
+        // Converter metros para quilômetros
+        let distanciaKm = distanciaMetros / 1000;
+
+        document.getElementById("horarioAlerta").textContent = radar.horarioAlerta;
+
+        document.getElementById("distanciaKm").textContent =`${distanciaKm.toFixed(2)} km`;
+
+        document.getElementById("fluxoCarro").textContent = radar.fluxo;
+
+        document.getElementById("tempoManutencao").textContent = radar.tempoManutencao;
+
+        document.getElementById("previsaoChegada").textContent = radar.previsaoChegada
+
+        // Separar os componentes com |
+        document.getElementById("componentesAlerta").textContent = radar.componentesAlerta.join(" | ");
+        
+
+}
+
+    // função de alterar o modal com base no id, caso você crie um novo basta passar o id de seu overlay
+    function toggleModal(id) {
+        document.getElementById(id).classList.toggle("aberto");
+    }
+
+    function criarLinhasMultiplas(canvasID, legendaID, labels, series) {
+        const chart = new Chart(document.getElementById(canvasID), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: series.map((s) => ({
+                    label: s.endereco,
+                    data: s.valores,
+                    borderColor: s.cor,
+                    backgroundColor: s.cor,
+                    borderWidth: 2,
+                    tension: 0.35,
+                    pointRadius: 0,
+                    pointHoverRadius: 4
+               }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { color: '#8a97ad' }, grid: { display: false } },
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: { color: '#8a97ad', callback: (v) => v + '%' },
+                        grid: { color: '#2a2f3a' }
                     }
                 }
-            });
+            }
+        });
 
-            return chart;
-        }
+        return chart;
+    }
 
-        criarLinhasMultiplas(
-            "leituras-chart-linha",
-            "radar-leituras-legend",
-            ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
-            [
-                { nome: 'CPU', valores: [10, 25, 18, 40, 35, 30], cor: '#1578FA' },
-                { nome: 'RAM', valores: [60, 62, 65, 64, 70, 68], cor: '#40C84F' },
-                { nome: 'Disco', valores: [30, 30, 31, 31, 32, 32], cor: '#F5A524' },
-                { nome: 'Rede', valores: [5, 40, 15, 60, 20, 35], cor: '#C84042' }
-            ]
-        );
-
-        function criarRosca(canvasID, labels, valores, cores) {
-            return new Chart(document.getElementById(canvasID), {
-                type: 'doughnut',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: valores,
-                        backgroundColor: cores,
-                        borderColor: '#13161C',
-                        borderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '65%',
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
-
-        criarRosca(
-            "causas-chart-rosca",
-            ['CPU', 'RAM', 'Disco', 'Rede'],
-            [30, 25, 20, 15],
-            ['#1578FA', '#40C84F', '#F5A524', '#C84042']
-        );
-    </script>
+</script>
 </body>
-
 </html>
