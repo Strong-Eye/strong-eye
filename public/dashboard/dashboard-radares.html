@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="../assets/icon/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style-dashboard.css">
+
+    <style>
+        .radar-chart {
+            position: relative;
+            height: 6px;
+            width: 100%;
+            background: #4a5568;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .radar-chart canvas {
+            display: block;
+        }
+
+        .radar-chart-rosca {
+            position: relative;
+            align-self: center;
+            width: 75%;
+            max-width: 260px;
+        }
+
+        .radar-chart-rosca canvas {
+            display: block;
+        }
+
+        .radar-chart-rosca-valor {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .radar-legenda {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background-color: #13161C;
+            border-radius: 5px;
+            color: #8a97ad;
+            font-size: 13px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .legenda-cor {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legenda-desativada {
+            opacity: 0.4;
+            text-decoration: line-through;
+        }
+
+        .radar-status-online {
+            color: #40C84F;
+            background-color: #2F503131;
+            font-size: 12px;
+            align-self: center;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .radar-status-offline {
+            color: #C84042;
+            background-color: #502F2F31;
+            font-size: 12px;
+            align-self: center;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body style="display: flex; flex-direction: row;" onload="renderizarRadares(dados_radares);">
+    <!-- menu para mobile -->
+    <div class="modal-overlay" id="modal-menu">
+        <div class="modal-main">
+            <div class="wrapper-top">
+                <div class="row row-space-beteween">
+                    <img class="logo" src="../assets/icon/LOGO.png" alt="">
+                    <span class="modal-overlay-fechar" onclick="toggleModal('modal-menu')"><i
+                            class="fa-solid fa-x"></i></span>
+                </div>
+                <div class="divider"></div>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+                <a class="sidebar-label sidebar-label-activate" href=""><i
+                        class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+            </div>
+
+            <div class="wrapper-bottom">
+                <div class="sidebar-user-row">
+                    <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                    <div class="wrapper">
+                        <span class="text text--bold">Bruna Leal</span>
+                        <span class="text text--light">bruna.leal@strongeye.com</span>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sidebar para desktop -->
+    <div class="sidebar">
+        <div class="wrapper-top">
+            <img src="../assets/icon/LOGO.png">
+            <div class="divider"></div>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+            <a class="sidebar-label sidebar-label--activate" href=""><i class="fa-solid fa-layer-group"></i>
+                Gerenciamento de Radares</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+        </div>
+
+        <div class="wrapper-bottom">
+            <div class="sidebar-user-row">
+                <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                <div class="wrapper">
+                    <span class="text text--bold">Bruna Leal</span>
+                    <span class="text text--light text--smallest">bruna.leal@strongeye.com</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal informações de cada radar de forma única -->
+    <div class="modal-overlay" id="modal-radar">
+        <div class="modal-main">
+            <div class="row row-space-beteween">
+            <span class="title" id="modal-radar-nome">RAD-025 <span class="text" id="radar-endereco">BE43BB34-2DC7-A2A8-214E-706979AD14D2</span></span>
+                
+                <span class="modal-overlay-fechar" onclick="fecharModalRadar()"><i class="fa-solid fa-x"></i></span>
+            </div>
+
+            <div class="card card--escuro">
+                <div class="row">
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Modelo:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Doppler</span>
+                    </div>
+
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Endereço:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Rodovia
+                            Castello Branco, km 18</span>
+                    </div>
+
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Tempo ativo:</span>
+                        <span class="text text--bold" id="radar-valor-ram">41 d 06
+                            h</span>
+                    </div>
+
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">Última leitura:</span>
+                        <span class="text text--bold" id="radar-valor-ram">Há 10s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card de componentes -->
+            <div class="container container--4col" id="asd">
+                <div class="card card--escuro">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-1">CPU:</span>
+                        <div class="radar-status-online" id="radar-status-1">Online</div>
+                    </div>
+
+                    <div class="radar-chart-rosca">
+                        <canvas id="cpu-chart-rosca"></canvas>
+                        <span class="radar-chart-rosca-valor" id="radar-valor-ram-2">20%</span>
+                    </div>
+
+                    <div class="row row-space-beteween">
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
+                            10%</span>
+                        <span class="text text--light"
+                            id="radar-ultima-leitura-3">Mediana: 10%</span>
+                    </div>
+                </div>
+
+                <div class="card card--escuro">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-2">RAM:</span>
+                        <div class="radar-status-online" id="radar-status-2">Online</div>
+                    </div>
+
+                    <div class="radar-chart-rosca">
+                        <canvas id="ram-chart-rosca"></canvas>
+                        <span class="radar-chart-rosca-valor" id="radar-valor-ram-2">20%</span>
+                    </div>
+
+                    <div class="row row-space-beteween">
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
+                            10%</span>
+                        <span class="text text--light"
+                            id="radar-ultima-leitura-3">Mediana: 10%</span>
+                    </div>
+                </div>
+
+                <div class="card card--escuro">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-2">Disco:</span>
+                        <div class="radar-status-online" id="radar-status-2">Online</div>
+                    </div>
+
+                    <div class="radar-chart-rosca">
+                        <canvas id="disco-chart-rosca"></canvas>
+                        <span class="radar-chart-rosca-valor" id="radar-valor-ram-2">20%</span>
+                    </div>
+
+                    <div class="row row-space-beteween">
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
+                            10%</span>
+                        <span class="text text--light"
+                            id="radar-ultima-leitura-3">Mediana: 10%</span>
+                    </div>
+                </div>
+
+                <div class="card card--escuro">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-3">Rede:</span>
+                        <div class="radar-status-online" id="radar-status-3">Online</div>
+                    </div>
+
+                    <div class="radar-chart-rosca">
+                        <canvas id="rede-chart-rosca"></canvas>
+                        <span class="radar-chart-rosca-valor" id="radar-valor-ram-2">20%</span>
+                    </div>
+
+                    <div class="row row-space-beteween">
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
+                            10%</span>
+                        <span class="text text--light"
+                            id="radar-ultima-leitura-3">Mediana: 10%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container container--4col container--preencher" id="asd">
+                <div class="card card--escuro card--grande">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-1">Leituras (%):</span>
+                        <div class="radar-legenda" id="radar-leituras-legend"></div>
+                    </div>
+
+                    <!-- gráfico de linha -->
+                    <div class="container-chart"><canvas id="leituras-chart-linha"></canvas></div>
+                </div>
+
+                <div class="card card--escuro">
+                    <div class="row row-space-beteween">
+                        <span class="title" id="radar-nome-2">RAM:</span>
+                        <div class="radar-status-online" id="radar-status-2">Online</div>
+                    </div>
+
+                    <div class="row" id="radar-componentes-2">
+                        <div class="wrapper" id="radar-ram-2">
+                            <span class="text text--bold">Ultima leitura:</span>
+                            <span class="text text--bold"
+                                id="radar-valor-ram-2">20%</span>
+                        </div>
+                    </div>
+
+                    <div class="row row-space-beteween">
+                        <span class="text text--light" id="radar-ultima-leitura-3">Média:
+                            10%</span>
+                        <span class="text text--light"
+                            id="radar-ultima-leitura-3">Mediana: 10%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-main modal-main--escuro">
+        <div class="row row-space-beteween">
+            <span class="title">Gerenciamento de Radares</span>
+
+            <div class="row">
+                <div class="wrapper-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar..." id="input-buscar-radar">
+                </div>
+                <button class="menu-sidebar button" onclick="abrirModalMenu()">Menu</button>
+            </div>
+        </div>
+
+        <span class="text" style="color: #ffffff;">
+            <span id="radares-total">10</span> cadastrados ·
+            <span id="radares-online">9</span> online ·
+            <span id="radares-alerta">5</span> alerta ·
+            <span id="radares-offline">5</span> offline
+        </span>
+
+        <div class="divider"></div>
+
+        <div class="row" style="gap: 15px;">
+            <button id="button-radares-total" class="button button--activate">Todos</button>
+            <button id="button-radares-online" class="button">Online</button>
+            <button id="button-radares-alerta" class="button">Atenção</button>
+            <button id="button-radares-offline" class="button">Offline</button>
+        </div>
+
+        <div class="container" id="container-cards">
+            <!-- <div class="card">
+                <div class="row row-space-beteween">
+                    <span class="title" id="radar-nome">RAD-001</span>
+                    <div class="radar-status-online" id="radar-status">Online</div>
+                </div>
+
+                <span class="text" id="radar-endereco">Av. dos Bandeirantes, km 3</span>
+
+                <div class="row" id="row-radar-componentes">
+                    <div class="wrapper" id="cpu">
+                        <span class="text text--bold">CPU:</span>
+                        <span class="text text--bold" id="radar-valor-cpu">10%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-cpu"></canvas></div>
+                    </div>
+
+                    <div class="wrapper" id="ram">
+                        <span class="text text--bold">RAM:</span>
+                        <span class="text text--bold" id="radar-valor-ram">20%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-ram"></canvas></div>
+                    </div>
+
+                    <div class="wrapper" id="disco">
+                        <span class="text text--bold">DISCO:</span>
+                        <span class="text text--bold" id="radar-valor-disco">30%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-disco"></canvas></div>
+                    </div>
+
+                    <div class="wrapper" id="rede">
+                        <span class="text text--bold">REDE:</span>
+                        <span class="text text--bold" id="radar-valor-rede">40%</span>
+                        <div class="radar-chart"><canvas id="radar-chart-rede"></canvas></div>
+                    </div>
+                </div>
+                <span class="text text--light" id="radar-ultima-leitura">Ultima leitura: 10.09.2026</span>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="dados.js"></script>
+
+    <script>
+        function criarMeiaRosca(canvasID, valor, max = 100) {
+            return new Chart(document.getElementById(canvasID), {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [valor, max - valor],
+                        backgroundColor: ['#1578FA', '#4a5568'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    rotation: -90,
+                    circumference: 180,
+                    cutout: '70%',
+                    responsive: true,
+                    aspectRatio: 2,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function criarLinhaSimples(canvasID, labels, valores) {
+            return new Chart(document.getElementById(canvasID), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: valores,
+                        borderColor: '#1578FA',
+                        backgroundColor: '#1578FA1a',
+                        fill: true,
+                        borderWidth: 2,
+                        tension: 0.35,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            ticks: { color: '#8a97ad' },
+                            grid: { display: false }
+                        },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: { color: '#8a97ad', callback: (v) => v + '%' },
+                            grid: { color: '#2a2f3a' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function criarLegendaHTML(chart, containerID) {
+            const container = document.getElementById(containerID);
+            container.replaceChildren();
+
+            chart.data.datasets.forEach((dataset, i) => {
+                const item = document.createElement('div');
+                item.className = 'legenda-item';
+                item.innerHTML = `
+                    <span class="legenda-cor" style="background-color: ${dataset.borderColor}"></span>
+                    <span>${dataset.label}</span>`;
+
+                item.onclick = () => {
+                    const visivel = chart.isDatasetVisible(i);
+                    chart.setDatasetVisibility(i, !visivel);
+                    item.classList.toggle('legenda-desativada', visivel);
+                    chart.update();
+                };
+
+                container.appendChild(item);
+            });
+        }
+
+        function criarLinhasMultiplas(canvasID, legendaID, labels, series) {
+            const chart = new Chart(document.getElementById(canvasID), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: series.map((s) => ({
+                        label: s.nome,
+                        data: s.valores,
+                        borderColor: s.cor,
+                        backgroundColor: s.cor,
+                        borderWidth: 2,
+                        tension: 0.35,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#8a97ad' },
+                            grid: { display: false }
+                        },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                color: '#8a97ad',
+                                callback: (v) => v + '%'
+                            },
+                            grid: { color: '#2a2f3a' }
+                        }
+                    }
+                }
+            });
+
+            criarLegendaHTML(chart, legendaID);
+            return chart;
+        }
+
+
+        function criarBarra(canvasID, valor, max = 100) {
+            return new Chart(document.getElementById(canvasID), {
+                type: "bar",
+                data: {
+                    labels: [''],
+                    datasets: [{
+                        data: [valor],
+                        backgroundColor: "#ffffff",
+                        borderRadius: 999,
+                        borderSkipped: false,
+                        barPercentage: 1,
+                        categoryPercentage: 1
+                    }]
+                },
+                options: {
+                    indexAxis: "y",
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 400 },
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                    layout: { padding: 0 },
+                    scales: {
+                        x: { display: false, min: 0, max: max },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+
+        function renderizarRadares(dados) {
+            let container = document.getElementById("container-cards");
+            container.replaceChildren();
+            for (let i = 0; i < dados.length; i++) {
+                let cpuBoxInfo = "";
+                if (dados[i]['cpu'] !== undefined && dados[i]['cpu'] !== null) {
+                    cpuBoxInfo = `
+                        <div class="wrapper" id="cpu">
+                            <span class="text text--bold">CPU:</span>
+                            <span class="text text--bold" id="radar-valor-cpu">${dados[i]['cpu']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-cpu-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let ramBoxInfo = "";
+                if (dados[i]['ram'] !== undefined && dados[i]['ram'] !== null) {
+                    ramBoxInfo = `
+                        <div class="wrapper" id="ram">
+                            <span class="text text--bold">RAM:</span>
+                            <span class="text text--bold" id="radar-valor-ram">${dados[i]['ram']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-ram-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let discoBoxInfo = "";
+                if (dados[i]['disco'] !== undefined && dados[i]['disco'] !== null) {
+                    discoBoxInfo = `
+                        <div class="wrapper" id="disco">
+                            <span class="text text--bold">DISCO:</span>
+                            <span class="text text--bold" id="radar-valor-disco">${dados[i]['disco']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-disco-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                let redeBoxInfo = "";
+                if (dados[i]['rede'] !== undefined && dados[i]['rede'] !== null) {
+                    redeBoxInfo = `
+                        <div class="wrapper" id="rede">
+                            <span class="text text--bold">REDE:</span>
+                            <span class="text text--bold" id="radar-valor-rede">${dados[i]['rede']}%</span>
+                            <div class="radar-chart"><canvas id="radar-chart-rede-${dados[i]['id']}"></canvas></div>
+                        </div>`
+                }
+
+                container.insertAdjacentHTML("beforeend", `
+                    <div class="card" onclick="abrirModalRadar(${dados[i]['id']})">
+                        <div class="row row-space-beteween">
+                            <span class="title" id="radar-nome">${dados[i]['nome']}</span>
+                                <div class="radar-status-${dados[i]['status'].toLowerCase()}" id="radar-status">${dados[i]['status']}</div>
+                        </div>
+                    
+                        <span class="text" id="radar-endereco">${dados[i]['endereco']}</span>
+                    
+                        <div class="row" id="row-radar-componentes">
+                            ${cpuBoxInfo}
+                            ${ramBoxInfo}
+                            ${discoBoxInfo}
+                            ${redeBoxInfo}
+                        </div>
+                        <span class="text text--light" id="radar-ultima-leitura">Ultima leitura: ${dados[i]['ultima_leitura']}</span>
+                    </div>
+                `);
+
+                if (dados[i]['cpu'] !== undefined && dados[i]['cpu'] !== null) {
+                    criarBarra(`radar-chart-cpu-${dados[i]['id']}`, dados[i]['cpu']);
+                }
+
+                if (dados[i]['ram'] !== undefined && dados[i]['ram'] !== null) {
+                    criarBarra(`radar-chart-ram-${dados[i]['id']}`, dados[i]['ram']);
+                }
+
+                if (dados[i]['disco'] !== undefined && dados[i]['disco'] !== null) {
+                    criarBarra(`radar-chart-disco-${dados[i]['id']}`, dados[i]['disco']);
+                }
+
+                if (dados[i]['rede'] !== undefined && dados[i]['rede'] !== null) {
+                    criarBarra(`radar-chart-rede-${dados[i]['id']}`, dados[i]['rede']);
+                }
+            }
+        }
+
+        function buscarRadar(termo, tipoBusca, dados) {
+            let encontrados = [];
+            for (let i = 0; i < dados.length; i++) {
+                if (dados[i][tipoBusca].toLowerCase().includes(termo.toLowerCase())) {
+                    encontrados.push(dados[i])
+                }
+            }
+            return renderizarRadares(encontrados);
+        }
+
+        let timer;
+        document.querySelector('#input-buscar-radar').oninput = (e) => {
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar(e.target.value, "nome", dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-total').onclick = (e) => {
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                renderizarRadares(dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-online').onclick = (e) => {
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar('online', 'status', dados_radares)
+            }, 50);
+        };
+
+        document.querySelector('#button-radares-offline').onclick = (e) => {
+            document.querySelector('.button--activate')?.classList.remove('button--activate');
+            e.target.classList.add('button--activate');
+            timer = clearTimeout(timer) || setTimeout(() => {
+                buscarRadar('offline', 'status', dados_radares)
+            }, 50);
+        };
+
+        function abrirModalRadar(id) {
+            alert(`Você está acessando o radar: ${id}`)
+            document.getElementById("modal-radar").classList.add("aberto");
+        }
+
+        function fecharModalRadar() {
+            document.getElementById("modal-radar").classList.remove("aberto");
+        }
+
+        function abrirModalMenu(id) {
+            document.getElementById("modal-menu").classList.add("aberto");
+        }
+
+        function fecharModalMenu() {
+            document.getElementById("modal-menu").classList.remove("aberto");
+        }
+
+        criarMeiaRosca("cpu-chart-rosca", 75);
+        criarMeiaRosca("ram-chart-rosca", 75);
+        criarMeiaRosca("disco-chart-rosca", 75);
+        criarMeiaRosca("rede-chart-rosca", 75);
+
+        criarLinhasMultiplas(
+            "leituras-chart-linha",
+            "radar-leituras-legend",
+            ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
+            [
+                { nome: 'CPU', valores: [10, 25, 18, 40, 35, 30], cor: '#1578FA' },
+                { nome: 'RAM', valores: [60, 62, 65, 64, 70, 68], cor: '#40C84F' },
+                { nome: 'Disco', valores: [30, 30, 31, 31, 32, 32], cor: '#F5A524' },
+                { nome: 'Rede', valores: [5, 40, 15, 60, 20, 35], cor: '#C84042' }
+            ]
+        );
+
+    </script>
+</body>
+
+</html>

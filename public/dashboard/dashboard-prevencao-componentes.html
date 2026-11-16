@@ -1,19 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
+ 
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/custom.css">
-
-  <title>Strong Eye - Cadastro</title>
-
+ 
+  <title>Strong Eye - Prevenção de componentes</title>
+ 
   <script src="./js/sessao.js"></script>
-
+ 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style-dashboard.css">
   <link rel="icon" href="../assets/icon/logo.png" />
-
+ 
   <style>
     .ponto-radar {
       width: 18px;
@@ -21,85 +23,207 @@
       top: 50%;
       cursor: pointer;
     }
-
+ 
     .ponto-radar:hover {
       border: 1px solid white;
     }
   </style>
-
+ 
 </head>
-
-<body class="d-flex flex-row min-vh-100">
-
-  <div class="offcanvas-md offcanvas-start text-bg-dark vh-100 d-flex flex-column " style="width: 290px;" tabindex="-1"
-    id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-
-    <div class="offcanvas-header bg-dark d-flex mb-0 pb-0">
-      <img src="../assets/img/LOGO.png" alt="" style="max-height: 100%;" class="h-auto mw-100">
-    </div>
-    
-    <div class="offcanvas-body p-3 d-flex flex-column justify-content-between flex-grow-1">
-      <hr />
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-          <a href="./cadastro-usuario.html" class="nav-link p-3 text-center" aria-current="true">
-            <b>Cadastro de membros</b>
-          </a>
-        </li>
-         <li class="nav-item">
-          <a href="./cadastro-radar.html" class="nav-link p-4 text-center" aria-current="page">
-            <b>Cadastro de radar</b>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./#" class="nav-link p-4 active text-center" aria-current="page">
-            <b>Prevenção de componentes</b>
-          </a>
-        </li>
-      </ul>
-      <hr/>
-      <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="../assets/icon/usuario.png" alt="" width="32" height="32" class="rounded-circle me-2" />
-          <span id="span_email">Carregando...</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" href="../login.html">Sair da conta</a></li>
-        </ul>
+ 
+<body>
+  <div class="modal-overlay" id="modal-menu">
+    <div class="modal-main">
+      <div class="wrapper-top">
+        <div class="row g-0 row-space-beteween">
+          <img class="logo w-auto" src="../assets/icon/LOGO.png" alt="">
+          <span class="modal-overlay-fechar w-auto" onclick="toggleModal('modal-menu')"><i
+              class="fa-solid fa-x"></i></span>
+        </div>
+        <div class="divider"></div>
+        <a class="sidebar-label" href="./cadastro-usuario.html"><i class="fa-solid fa-users"></i> Cadastro de membros</a>
+        <a class="sidebar-label" href="./cadastro-radar.html"><i class="fa-solid fa-layer-group"></i> Cadastro de radar</a>
+        <a class="sidebar-label sidebar-label--activate" href="./#"><i class="fa-solid fa-chart-simple"></i> Prevenção de componentes</a>
+      </div>
+ 
+      <div class="wrapper-bottom">
+        <div class="sidebar-user-row">
+          <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+          <div class="wrapper">
+            <span class="text text--light" id="span_email_mobile">Carregando...</span>
+          </div>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
       </div>
     </div>
   </div>
-
-
-  <main class="flex-grow-1 w-100 h-100 d-flex flex-column ms-3 me-3 overflow-auto">
-    <div>
-      <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-        Menu</button>
+ 
+  <div class="sidebar">
+    <div class="wrapper-top">
+      <img src="../assets/icon/LOGO.png">
+      <div class="divider"></div>
+      <a class="sidebar-label" href="./cadastro-usuario.html"><i class="fa-solid fa-users"></i> Cadastro de membros</a>
+      <a class="sidebar-label" href="./cadastro-radar.html"><i class="fa-solid fa-layer-group"></i> Cadastro de radar</a>
+      <a class="sidebar-label sidebar-label--activate" href="./#"><i class="fa-solid fa-chart-simple"></i> Prevenção de componentes</a>
     </div>
-    <div class="d-flex flex-column w-100 h-25 border-dark border-1 bg-dark mt-3 p-2">
-      <div class="d-flex flex-row justify-content-between">
-        <p class="text-white">Faixa de proridade de manutenção dos componentes:</p>
-        <p class="text-white"><small>Exibindo próximos 14 dias.</small></p>
-      </div>
-      <div id="faixa" class="position-relative w-100 h-100"
-          style="height:60px; background:linear-gradient(90deg,#ff232360 0 15.5%,#ffd43b60 15.5% 50%,#51cf6660 50% 100%)">
-      </div>
-      <div class="d-flex flex-row justify-content-between mt-1">
-        <p class="small text-white">hoje</p>
-        <p class="small text-white">7 dias</p>
-        <p class="small text-white">14 dias</p>
+ 
+    <div class="wrapper-bottom">
+      <div class="sidebar-user-row">
+        <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+        <div class="wrapper">
+          <span class="text text--light text--smallest" id="span_email">Carregando...</span>
+        </div>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
       </div>
     </div>
-  </main>
+  </div>
+ 
+  <div class="modal-main modal-main--escuro">
+    <div class="row g-0 row-space-beteween">
+      <span class="title w-auto">Prevenção de componentes</span>
+      <button class="button menu-sidebar w-auto" type="button" onclick="toggleModal('modal-menu')"><i
+          class="fa-solid fa-bars"></i></button>
+    </div>
+ 
+    <div class="divider"></div>
+ 
+    <div class="container container--4col g-0 mw-100" id="resumo">
+      <div class="card border-0">
+        <span class="title">Críticos</span>
+        <span class="text">Estouro em até 2 dias</span>
+        <span class="text text--bold fs-4 text-danger" id="kCriticos">–</span>
+      </div>
+ 
+      <div class="card border-0">
+        <span class="title">Atenção</span>
+        <span class="text">Estouro entre 3 e 7 dias</span>
+        <span class="text text--bold fs-4 text-warning" id="kAtencao">–</span>
+      </div>
+ 
+      <div class="card border-0">
+        <span class="title">Saudáveis</span>
+        <span class="text">Acima de 7 dias ou estável</span>
+        <span class="text text--bold fs-4 text-success" id="kSaudaveis">–</span>
+      </div>
+ 
+      <div class="card border-0">
+        <span class="title">Próximo estouro</span>
+        <span class="text">Data mais próxima prevista</span>
+        <span class="text text--bold fs-4" id="kProximo">–</span>
+      </div>
+    </div>
+ 
+    <div class="container container--1col g-0 mw-100">
+      <div class="card border-0">
+        <div class="wrapper">
+          <span class="title">Faixa de prioridade de manutenção dos componentes</span>
+          <span class="text">Exibindo próximos 14 dias.</span>
+        </div>
+ 
+        <div id="faixa" class="position-relative w-100"
+            style="height:76px; background:linear-gradient(90deg,#ff232360 0 15.5%,#ffd43b60 15.5% 50%,#51cf6660 50% 100%)">
+        </div>
+ 
+        <div class="row g-0 row-space-beteween">
+          <span class="text w-auto">hoje</span>
+          <span class="text w-auto">7 dias</span>
+          <span class="text w-auto">14 dias</span>
+        </div>
 
+        <span class="text">Projeção para os próximos 14 dias, calculada com os últimos 3 dias de uso. Só se confirma se os radares mantiverem o mesmo comportamento.</span>
+
+      </div>
+    </div>
+ 
+    <div class="container container--3col g-0 mw-100">
+      <div class="card border-0">
+        <span class="title">Fila de relatórios</span>
+        <span class="text">Estouro previsto em até 14 dias</span>
+ 
+        <div class="lista-rolagem" id="lista">
+          <div class="row g-0 lista-rolagem__cabecalho">
+            <div class="wrapper">
+              <span class="text">Radar</span>
+            </div>
+ 
+            <div class="wrapper">
+              <span class="text">Componente</span>
+            </div>
+ 
+            <div class="wrapper">
+              <span class="text">Dias</span>
+            </div>
+          </div>
+ 
+          <div class="row g-0" role="button">
+            <div class="wrapper">
+              <span class="text text--bold">–</span>
+            </div>
+ 
+            <div class="wrapper">
+              <span class="text text--bold">–</span>
+            </div>
+ 
+            <div class="wrapper">
+              <span class="text text--bold">–</span>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="card card--grande border-0">
+        <div class="row g-0 row-space-beteween">
+          <div class="wrapper">
+            <span class="title" id="titulo">–</span>
+            <span class="text" id="subtitulo">–</span>
+          </div>
+ 
+          <div class="row g-0 w-auto align-items-center">
+            <span class="badge text-bg-secondary w-auto" id="badgeSev">–</span>
+            <a class="button button--activate text-decoration-none w-auto" id="btnRadar" href="#">Ver no radar</a>
+          </div>
+        </div>
+ 
+        <div class="container container--4col g-0 mw-100">
+          <div class="card card--escuro">
+            <span class="text">Dias até o limite</span>
+            <span class="text text--bold fs-4" id="kDias">–</span>
+          </div>
+ 
+          <div class="card card--escuro">
+            <span class="text">Data prevista</span>
+            <span class="text text--bold fs-4" id="kData">–</span>
+          </div>
+ 
+          <div class="card card--escuro">
+            <span class="text">Crescimento por dia</span>
+            <span class="text text--bold fs-4" id="kTaxa">–</span>
+          </div>
+ 
+          <div class="card card--escuro">
+            <span class="text">Confiança da previsão</span>
+            <span class="text text--bold fs-4" id="kR2">–</span>
+          </div>
+        </div>
+ 
+        <div id="aviso"></div>
+      </div>
+    </div>
+  </div>
+ 
   <footer>
-
+ 
   </footer>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/dashboard-prevencao-componentes.js"></script>
+  <script src="js/script_conta.js"></script>
+  <script>
+    function toggleModal(id) {
+      document.getElementById(id).classList.toggle("aberto");
+    }
+  </script>
 </body>
-
+ 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/dashboard-prevencao-componentes.js"></script>
-<script src="js/script_conta.js"></script>
+ 

@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Manrope';
+    src: url('../assets/font/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 800;
+    font-style: normal;
+}
+
+:root {
+    color-scheme: dark;
+
+    /* fundos */
+    --color-bg: #0C0E11;
+    --color-surface: #13161C;
+    --color-surface-hover: #4e545e17;
+    --color-overlay: #0c0e11a2;
+
+    /* texto */
+    --color-text: #ffffff;
+    --color-text-muted: #8a97ad;
+
+    /* cor principal */
+    --color-primary: #1578FA;
+    --color-primary-bg: #1578fa1a;
+
+    /* status dos charts */
+    --color-success: #40C84F;
+    --color-success-bg: #2F503131;
+    --color-danger: #C84042;
+    --color-danger-bg: #502F2F31;
+    --color-warning: #F5A524;
+    --color-neutral: #4a5568;
+
+    /* charts */
+    --color-grid: #2a2f3a;
+    /* bordas */
+    --color-border: #232834;
+
+    --font-title: 20px;
+    --font-text: 15px;
+    --font-light: 13px;
+
+    /* raio de border-radius */
+    --radius-sm: 5px;
+    /*sm = small, em badges e detalhes    */
+    --radius-md: 10px;
+    /*md = medium, usado em cards, seções e afins*/
+    --radius-full: 999px;
+    /*completamente redondo*/
+
+    /* espaçamentos */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 15px;
+    --spacing-xl: 24px;
+}
