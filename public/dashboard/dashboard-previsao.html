@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard do Radar</title>
+   <link rel="stylesheet" href="../css/style-dashboard.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="modal-menu">
+        <div class="modal-main">
+            <div class="wrapper-top">
+                <div class="row row-space-beteween">
+                    <img class="logo" src="../assets/icon/LOGO.png" alt="">
+                    <span class="modal-overlay-fechar" onclick="toggleModal('modal-menu')"><i
+                            class="fa-solid fa-x"></i></span>
+                </div>
+                <div class="divider"></div>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+                <a class="sidebar-label sidebar-label-activate" href=""><i
+                        class="fa-solid fa-layer-group"></i>Gerenciamento de Radares</a>
+                <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+            </div>
+
+            <div class="wrapper-bottom">
+                <div class="sidebar-user-row">
+                    <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                    <div class="wrapper">
+                        <span class="text text--bold">Usuário</span>
+                        <span class="text text--light">usuario@strongeye.com</span>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sidebar -->
+    <div class="sidebar">
+        <div class="wrapper-top">
+            <img src="../assets/icon/LOGO.png">
+            <div class="divider"></div>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-house"></i>Home</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-users"></i> Cadastro de Membros</a>
+            <a class="sidebar-label sidebar-label--activate" href=""><i class="fa-solid fa-layer-group"></i>
+                Gerenciamento de Radares</a>
+            <a class="sidebar-label" href=""><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+        </div>
+
+        <div class="wrapper-bottom">
+            <div class="sidebar-user-row">
+                <i class="fa-solid fa-circle-user sidebar-user-icon"></i>
+                <div class="wrapper">
+                    <span class="text text--bold">Bruna Leal</span>
+                    <span class="text text--light text--smallest">bruna.leal@strongeye.com</span>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+    </div>
+
+<div class="main" style="width: 100%; height: 100vh; min-height: 0; overflow-y: auto; gap: 16px; padding: clamp(12px, 2vw, 24px);">
+  <header class="topbar row row-space-beteween" style="align-items: flex-start; flex-wrap: wrap; min-width: 0;">
+    <div>
+      <h1 class="title" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 4px;"><span id="radarTitle">RAD-001</span> <span class="pill critical" id="headerStatus" style="display: inline-flex; align-items: center; padding: 3px 8px; border-radius: var(--radius-full); background: var(--color-danger-bg); color: var(--color-danger); font-size: 12px; font-weight: 700;">Crítico</span></h1>
+      <div class="subtitle text" id="radarSubtitle">SP-310 km 22 · Jundiaí · Última coleta: há 2 min · 3 componentes monitorados</div>
+    </div>
+    <div class="wrapper-input" style="max-width: 100%;">
+      <select id="radarSelect" aria-label="Selecionar radar" style="max-width: 100%;">
+        <option value="RAD-001">Trocar Radar · RAD-001</option>
+        <option value="RAD-002">Trocar Radar · RAD-002</option>
+        <option value="RAD-003">Trocar Radar · RAD-003</option>
+      </select>
+    </div>
+  </header>
+  
+  <main class="container container--1col container--preencher" style="display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; align-content: start; gap: 12px; flex: 1; min-height: 0;">
+  <section class="summary container container--4col" aria-label="Resumo do radar" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; width: 100%; margin: 0;">
+    <div class="metric-card card" style="gap: 4px;"><span class="metric-label text">Status geral</span><span class="metric-value text text--bold" id="overallStatus">Crítico</span></div>
+    <div class="metric-card card" style="gap: 4px;"><span class="metric-label text">Em alerta</span><span class="metric-value text text--bold" id="alertCount">1 de 3</span></div>
+    <div class="metric-card card" style="gap: 4px;"><span class="metric-label text">Maior risco</span><span class="metric-value text text--bold" id="highestRisk">RAM</span><span class="metric-detail text text--light" id="riskDetail">76% · limite 80%</span></div>
+    <div class="metric-card card" style="gap: 4px;"><span class="metric-label text">Confiabilidade</span><span class="metric-value text text--bold" id="reliability">Média</span></div>
+  </section>
+
+    <article class="container container--3col container--preencher" style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; width: 100%; min-height: auto; margin: 0;">
+    <div class="wrapper wrapper--coluna" style="display: grid; grid-template-rows: minmax(240px, 1fr) auto; gap: 12px; min-width: 0; flex: 1 1 290px;">
+      <section class="panel card" style="min-height: 0;">
+        <div class="panel-heading" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><h2 class="title" style="margin: 0;">Saúde do radar: atual × prevista</h2></div>
+        <div class="radar-placeholder container-chart" id="radarChartArea" style="height: clamp(300px, 28vh, 300px); flex: 0 0 auto;">
+          <canvas id="RadarChart" aria-label="Gráfico radar de saúde atual e prevista" ></canvas>
+        </div>
+
+        <p class="chart-note text" id="radarInsight" style="margin: 4px 0 0;"><strong>Maior aumento previsto:</strong> RAM (+24%).</p>
+      </section>
+
+      <section class="weather-card card" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 16px;">
+
+        <div>
+          <div class="weather-title title" style="margin-bottom: 6px;">Previsão do tempo · próx. 24 h</div>
+          <div class="weather-main row" style="align-items: center; gap: 8px;"><span class="weather-icon">🌧️</span><div class="weather-info" style="display: flex; flex-direction: column; gap: 2px;"><strong class="text text--bold">Chuva forte</strong><span class="text">20°C · chuva 85%</span></div></div>
+        </div>
+
+        <div class="weather-risk" style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+          <strong class="text text--bold" style="font-size: 32px;">27%</strong>
+          <span class="text text--light">chance de afetar o radar</span>
+        </div>
+
+        <span class="pill critical" style="display: inline-flex; align-items: center; padding: 3px 8px; border-radius: var(--radius-full); background: var(--color-danger-bg); color: var(--color-danger); font-size: 12px; font-weight: 700;">Alto</span>
+      </section>
+    </div>
+
+    <section class="panel detail-panel card card--grande" style="min-width: 0; flex: 2 1 440px;">
+        <div class="controls row row-space-beteween" style="flex-wrap: wrap; align-items: center; gap: 8px;">
+            <div class="component-controls row" aria-label="Selecionar componente" style="flex-wrap: wrap; gap: 6px;">
+            <button class="arrow-btn button button--contorno" id="previousComponent" title="Componente anterior" style="padding: 6px 10px;">‹</button>
+            <button class="tab-btn button" data-component="CPU" style="padding: 6px 10px; white-space: nowrap;"><i class="dot"></i>CPU</button>
+            <button class="tab-btn button" data-component="RAM" style="padding: 6px 10px; white-space: nowrap;"><i class="dot red"></i>RAM</button>
+            <button class="tab-btn button active" data-component="Disco" style="padding: 6px 10px; white-space: nowrap;"><i class="dot blue"></i>Disco</button>
+            <button class="arrow-btn button button--contorno" id="nextComponent" title="Próximo componente" style="padding: 6px 10px;">›</button>
+            </div>
+            <div class="period-controls row" aria-label="Selecionar período" style="flex-wrap: wrap; gap: 6px;">
+            <button class="period-btn button" data-period="1 h" style="padding: 6px 10px;">1 h</button>
+            <button class="period-btn button" data-period="6 h" style="padding: 6px 10px;">6 h</button>
+            <button class="period-btn button active" data-period="24 h" style="padding: 6px 10px;">24 h</button>
+            <button class="period-btn button" data-period="7 d" style="padding: 6px 10px;">7 d</button>
+            <button class="period-btn button" data-period="30 d" style="padding: 6px 10px;">30 d</button>
+            </div>
+        </div>
+        <div class="panel-heading" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <h2 class="detail-title title" id="detailTitle" style="margin: 0;">Disco · histórico, previsão e limites</h2>
+            <div class="status-pills" style="display: flex; flex-wrap: wrap; gap: 6px;"><span class="pill good" id="componentStatus" style="display: inline-flex; align-items: center; padding: 3px 8px; border-radius: var(--radius-full); background: var(--color-success-bg); color: var(--color-success); font-size: 12px; font-weight: 700;">Normal</span><span class="pill good" id="confidenceStatus" style="display: inline-flex; align-items: center; padding: 3px 8px; border-radius: var(--radius-full); background: var(--color-success-bg); color: var(--color-success); font-size: 12px; font-weight: 700;">Confiab. alta</span></div>
+        </div>
+        <div class="stats-grid row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 85px), 1fr)); gap: 8px;">
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Atual</span><strong class="text text--bold" id="currentValue">60%</strong></div>
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Média</span><strong class="text text--bold" id="averageValue">59.8%</strong></div>
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Maior</span><strong class="text text--bold" id="maxValue">60.8%</strong></div>
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Menor</span><strong class="text text--bold" id="minValue">59.1%</strong></div>
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Falta até o limite</span><strong class="text text--bold" id="toLimit">30%</strong></div>
+            <div class="stat wrapper" style="gap: 4px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-bg);"><span class="text">Ultrapassa em</span><strong class="text text--bold" id="timeToLimit">—</strong></div>
+        </div>
+        <div class="detail-content row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; min-height: 0;">
+            
+            <div class="limits wrapper" style="display: flex; flex-direction: column; min-width: 0; width: 100%; gap: 12px;">
+            <div class="wrapper" style="min-width: 0;">
+              <div class="container-chart" style="height: 300px; flex: 0 0 auto; position: relative; width: 100%;"">
+                <canvas id="PrevisaoChart" aria-label="Gráfico previsão do componente"></canvas>
+              </div>
+            </div>
+
+            <div class="limits wrapper" style="display: flex; flex-direction: column; min-width: 0; width: 100%; gap: 12px;">
+              <div class="limits wrapper" style="min-width: 0; gap: 12px;">
+              <div class="limit-row row text" style="justify-content: space-between; gap: 12px;"><span>Falta até o máximo (<span id="maxLimitLabel">90</span>%)</span><strong class="text--bold" id="maxRemaining">30%</strong></div>
+              <div class="limit-row row text" style="justify-content: space-between; gap: 12px;"><span>Acima do mínimo (<span id="minLimitLabel">10</span>%)</span><strong class="text--bold" id="aboveMinimum">50%</strong></div>
+              </div>
+
+            </div>
+            </div>
+            
+        </div>
+        </section>
+    </article>
+
+    <section class="technicians card" style="min-width: 0;">
+        <h2 class="title" style="margin: 0 0 8px;">Técnicos recomendados</h2>
+        <div style="width: 100%; overflow-x: auto;">
+        <table class="text" style="width: 100%; min-width: 680px; border-collapse: collapse; text-align: left;">
+        <thead style="color: var(--color-text-muted);"><tr style="height: 34px; border-bottom: 1px solid var(--color-border);"><th>#</th><th>Técnico</th><th>Disponibilidade</th><th>Distância</th><th>Deslocamento</th><th>Manutenção média</th><th>Tempo total</th><th>Ação</th></tr></thead>
+        <tbody id="technicianRows">
+            <tr style="height: 36px; border-bottom: 1px solid var(--color-border);"><td>1</td><td class="text--bold">Ana Souza</td><td>Disponível</td><td>13 km</td><td>23 min</td><td>36 min</td><td>59 min</td><td></td></tr>
+            <tr style="height: 36px; border-bottom: 1px solid var(--color-border);"><td>2</td><td class="text--bold">Carla Dias</td><td>Disponível</td><td>19 km</td><td>34 min</td><td>32 min</td><td>66 min</td><td></td></tr>
+            <tr style="height: 36px; border-bottom: 1px solid var(--color-border);"><td>3</td><td class="text--bold">Elisa Matos</td><td>Disponível</td><td>17 km</td><td>31 min</td><td>44 min</td><td>75 min</td><td></td></tr>
+            <tr style="height: 36px; border-bottom: 1px solid var(--color-border);"><td>4</td><td class="text--bold">Diego Rocha</td><td>Livre em 25 min</td><td>9 km</td><td>16 min</td><td>40 min</td><td>81 min</td><td></td></tr>
+            <tr style="height: 36px; border-bottom: 1px solid var(--color-border);"><td>5</td><td class="text--bold">Bruno Lima</td><td>Livre em 40 min</td><td>21 km</td><td>38 min</td><td>48 min</td><td>126 min</td><td></td></tr>
+        </tbody>
+        </table>
+        </div>
+    </section>
+  </main>
+
+
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/dashboard-previsao.js"></script>
+</body>
+</html>
